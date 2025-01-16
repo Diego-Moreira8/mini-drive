@@ -1,0 +1,17 @@
+<h1><%= locals.title %></h1>
+
+<form action="/sign-up" method="post">
+  <div class="formRow">
+    <label for="username">Nome de usuário:</label>
+    <input type="text" name="username" id="username" required />
+  </div>
+
+  <div class="formRow">
+    <label for="password">Senha:</label>
+    <input type="password" name="password" id="password" required />
+  </div>
+
+  <div class="formControl">
+    <button type="submit">Criar conta</button>
+  </div>
+</form>
