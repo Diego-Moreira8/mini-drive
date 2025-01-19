@@ -1,11 +1,18 @@
-const { hashPassword } = require("../authentication/bcrypt");
+const { hashPassword, comparePassword } = require("../authentication/bcrypt");
 const { prisma } = require("../prisma/prisma-client");
+
+const getById = async (id) => {
+  const foundUsername = await prisma.user.findUnique({
+    where: { id },
+  });
+  return foundUsername;
+};
 
 const checkExistence = async (username) => {
   const foundUsername = await prisma.user.findUnique({
     where: { username },
   });
-  return Boolean(foundUsername);
+  return foundUsername;
 };
 
 const create = async (name, username, password) => {
@@ -20,4 +27,10 @@ const create = async (name, username, password) => {
   return newUser;
 };
 
-module.exports = { checkExistence, create };
+const verifyPassword = async (userId, plainPassword) => {
+  const user = await prisma.user.findUnique({ where: { id: userId } });
+  const result = await comparePassword(plainPassword, user.password);
+  return result;
+};
+
+module.exports = { getById, checkExistence, create, verifyPassword };

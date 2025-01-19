@@ -3,11 +3,22 @@
     <li>
       <a href="/">Home</a>
     </li>
+    <% if (locals.user) { %>
+    <li>
+      <b>Olá, <%= locals.user.name || locals.user.username %></b>
+    </li>
+    <li>
+      <form action="/log-out" method="post">
+        <button type="submit">Sair</button>
+      </form>
+    </li>
+    <% } else { %>
     <li>
       <a href="/log-in">Entrar</a>
     </li>
     <li>
       <a href="/sign-up">Criar Conta</a>
     </li>
+    <% } %>
   </ul>
 </nav>

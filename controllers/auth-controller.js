@@ -1,4 +1,5 @@
 const userService = require("../services/user-service");
+const { passport } = require("../authentication/passport");
 
 /** @type {import("express").RequestHandler} */
 const getSignUp = (req, res, next) => {
@@ -38,4 +39,39 @@ const getLogin = (req, res, next) => {
   });
 };
 
-module.exports = { getSignUp, postSignUp, getLogin };
+/** @type {import("express").RequestHandler} */
+const postLogin = (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (err) {
+      return next(err);
+    }
+
+    if (!user) {
+      return res.status(401).render("layout", {
+        template: "pages/log-in",
+        title: "Entrar",
+        errors: [{ msg: info.message }],
+        values: { ...req.body },
+      });
+    }
+
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      res.redirect("/");
+    });
+  })(req, res, next);
+};
+
+/** @type {import("express").RequestHandler} */
+const postLogout = (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+};
+
+module.exports = { getSignUp, postSignUp, getLogin, postLogin, postLogout };
