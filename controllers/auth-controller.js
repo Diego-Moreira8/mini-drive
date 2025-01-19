@@ -6,13 +6,13 @@ const getSignUp = (req, res, next) => {
     template: "pages/sign-up",
     title: "Criar Conta",
     errors: [],
-    values: { username: "", password: "" },
+    values: { name: "", username: "", password: "", confirmPassword: "" },
   });
 };
 
 /** @type {import("express").RequestHandler} */
 const postSignUp = async (req, res, next) => {
-  const { username, password } = req.body;
+  const { name, username, password } = req.body;
   const usernameTaken = await userService.checkExistence(username);
 
   if (usernameTaken) {
@@ -24,7 +24,7 @@ const postSignUp = async (req, res, next) => {
     });
   }
 
-  const newUser = await userService.create(username, password);
+  const newUser = await userService.create(name, username, password);
   res.json(newUser);
 };
 

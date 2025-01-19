@@ -4,6 +4,18 @@
   <%- include("../partials/form-errors") %>
 
   <div class="formRow">
+    <label for="name">Nome completo: (opcional)</label>
+    <input
+      type="text"
+      name="name"
+      id="name"
+      minlength="2"
+      maxlength="250"
+      value="<%= locals.values.name %>"
+    />
+  </div>
+
+  <div class="formRow">
     <label for="username">Nome de usuário:</label>
     <input
       type="text"
@@ -25,6 +37,17 @@
       maxlength="50"
       required
       value="<%= locals.values.password %>"
+    />
+  </div>
+
+  <div class="formRow">
+    <label for="confirmPassword">Repita a senha:</label>
+    <input
+      type="password"
+      name="confirmPassword"
+      id="confirmPassword"
+      required
+      value="<%= locals.values.confirmPassword %>"
     />
   </div>
 

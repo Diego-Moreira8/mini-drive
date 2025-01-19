@@ -8,10 +8,11 @@ const checkExistence = async (username) => {
   return Boolean(foundUsername);
 };
 
-const create = async (username, password) => {
+const create = async (name, username, password) => {
   const hashedPassword = await hashPassword(password);
   const newUser = await prisma.user.create({
     data: {
+      name: name || null,
       username: username,
       password: hashedPassword,
     },

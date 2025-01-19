@@ -1,6 +1,11 @@
 const { body, validationResult } = require("express-validator");
 
 const validateSignUpForm = [
+  body("name")
+    .trim()
+    .isLength({ max: 250 })
+    .withMessage("O nome pode ter no máximo 250 caracteres"),
+
   body("username")
     .trim()
     .notEmpty()
@@ -13,6 +18,13 @@ const validateSignUpForm = [
     .withMessage("Uma senha precisa ser fornecida")
     .isLength({ min: 8, max: 50 })
     .withMessage("A senha precisa ter entre 8 e 50 caracteres"),
+
+  body("confirmPassword").custom((input, { req }) => {
+    if (input !== req.body.password) {
+      throw "As senhas não são iguais, tente novamente";
+    }
+    return true;
+  }),
 
   /** @type {import("express").RequestHandler}} */
   function handleValidation(req, res, next) {
