@@ -28,4 +28,14 @@ const postSignUp = async (req, res, next) => {
   res.json(newUser);
 };
 
-module.exports = { getSignUp, postSignUp };
+/** @type {import("express").RequestHandler} */
+const getLogin = (req, res, next) => {
+  res.render("layout", {
+    template: "pages/log-in",
+    title: "Entrar",
+    errors: [],
+    values: { username: "" },
+  });
+};
+
+module.exports = { getSignUp, postSignUp, getLogin };

@@ -1,0 +1,25 @@
+<h1><%= locals.title %></h1>
+
+<form action="/log-in" method="post">
+  <%- include("../partials/form-errors") %>
+
+  <div class="formRow">
+    <label for="username">Nome de usuário:</label>
+    <input
+      type="text"
+      name="username"
+      id="username"
+      required
+      value="<%= locals.values.username %>"
+    />
+  </div>
+
+  <div class="formRow">
+    <label for="password">Senha:</label>
+    <input type="password" name="password" id="password" required />
+  </div>
+
+  <div class="formControl">
+    <button type="submit">Entrar</button>
+  </div>
+</form>
