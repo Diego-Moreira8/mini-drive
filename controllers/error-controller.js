@@ -1,12 +1,12 @@
 require("dotenv").config();
 
 /** @type {import("express").RequestHandler} */
-routeNotFound = (req, res, next) => {
+const routeNotFound = (req, res, next) => {
   throw { statusCode: 404, message: "Página não encontrada." };
 };
 
 /** @type {import("express").ErrorRequestHandler} */
-errorHandler = (err, req, res, next) => {
+const errorHandler = (err, req, res, next) => {
   if (err.stack) {
     console.error(err.stack);
   }

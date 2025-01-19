@@ -1,0 +1,10 @@
+<%# Render errors from Express Validator %>
+<%# Custom errors must have a msg key %>
+
+<% if (locals.errors) { %>
+<ul>
+  <% for (let error of locals.errors) { %>
+  <li><%= error.msg %></li>
+  <% } %>
+</ul>
+<% } %>

@@ -1,5 +1,5 @@
 /** @type {import("express").RequestHandler} */
-getHome = (req, res, next) => {
+const getHome = (req, res, next) => {
   res.render("layout", {
     template: "pages/home",
     title: "Início",
