@@ -8,6 +8,9 @@
       <b>Olá, <%= locals.user.name || locals.user.username %></b>
     </li>
     <li>
+      <a href="/minha-conta">Minha conta</a>
+    </li>
+    <li>
       <form action="/log-out" method="post">
         <button type="submit">Sair</button>
       </form>

@@ -1,11 +1,12 @@
 const { Router } = require("express");
 const { authRouter } = require("./auth-router");
-const { getHome } = require("../controllers/index-controller");
+const indexController = require("../controllers/index-controller");
 
 const indexRouter = Router();
 
 indexRouter.use("/", authRouter);
 
-indexRouter.get("/", getHome);
+indexRouter.get("/", indexController.getHome);
+indexRouter.get("/minha-conta", indexController.getProfilePage);
 
 module.exports = { indexRouter };

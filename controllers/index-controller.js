@@ -6,4 +6,18 @@ const getHome = (req, res, next) => {
   });
 };
 
-module.exports = { getHome };
+/** @type {import("express").RequestHandler} */
+const getProfilePage = (req, res, next) => {
+  if (!req.user) {
+    throw { statusCode: 401, message: "Esta página requer autenticação." };
+  }
+
+  const { name, username } = req.user;
+  res.render("layout", {
+    template: "pages/profile-page",
+    title: "Meu Perfil",
+    values: { name, username },
+  });
+};
+
+module.exports = { getHome, getProfilePage };
