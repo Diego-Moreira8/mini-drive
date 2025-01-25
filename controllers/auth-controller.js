@@ -26,7 +26,7 @@ const postSignUp = async (req, res, next) => {
   }
 
   const newUser = await userService.create(name, username, password);
-  res.json(newUser);
+  res.redirect("/log-in");
 };
 
 /** @type {import("express").RequestHandler} */
