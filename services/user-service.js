@@ -27,10 +27,28 @@ const create = async (name, username, password) => {
   return newUser;
 };
 
+const update = async (id, newName, newUsername, newPassword) => {
+  const newData = { name: newName };
+  if (newUsername) {
+    newData.username = newUsername;
+  }
+  if (newPassword) {
+    const hashedPassword = await hashPassword(newPassword);
+    newData.password = hashedPassword;
+  }
+
+  const result = await prisma.user.update({
+    where: { id },
+    data: { ...newData },
+  });
+
+  return result;
+};
+
 const verifyPassword = async (userId, plainPassword) => {
   const user = await prisma.user.findUnique({ where: { id: userId } });
   const result = await comparePassword(plainPassword, user.password);
   return result;
 };
 
-module.exports = { getById, checkExistence, create, verifyPassword };
+module.exports = { getById, checkExistence, create, update, verifyPassword };
