@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const { authRouter } = require("./auth-router");
+const { filesRouter } = require("./files-router");
 const indexController = require("../controllers/index-controller");
 const {
   validateUpdateProfileForm,
@@ -8,6 +9,7 @@ const {
 const indexRouter = Router();
 
 indexRouter.use("/", authRouter);
+indexRouter.use("/", filesRouter);
 
 indexRouter.get("/", indexController.getHome);
 indexRouter.get("/minha-conta", indexController.getProfilePage);

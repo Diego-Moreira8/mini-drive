@@ -1,1 +1,11 @@
-<h1>Olá!</h1>
+<% if (locals.user) { %>
+<h1>Olá <%= locals.user.name || locals.user.username %></h1>
+
+<form action="/enviar-arquivo" method="post" enctype="multipart/form-data">
+  <label for="file">Fazer upload de arquivo</label>
+  <input type="file" name="file" id="file" />
+  <p><i>Tamanho máximo de 25 MB</i></p>
+
+  <button type="submit">Enviar</button>
+</form>
+<% } %>
