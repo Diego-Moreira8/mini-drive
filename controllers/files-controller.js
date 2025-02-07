@@ -3,6 +3,10 @@ const fileService = require("../services/file-service");
 
 /** @type {import("express").RequestHandler} */
 const uploadFile = async (req, res, next) => {
+  if (!req.file) {
+    // No file sent
+    return res.redirect("/");
+  }
   await fileService.create(req.user.id, req.file);
   res.redirect("/");
 };
