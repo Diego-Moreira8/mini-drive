@@ -1,10 +1,21 @@
+const { getUserFiles } = require("../services/file-service");
 const userService = require("../services/user-service");
 
 /** @type {import("express").RequestHandler} */
-const getHome = (req, res, next) => {
+const getHome = async (req, res, next) => {
+  if (!req.user) {
+    return res.render("layout", {
+      template: "pages/home",
+      title: "Início",
+      files: [],
+    });
+  }
+
+  const userFiles = await getUserFiles(req.user.id);
   res.render("layout", {
     template: "pages/home",
     title: "Início",
+    files: userFiles,
   });
 };
 

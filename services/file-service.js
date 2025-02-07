@@ -17,4 +17,9 @@ const create = async (userId, fileRequest) => {
   return newFile;
 };
 
-module.exports = { create };
+const getUserFiles = async (userId) => {
+  const userFiles = await prisma.file.findMany({ where: { userId: userId } });
+  return userFiles;
+};
+
+module.exports = { create, getUserFiles };

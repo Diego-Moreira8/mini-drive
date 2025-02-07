@@ -8,4 +8,36 @@
 
   <button type="submit">Enviar</button>
 </form>
+
+<h1>Meus Arquivos</h1>
+<% if (locals.files.length > 0) { %>
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Nome do arquivo</th>
+      <th scope="col">Tamanho</th>
+      <th scope="col">Opões</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% locals.files.forEach(file => { %>
+    <tr>
+      <td><%= file.fileName %></td>
+      <td><%= file.size %> bytes</td>
+      <td>
+        <form action="<%= `/arquivo/download/${file.id}` %>" method="post">
+          <button>Baixar</button>
+        </form>
+        <form action="<%= `/arquivo/apagar/${file.id}` %>" method="post">
+          <button>Apagar</button>
+        </form>
+      </td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
+<% } else { %>
+<p><i>Ainda não há arquivos por aqui...</i></p>
+<% } %> <% } else { %>
+<p>Olá! Faça log-in e comece a usar o serviço!</p>
 <% } %>
