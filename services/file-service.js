@@ -22,9 +22,14 @@ const getUserFiles = async (userId) => {
   return userFiles;
 };
 
-const getFileFromUser = async (fileId) => {
+const getFile = async (fileId) => {
   const file = await prisma.file.findUnique({ where: { id: fileId } });
   return file;
 };
 
-module.exports = { create, getUserFiles, getFileFromUser };
+const deleteFile = async (fileId) => {
+  const deletedFile = await prisma.file.delete({ where: { id: fileId } });
+  return deletedFile;
+};
+
+module.exports = { create, getUserFiles, getFile, deleteFile };

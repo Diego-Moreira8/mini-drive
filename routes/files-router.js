@@ -13,5 +13,6 @@ filesRouter.post(
   filesController.uploadFile
 );
 filesRouter.get("/arquivo/baixar/:fileId", filesController.downloadFile);
+filesRouter.get("/arquivo/apagar/:fileId", filesController.deleteFile);
 
 module.exports = { filesRouter };
