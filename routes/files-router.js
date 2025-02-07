@@ -9,5 +9,6 @@ filesRouter.post(
   multer.uploadFile,
   filesController.uploadFile
 );
+filesRouter.get("/arquivo/baixar/:fileId", filesController.downloadFile);
 
 module.exports = { filesRouter };

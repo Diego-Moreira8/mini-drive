@@ -25,12 +25,8 @@
       <td><%= file.fileName %></td>
       <td><%= file.size %> bytes</td>
       <td>
-        <form action="<%= `/arquivo/download/${file.id}` %>" method="post">
-          <button>Baixar</button>
-        </form>
-        <form action="<%= `/arquivo/apagar/${file.id}` %>" method="post">
-          <button>Apagar</button>
-        </form>
+        <a href="<%= `/arquivo/baixar/${file.id}` %>">Baixar</a>
+        <a href="<%= `/arquivo/apagar/${file.id}` %>">Apagar</a>
       </td>
     </tr>
     <% }) %>
