@@ -4,7 +4,7 @@ const path = require("path");
 const { passport } = require("./authentication/passport");
 const errorController = require("./controllers/error-controller");
 const { configureSession } = require("./middlewares/express-session");
-const setLocals = require("./middlewares/setLocals");
+const { addUserToLocals } = require("./middlewares/custom-middlewares");
 const { indexRouter } = require("./routes/index-router");
 
 const app = express();
@@ -15,7 +15,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(configureSession());
 app.use(passport.session());
-app.use(setLocals.addUser);
+app.use(addUserToLocals);
 
 app.use("/", indexRouter);
 
