@@ -16,6 +16,7 @@
     <tr>
       <th scope="col">Nome do arquivo</th>
       <th scope="col">Tamanho</th>
+      <th scope="col">Data do envio</th>
       <th scope="col">Opões</th>
     </tr>
   </thead>
@@ -24,6 +25,7 @@
     <tr>
       <td><%= file.fileName %></td>
       <td><%= file.size %> bytes</td>
+      <td class="date"><%= file.uploadTime %></td>
       <td>
         <a href="<%= `/arquivo/baixar/${file.id}` %>">Baixar</a>
         <a href="<%= `/arquivo/apagar/${file.id}` %>">Apagar</a>
@@ -36,4 +38,4 @@
 <p><i>Ainda não há arquivos por aqui...</i></p>
 <% } %> <% } else { %>
 <p>Olá! Faça log-in e comece a usar o serviço!</p>
-<% } %>
+<% } %> <%- include("../scripts/format-client-dates") %>

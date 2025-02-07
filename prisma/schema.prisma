@@ -23,12 +23,13 @@ model Session {
 }
 
 model File {
-  id            Int    @id @default(autoincrement())
+  id            Int      @id @default(autoincrement())
   fileName      String
   nameOnStorage String
   size          Int
   mimeType      String
   encoding      String
-  owner         User   @relation(fields: [userId], references: [id])
+  uploadTime    DateTime @default(now())
+  owner         User     @relation(fields: [userId], references: [id])
   userId        Int
 }
