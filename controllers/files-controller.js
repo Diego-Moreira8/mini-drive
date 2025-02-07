@@ -18,18 +18,24 @@ const downloadFile = async (req, res, next) => {
     });
   }
 
-  const queryResult = await fileService.getFileFromUser(req.user.id, fileId);
+  const file = await fileService.getFileFromUser(fileId);
 
-  if (!queryResult.success) {
+  if (!file) {
     return next({
-      statusCode: queryResult.statusCode,
-      message: queryResult.message,
+      statusCode: 400,
+      message: "Não existe um arquivo com o ID fornecido.",
+    });
+  }
+  if (file.userId !== req.user.id) {
+    return next({
+      statusCode: 403,
+      message: "Você não tem autorização para visualizar esse arquivo.",
     });
   }
 
   res.download(
-    path.join(__dirname, `../uploads/${queryResult.file.nameOnStorage}`),
-    queryResult.file.fileName
+    path.join(__dirname, `../uploads/${file.nameOnStorage}`),
+    file.fileName
   );
 };
 
