@@ -1,6 +1,7 @@
 const path = require("path");
 const { unlink } = require("node:fs");
 const fileService = require("../services/file-service");
+const validateId = require("../utils/validateId");
 
 const checkFilePermissions = (fileData, userId) => {
   if (!fileData) {
@@ -17,31 +18,26 @@ const checkFilePermissions = (fileData, userId) => {
   }
 };
 
-const validadeId = (id) => {
-  const integerId = parseInt(id);
-  if (isNaN(integerId)) {
-    throw {
-      statusCode: 400,
-      message: "O ID fornecido precisa ser um número.",
-    };
-  }
-  return integerId;
-};
-
 /** @type {import("express").RequestHandler} */
 const uploadFile = async (req, res, next) => {
   if (!req.file) {
     // No file sent
     return res.redirect("/");
   }
-  await fileService.create(req.user.id, req.file);
+
+  await fileService.create(
+    req.user.id,
+    validateId(req.body.currDirectory),
+    req.file
+  );
+
   res.redirect("/");
 };
 
 /** @type {import("express").RequestHandler} */
 const downloadFile = async (req, res, next) => {
   try {
-    const id = validadeId(req.params.fileId);
+    const id = validateId(req.params.fileId);
     const file = await fileService.getFile(id);
     checkFilePermissions(file, req.user.id);
     res.download(
@@ -56,7 +52,7 @@ const downloadFile = async (req, res, next) => {
 /** @type {import("express").RequestHandler} */
 const deleteFile = async (req, res, next) => {
   try {
-    const id = validadeId(req.params.fileId);
+    const id = validateId(req.params.fileId);
     const file = await fileService.getFile(id);
     checkFilePermissions(file, req.user.id);
     const deletedFile = await fileService.deleteFile(id);

@@ -7,19 +7,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id       Int     @id @default(autoincrement())
-  username String  @unique
-  password String
-  name     String?
-  files    File[]
-}
-
 model Session {
   id        String   @id
   sid       String   @unique
   data      String
   expiresAt DateTime
+}
+
+model User {
+  id       Int     @id @default(autoincrement())
+  username String  @unique
+  password String
+  name     String?
+
+  files       File[]
+  directories Directory[] @relation("UserDirectories")
 }
 
 model File {
@@ -30,6 +32,25 @@ model File {
   mimeType      String
   encoding      String
   uploadTime    DateTime @default(now())
-  owner         User     @relation(fields: [userId], references: [id])
-  userId        Int
+
+  owner   User @relation(fields: [ownerId], references: [id])
+  ownerId Int
+
+  directory   Directory @relation(fields: [directoryId], references: [id])
+  directoryId Int
+}
+
+model Directory {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  owner   User    @relation("UserDirectories", fields: [ownerId], references: [id])
+  ownerId Int
+  isRoot  Boolean @default(false)
+
+  subdirectories Directory[] @relation("DirectoryToSubdirectory")
+  parent         Directory?  @relation("DirectoryToSubdirectory", fields: [parentId], references: [id])
+  parentId       Int?
+
+  files File[]
 }

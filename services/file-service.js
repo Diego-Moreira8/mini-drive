@@ -1,6 +1,6 @@
 const { prisma } = require("../prisma/prisma-client");
 
-const create = async (userId, fileRequest) => {
+const create = async (userId, directoryId, fileRequest) => {
   const { originalname, encoding, mimetype, filename, size } = fileRequest;
 
   const newFile = await prisma.file.create({
@@ -10,7 +10,8 @@ const create = async (userId, fileRequest) => {
       size: size,
       mimeType: mimetype,
       encoding: encoding,
-      userId: userId,
+      ownerId: userId,
+      directoryId: directoryId,
     },
   });
 
@@ -18,8 +19,17 @@ const create = async (userId, fileRequest) => {
 };
 
 const getUserFiles = async (userId) => {
-  const userFiles = await prisma.file.findMany({ where: { userId: userId } });
+  const userFiles = await prisma.file.findMany({ where: { ownerId: userId } });
   return userFiles;
+};
+
+const getUserRoot = async (userId) => {
+  const user = await prisma.user.findUnique({ where: { id: userId } });
+  const directory = await prisma.directory.findFirst({
+    where: { AND: { ownerId: user.id, isRoot: true } },
+    include: { subdirectories: true, files: true },
+  });
+  return directory;
 };
 
 const getFile = async (fileId) => {
@@ -32,4 +42,10 @@ const deleteFile = async (fileId) => {
   return deletedFile;
 };
 
-module.exports = { create, getUserFiles, getFile, deleteFile };
+module.exports = {
+  create,
+  getUserFiles,
+  getFile,
+  deleteFile,
+  getUserRoot,
+};

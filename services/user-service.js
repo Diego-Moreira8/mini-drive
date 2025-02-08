@@ -24,6 +24,14 @@ const create = async (name, username, password) => {
       password: hashedPassword,
     },
   });
+  // Create user's root directory
+  await prisma.directory.create({
+    data: {
+      name: "root",
+      ownerId: newUser.id,
+      isRoot: true,
+    },
+  });
   return newUser;
 };
 
