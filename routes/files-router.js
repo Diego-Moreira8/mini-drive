@@ -7,6 +7,7 @@ const filesRouter = Router();
 
 filesRouter.use(checkUser);
 
+filesRouter.get("/meus-arquivos", filesController.getRoot);
 filesRouter.post(
   "/enviar-arquivo",
   multer.uploadFile,
@@ -14,5 +15,7 @@ filesRouter.post(
 );
 filesRouter.get("/arquivo/baixar/:fileId", filesController.downloadFile);
 filesRouter.get("/arquivo/apagar/:fileId", filesController.deleteFile);
+
+filesRouter.post("/criar-diretorio", filesController.newDirectory);
 
 module.exports = { filesRouter };

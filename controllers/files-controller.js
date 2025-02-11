@@ -2,6 +2,7 @@ const path = require("path");
 const { unlink } = require("node:fs");
 const fileService = require("../services/file-service");
 const validateId = require("../utils/validateId");
+const { createDirectory } = require("../services/directory-service");
 
 const checkFilePermissions = (fileData, userId) => {
   if (!fileData) {
@@ -71,4 +72,29 @@ const deleteFile = async (req, res, next) => {
   }
 };
 
-module.exports = { uploadFile, downloadFile, deleteFile };
+/** @type {import("express").RequestHandler} */
+const getRoot = async (req, res, next) => {
+  const directory = await fileService.getUserRoot(req.user.id);
+
+  res.render("layout", {
+    template: "pages/my-files",
+    title: "Meus Arquivos",
+    directory: directory,
+  });
+};
+
+/** @type {import("express").RequestHandler} */
+const newDirectory = async (req, res, next) => {
+  const userId = validateId(req.user.id);
+  const currDirectory = validateId(req.body.currDirectory);
+  await createDirectory(userId, req.body.newDirName, currDirectory);
+  res.redirect("/meus-arquivos");
+};
+
+module.exports = {
+  uploadFile,
+  downloadFile,
+  deleteFile,
+  getRoot,
+  newDirectory,
+};

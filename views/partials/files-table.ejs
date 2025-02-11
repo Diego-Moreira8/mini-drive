@@ -1,4 +1,9 @@
-<h2><%= locals.directory.isRoot ? "Início" : locals.directory.name %></h2>
+<h1><%= locals.directory.isRoot ? "Início" : locals.directory.name %></h1>
+
+<%- include("send-file-form") %>
+<hr>
+<%- include("new-directory-form") %>
+<hr>
 
 <% const hasSubdirectories = locals.directory.subdirectories?.length > 0 %>
 <% const hasFiles = locals.directory.files?.length > 0 %>
@@ -45,3 +50,5 @@
 <% } else { %>
   <p><i>Ainda não há arquivos por aqui...</i></p>
 <% } %>
+
+<%- include("../scripts/format-client-dates") %>

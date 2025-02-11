@@ -1,6 +1,5 @@
 <% if (locals.user) { %>
-  <h1>Olá, <%= locals.user.name || locals.user.username %></h1>
+  <%- include("../partials/files-table") %>
 <% } else { %>
   <p>Olá! Faça log-in e comece a usar o serviço!</p>
 <% } %>
-

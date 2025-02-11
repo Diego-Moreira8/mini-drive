@@ -1,0 +1,21 @@
+<h2>Criar Pasta</h2>
+
+<form action="/criar-diretorio" method="post">
+  <label for="newDirName">Nome:</label>
+
+  <input
+    type="hidden"
+    name="currDirectory"
+    value="<%= locals.directory.id %>"
+  />
+
+  <input
+    type="text"
+    name="newDirName"
+    id="newDirName"
+    maxlength="250"
+    required
+  />
+
+  <button type="submit">Criar</button>
+</form>

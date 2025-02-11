@@ -1,14 +1,10 @@
-const { getUserRoot } = require("../services/file-service");
 const userService = require("../services/user-service");
 
 /** @type {import("express").RequestHandler} */
 const getHome = async (req, res, next) => {
-  const directory = await getUserRoot(req.user.id);
-
   res.render("layout", {
     template: "pages/home",
     title: "Início",
-    directory: directory,
   });
 };
 
