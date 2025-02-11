@@ -1,2 +1,3 @@
 views/partials/form-errors.ejs
+views/partials/files-table.ejs
 views/pages/home.ejs

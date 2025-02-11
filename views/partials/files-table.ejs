@@ -1,0 +1,47 @@
+<h2><%= locals.directory.isRoot ? "Início" : locals.directory.name %></h2>
+
+<% const hasSubdirectories = locals.directory.subdirectories?.length > 0 %>
+<% const hasFiles = locals.directory.files?.length > 0 %>
+<% const notEmpty = hasSubdirectories || hasFiles %>
+
+<% if (notEmpty) { %>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Nome do arquivo</th>
+        <th scope="col">Tamanho</th>
+        <th scope="col">Data do envio</th>
+        <th scope="col">Opões</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% if (hasSubdirectories) { %>
+        <% locals.directory.subdirectories.forEach(dir => { %>
+          <tr>
+            <td><%= dir.name %></td>
+            <td></td>
+            <td></td>
+            <td><a href="#">Apagar</a></td>
+          </tr>
+        <% }) %>
+      <% } %>
+
+      <% if (hasFiles) { %>
+        <% locals.directory.files.forEach(file => { %>
+          <tr>
+            <td><%= file.fileName %></td>
+            <td><%= file.size %> bytes</td>
+            <td class="date"><%= file.uploadTime %></td>
+            <td>
+              <a href="<%= `/arquivo/baixar/${file.id}` %>">Baixar</a>
+              <a href="<%= `/arquivo/apagar/${file.id}` %>">Apagar</a>
+            </td>
+          </tr>
+        <% }) %>
+      <% } %>
+    </tbody>
+  </table>
+<% } else { %>
+  <p><i>Ainda não há arquivos por aqui...</i></p>
+<% } %>

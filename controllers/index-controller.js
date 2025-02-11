@@ -5,8 +5,6 @@ const userService = require("../services/user-service");
 const getHome = async (req, res, next) => {
   const directory = await getUserRoot(req.user.id);
 
-  console.log(directory);
-
   res.render("layout", {
     template: "pages/home",
     title: "Início",

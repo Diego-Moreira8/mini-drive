@@ -1,0 +1,11 @@
+<form action="/enviar-arquivo" method="post" enctype="multipart/form-data">
+  <input type="file" name="file" id="file" required />
+
+  <input
+    type="hidden"
+    name="currDirectory"
+    value="<%= locals.directory.id %>"
+  />
+
+  <button type="submit">Enviar</button>
+</form>
