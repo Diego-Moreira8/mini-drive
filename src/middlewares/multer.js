@@ -2,7 +2,7 @@ const path = require("path");
 const multer = require("multer");
 
 const uploadSingleFile = multer({
-  dest: path.join(__dirname, `../uploads/`),
+  dest: path.join(__dirname, `../../uploads/`),
   limits: { fileSize: 25000000 /*25 MB*/ },
 }).single("file");
 

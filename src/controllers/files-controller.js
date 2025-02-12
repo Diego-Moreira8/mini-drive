@@ -42,7 +42,7 @@ const downloadFile = async (req, res, next) => {
     const file = await fileService.getFile(id);
     checkFilePermissions(file, req.user.id);
     res.download(
-      path.join(__dirname, `../uploads/${file.nameOnStorage}`),
+      path.join(__dirname, `../../uploads/${file.nameOnStorage}`),
       file.fileName
     );
   } catch (err) {
@@ -60,7 +60,7 @@ const deleteFile = async (req, res, next) => {
 
     // Delete from uploads directory
     unlink(
-      path.join(__dirname, `../uploads/${deletedFile.nameOnStorage}`),
+      path.join(__dirname, `../../uploads/${deletedFile.nameOnStorage}`),
       (err) => {
         if (err) throw err;
       }

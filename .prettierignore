@@ -1,4 +1,4 @@
-views/pages/home.ejs
-views/pages/my-files.ejs
-views/partials/form-errors.ejs
-views/partials/files-table.ejs
+src/views/pages/home.ejs
+src/views/pages/my-files.ejs
+src/views/partials/form-errors.ejs
+src/views/partials/files-table.ejs
