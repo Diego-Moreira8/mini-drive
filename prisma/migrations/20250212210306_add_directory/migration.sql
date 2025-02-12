@@ -19,11 +19,14 @@ CREATE TABLE "Directory" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "ownerId" INTEGER NOT NULL,
-    "isRoot" BOOLEAN NOT NULL DEFAULT false,
+    "rootOfUserId" INTEGER,
     "parentId" INTEGER,
 
     CONSTRAINT "Directory_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Directory_rootOfUserId_key" ON "Directory"("rootOfUserId");
 
 -- AddForeignKey
 ALTER TABLE "File" ADD CONSTRAINT "File_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -33,6 +36,9 @@ ALTER TABLE "File" ADD CONSTRAINT "File_directoryId_fkey" FOREIGN KEY ("director
 
 -- AddForeignKey
 ALTER TABLE "Directory" ADD CONSTRAINT "Directory_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Directory" ADD CONSTRAINT "Directory_rootOfUserId_fkey" FOREIGN KEY ("rootOfUserId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Directory" ADD CONSTRAINT "Directory_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "Directory"("id") ON DELETE SET NULL ON UPDATE CASCADE;

@@ -22,6 +22,8 @@ model User {
 
   files       File[]
   directories Directory[] @relation("UserDirectories")
+
+  rootDirectory Directory? @relation("RootDirectoryOfUser")
 }
 
 model File {
@@ -44,9 +46,11 @@ model Directory {
   id   Int    @id @default(autoincrement())
   name String
 
-  owner   User    @relation("UserDirectories", fields: [ownerId], references: [id])
+  owner   User @relation("UserDirectories", fields: [ownerId], references: [id])
   ownerId Int
-  isRoot  Boolean @default(false)
+
+  rootOfUser   User? @relation("RootDirectoryOfUser", fields: [rootOfUserId], references: [id])
+  rootOfUserId Int?  @unique
 
   subdirectories Directory[] @relation("DirectoryToSubdirectory")
   parent         Directory?  @relation("DirectoryToSubdirectory", fields: [parentId], references: [id])
