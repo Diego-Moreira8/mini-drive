@@ -8,9 +8,6 @@ const {
 
 const indexRouter = Router();
 
-indexRouter.use("/", authRouter);
-indexRouter.use("/", filesRouter);
-
 indexRouter.get("/", indexController.getHome);
 indexRouter.get("/minha-conta", indexController.getProfilePage);
 indexRouter.post(

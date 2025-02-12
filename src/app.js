@@ -6,6 +6,8 @@ const errorController = require("./controllers/error-controller");
 const { configureSession } = require("./middlewares/express-session");
 const { addUserToLocals } = require("./middlewares/custom-middlewares");
 const { indexRouter } = require("./routes/index-router");
+const { authRouter } = require("./routes/auth-router");
+const { filesRouter } = require("./routes/files-router");
 
 const app = express();
 
@@ -18,6 +20,8 @@ app.use(passport.session());
 app.use(addUserToLocals);
 
 app.use("/", indexRouter);
+app.use("/", authRouter);
+app.use("/pasta", filesRouter);
 
 app.use(errorController.routeNotFound);
 app.use(errorController.errorHandler);
