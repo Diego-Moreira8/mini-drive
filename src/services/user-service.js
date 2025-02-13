@@ -32,6 +32,15 @@ const create = async (username, password, name) => {
   }
 };
 
+// (async () => {
+//   try {
+//     const response = await create("username1", "123");
+//     console.dir(response);
+//   } catch (err) {
+//     console.error("Error");
+//   }
+// })();
+
 const getById = async (id) => {
   try {
     const user = await prisma.user.findUnique({ where: { id } });

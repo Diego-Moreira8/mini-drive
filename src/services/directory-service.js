@@ -80,6 +80,24 @@ const getChildrenDirectories = async (parentId) => {
   }
 };
 
+const isDirectoryOfUser = async (directoryId, userId) => {
+  try {
+    const directory = await prisma.directory.findUnique({
+      where: {
+        id: directoryId,
+      },
+    });
+
+    return directory.ownerId === userId;
+  } catch (err) {
+    console.error(
+      "Error at checking if directory belongs to user:",
+      err.message
+    );
+    throw err;
+  }
+};
+
 const renameDirectory = async (directoryId, newName) => {
   try {
     const directory = await prisma.directory.findUnique({
@@ -155,6 +173,7 @@ module.exports = {
   getById,
   getUserRoot,
   getChildrenDirectories,
+  isDirectoryOfUser,
   renameDirectory,
   moveDirectory,
   deleteDirectoryAndItsFiles,
