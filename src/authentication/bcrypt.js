@@ -8,8 +8,8 @@ const hashPassword = async (plainTextPassword) => {
     const hash = await bcrypt.hash(plainTextPassword, saltRounds);
     return hash;
   } catch (err) {
-    console.error("Error on generating hash:", err);
-    throw { statusCode: 500, message: "Erro ao tentar salvar a senha." };
+    console.error("Error on generating hash:", err.message);
+    throw err;
   }
 };
 
@@ -18,8 +18,8 @@ const comparePassword = async (plainTextPassword, hash) => {
     const result = await bcrypt.compare(plainTextPassword, hash);
     return result;
   } catch (err) {
-    console.error("Error on comparing password against hash:", err);
-    throw { statusCode: 500, message: "Erro ao tentar ler a senha." };
+    console.error("Error on comparing password against hash:", err.message);
+    throw err;
   }
 };
 

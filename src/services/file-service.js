@@ -1,4 +1,4 @@
-const { prisma } = require("../prisma/prisma-client");
+const { prisma } = require("../prisma-client/prisma-client");
 
 const create = async (userId, directoryId, fileRequest) => {
   const { originalname, encoding, mimetype, filename, size } = fileRequest;
