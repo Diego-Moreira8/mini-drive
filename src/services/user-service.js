@@ -4,10 +4,12 @@ const { prisma } = require("../prisma-client/prisma-client");
 const create = async (username, password, name) => {
   try {
     return prisma.$transaction(async (tx) => {
+      const hashedPassword = await hashPassword(password);
+
       const user = await tx.user.create({
         data: {
           username,
-          password,
+          password: hashedPassword,
           name,
         },
       });
@@ -32,15 +34,6 @@ const create = async (username, password, name) => {
   }
 };
 
-// (async () => {
-//   try {
-//     const response = await create("username1", "123");
-//     console.dir(response);
-//   } catch (err) {
-//     console.error("Error");
-//   }
-// })();
-
 const getById = async (id) => {
   try {
     const user = await prisma.user.findUnique({ where: { id } });
@@ -53,7 +46,11 @@ const getById = async (id) => {
 
 const getByUsername = async (username) => {
   try {
-    const user = await prisma.user.findUnique({ where: { username } });
+    const user = await prisma.user.findUnique({
+      where: {
+        username: username,
+      },
+    });
     return user;
   } catch (err) {
     console.error("Error at searching for username:", err.message);

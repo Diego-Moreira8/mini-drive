@@ -4,7 +4,7 @@ const userService = require("../services/user-service");
 
 passport.use(
   new LocalStrategy(async function verify(username, password, done) {
-    const user = await userService.checkExistence(username);
+    const user = await userService.getByUsername(username);
     if (!user) {
       return done(null, false, { message: "Nome de usuário incorreto" });
     }

@@ -21,7 +21,13 @@ app.use(addUserToLocals);
 
 app.use("/", indexRouter);
 app.use("/", authRouter);
-app.use("/pasta", filesRouter);
+// app.get("/minha-conta", indexController.getProfilePage);
+// app.post(
+//   "/minha-conta",
+//   validateUpdateProfileForm,
+//   indexController.postProfileUpdate
+// );
+// app.use("/pasta", filesRouter);
 
 app.use(errorController.routeNotFound);
 app.use(errorController.errorHandler);

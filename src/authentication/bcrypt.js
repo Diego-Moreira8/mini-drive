@@ -1,11 +1,9 @@
 require("dotenv").config();
 const bcrypt = require("bcrypt");
 
-const saltRounds = parseInt(process.env.BCRYPT_SALT);
-
 const hashPassword = async (plainTextPassword) => {
   try {
-    const hash = await bcrypt.hash(plainTextPassword, saltRounds);
+    const hash = await bcrypt.hash(plainTextPassword, 10);
     return hash;
   } catch (err) {
     console.error("Error on generating hash:", err.message);
