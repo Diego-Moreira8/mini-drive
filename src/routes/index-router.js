@@ -6,4 +6,4 @@ const indexRouter = Router();
 indexRouter.get("/", indexController.getIndex);
 indexRouter.get("/inicio", indexController.getHome);
 
-module.exports = { indexRouter };
+module.exports = indexRouter;

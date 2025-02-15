@@ -12,4 +12,4 @@ authRouter.post("/entrar", authController.postLogin);
 
 authRouter.get("/sair", authController.getLogout);
 
-module.exports = { authRouter };
+module.exports = authRouter;

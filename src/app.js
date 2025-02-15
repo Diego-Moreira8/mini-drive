@@ -6,9 +6,9 @@ const { passport } = require("./authentication/passport");
 const errorController = require("./controllers/error-controller");
 const { configureSession } = require("./middlewares/express-session");
 const { addUserToLocals } = require("./middlewares/custom-middlewares");
-const { indexRouter } = require("./routes/index-router");
-const { authRouter } = require("./routes/auth-router");
-const { filesRouter } = require("./routes/files-router");
+const indexRouter = require("./routes/index-router");
+const authRouter = require("./routes/auth-router");
+const userProfileRouter = require("./routes/user-profile-router");
 
 const app = express();
 
@@ -23,12 +23,7 @@ app.use(addUserToLocals);
 
 app.use("/", indexRouter);
 app.use("/", authRouter);
-// app.get("/minha-conta", indexController.getProfilePage);
-// app.post(
-//   "/minha-conta",
-//   validateUpdateProfileForm,
-//   indexController.postProfileUpdate
-// );
+app.use("/minha-conta", userProfileRouter);
 // app.use("/pasta", filesRouter);
 
 app.use(errorController.routeNotFound);
