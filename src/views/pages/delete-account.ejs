@@ -1,0 +1,18 @@
+<h1><%= locals.title %></h1>
+
+<form action="/minha-conta/apagar" method="post">
+  <%- include("../partials/form-errors") %>
+
+  <p>
+    Tem certeza que deseja apagar a sua conta?
+    <br />
+    Todos os seus dados serão apagados com ela.
+    <br />
+    <b>Esta ação não pode ser desfeita!</b>
+  </p>
+
+  <label for="password">Digite sua senha:</label>
+  <input type="password" name="password" id="password" />
+
+  <button type="submit">Apagar a minha conta</button>
+</form>

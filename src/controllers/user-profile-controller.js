@@ -9,6 +9,14 @@ const getProfileViewData = (errorsArray, { name, username }) => {
   };
 };
 
+const getDeleteAccountViewData = (errorsArray) => {
+  return {
+    template: "pages/delete-account",
+    title: "Apagar Minha Conta",
+    errors: errorsArray.length > 0 ? errorsArray : [],
+  };
+};
+
 /** @type {import("express").RequestHandler} */
 const getProfilePage = (req, res, next) => {
   if (!req.user) {
@@ -68,4 +76,44 @@ const postProfileUpdate = async (req, res, next) => {
   }
 };
 
-module.exports = { getProfilePage, postProfileUpdate };
+/** @type {import("express").RequestHandler} */
+const getDeleteAccountPage = (req, res, next) => {
+  res.render("layout", getDeleteAccountViewData([]));
+};
+
+/** @type {import("express").RequestHandler} */
+const postProfileDelete = async (req, res, next) => {
+  try {
+    const passwordMatch = await userService.verifyPassword(
+      req.user.id,
+      req.body.password
+    );
+
+    if (!passwordMatch) {
+      return res
+        .status(400)
+        .render(
+          "layout",
+          getDeleteAccountViewData([
+            { msg: "Senha incorreta. Tente novamente" },
+          ])
+        );
+    }
+
+    await userService.deleteUserAndItsData(req.user.id);
+
+    req.logout((err) => {
+      if (err) throw err;
+      res.redirect("/");
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = {
+  getProfilePage,
+  postProfileUpdate,
+  getDeleteAccountPage,
+  postProfileDelete,
+};
