@@ -17,7 +17,7 @@ const checkUser = (req, res, next) => {
   if (!req.user) {
     return next({
       statusCode: 401,
-      message: "Você precisa estar conectado para manipular arquivos.",
+      msgForUser: "Você precisa estar conectado para acessar este recurso.",
     });
   }
   next();

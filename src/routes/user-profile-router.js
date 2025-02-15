@@ -1,3 +1,4 @@
+const { checkUser } = require("../middlewares/custom-middlewares");
 const userProfileController = require("../controllers/user-profile-controller");
 const {
   validateUpdateProfileForm,
@@ -6,6 +7,8 @@ const {
 const { Router } = require("express");
 
 const userProfileRouter = Router();
+
+userProfileRouter.use(checkUser);
 
 userProfileRouter.get("/", userProfileController.getProfilePage);
 
