@@ -1,8 +1,11 @@
-<h1><%= locals.directory.isRoot ? "Início" : locals.directory.name %></h1>
+<h1>
+  <%= locals.directory.rootOfUserId ? "Pasta raiz" : locals.directory.name %>
+</h1>
 
-<%- include("send-file-form") %>
 <hr>
-<%- include("new-directory-form") %>
+<%- include("../partials/send-file-form") %>
+<hr>
+<%- include("../partials/new-directory-form") %>
 <hr>
 
 <% const hasSubdirectories = locals.directory.subdirectories?.length > 0 %>

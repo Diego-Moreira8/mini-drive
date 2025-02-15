@@ -41,6 +41,10 @@ const getById = async (directoryId) => {
       where: {
         id: directoryId,
       },
+      include: {
+        subdirectories: true,
+        files: true,
+      },
     });
     return directory;
   } catch (err) {

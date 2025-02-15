@@ -9,6 +9,7 @@ const { addUserToLocals } = require("./middlewares/custom-middlewares");
 const indexRouter = require("./routes/index-router");
 const authRouter = require("./routes/auth-router");
 const userProfileRouter = require("./routes/user-profile-router");
+const directoriesRouter = require("./routes/directories-router");
 
 const app = express();
 
@@ -24,7 +25,7 @@ app.use(addUserToLocals);
 app.use("/", indexRouter);
 app.use("/", authRouter);
 app.use("/minha-conta", userProfileRouter);
-// app.use("/pasta", filesRouter);
+app.use("/pasta", directoriesRouter);
 
 app.use(errorController.routeNotFound);
 app.use(errorController.errorHandler);
