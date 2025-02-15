@@ -27,7 +27,9 @@
       <% if (hasSubdirectories) { %>
         <% locals.directory.subdirectories.forEach(dir => { %>
           <tr>
-            <td><%= dir.name %></td>
+            <td>
+              <a href="<%= `/pasta/${dir.id}` %>"><%= dir.name %></a>
+            </td>
             <td></td>
             <td></td>
             <td><a href="#">Apagar</a></td>

@@ -32,29 +32,21 @@ const getIndexPage = async (req, res, next) => {
 
 /** @type {import("express").RequestHandler} */
 const getDirectoryPage = async (req, res, next) => {
+  res.render("layout", {
+    template: "pages/files-table",
+    directory: res.locals.directory,
+  });
+};
+
+/** @type {import("express").RequestHandler} */
+const postCreateDirectory = async (req, res, next) => {
   try {
-    const directory = await directoryService.getById(parseInt(req.params.id));
-
-    if (!directory) {
-      throw {
-        statusCode: 404,
-        msgForUser: "O diretório requisitado não existe.",
-      };
-    }
-
-    if (req.user.id !== directory.ownerId) {
-      throw {
-        statusCode: 403,
-        msgForUser: "Você não tem permissão para acessar este diretório.",
-      };
-    }
-
-    console.dir(directory);
-
-    res.render("layout", {
-      template: "pages/files-table",
-      directory,
-    });
+    const newDirectory = await directoryService.create(
+      req.body.name,
+      req.user.id,
+      parseInt(req.params.id)
+    );
+    res.redirect(`/pasta/${newDirectory.id}`);
   } catch (err) {
     next(err);
   }
@@ -113,13 +105,9 @@ const getDirectoryPage = async (req, res, next) => {
 //   }
 // };
 
-// /** @type {import("express").RequestHandler} */
-// const newDirectory = async (req, res, next) => {
-//   const userId = validateId(req.user.id);
-//   const currDirectory = validateId(req.body.currDirectory);
-//   await createDirectory(userId, req.body.newDirName, currDirectory);
-//   res.redirect("/meus-arquivos");
-// };
-
-const directoriesController = { getIndexPage, getDirectoryPage };
+const directoriesController = {
+  getIndexPage,
+  getDirectoryPage,
+  postCreateDirectory,
+};
 module.exports = directoriesController;
