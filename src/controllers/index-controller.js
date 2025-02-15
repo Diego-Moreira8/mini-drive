@@ -5,16 +5,16 @@ const getIndex = (req, res, next) => {
   if (req.user) {
     return res.redirect("/meus-arquivos");
   }
-  res.redirect("/home");
+  res.redirect("/inicio");
 };
 
-// /** @type {import("express").RequestHandler} */
-// const getHome = async (req, res, next) => {
-//   res.render("layout", {
-//     template: "pages/home",
-//     title: "Início",
-//   });
-// };
+/** @type {import("express").RequestHandler} */
+const getHome = async (req, res, next) => {
+  res.render("layout", {
+    template: "pages/home",
+    title: "Início",
+  });
+};
 
 // /** @type {import("express").RequestHandler} */
 // const getProfilePage = (req, res, next) => {
@@ -73,4 +73,4 @@ const getIndex = (req, res, next) => {
 // };
 
 // module.exports = { getHome, getProfilePage, postProfileUpdate };
-module.exports = { getIndex };
+module.exports = { getIndex, getHome };

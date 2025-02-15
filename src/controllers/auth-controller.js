@@ -38,11 +38,7 @@ const postSignUp = async (req, res, next) => {
     // Redirect to log-in page
     res.redirect("/entrar");
   } catch (err) {
-    console.error("Error at post sign up form:", err.message);
-    next({
-      statusCode: 500,
-      message: "Houve um erro ao criar o usuário. Tente novamente.",
-    });
+    next(err);
   }
 };
 

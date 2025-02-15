@@ -7,19 +7,16 @@ const routeNotFound = (req, res, next) => {
 
 /** @type {import("express").ErrorRequestHandler} */
 const errorHandler = (err, req, res, next) => {
-  if (err.stack) {
-    console.error(err.stack);
-  }
+  console.error(err);
 
   const statusCode = err.statusCode || 500;
-  const message = err.message || "Erro interno do servidor.";
+  const msgForUser = err.msgForUser || "Erro interno do servidor.";
 
   res.status(statusCode).render("layout", {
     template: "error",
     title: "Erro",
     statusCode,
-    message,
-    stack: process.env.NODE_ENV === "development" ? err.stack : null,
+    msgForUser,
   });
 };
 

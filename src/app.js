@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const path = require("path");
+const logger = require("morgan");
 const { passport } = require("./authentication/passport");
 const errorController = require("./controllers/error-controller");
 const { configureSession } = require("./middlewares/express-session");
@@ -14,6 +15,7 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+app.use(logger("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(configureSession());
 app.use(passport.session());
