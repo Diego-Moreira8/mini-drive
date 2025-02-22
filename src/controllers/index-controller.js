@@ -1,7 +1,7 @@
 /** @type {import("express").RequestHandler} */
 const getIndex = (req, res, next) => {
   if (req.user) {
-    return res.redirect("/meus-arquivos");
+    return res.redirect("/pasta");
   }
   res.redirect("/inicio");
 };
