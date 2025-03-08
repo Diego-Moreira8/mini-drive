@@ -110,6 +110,10 @@ const renameDirectory = async (directoryId, newName) => {
       },
     });
 
+    if (directory.rootOfUserId) {
+      throw new Error("Root directory cannot be renamed.");
+    }
+
     await directoryNameExists(newName, directory.parentId);
 
     const updatedDirectory = await prisma.directory.update({
@@ -161,6 +165,14 @@ const moveDirectory = async (userId, directoryId, newParentId) => {
 
 const deleteDirectoryAndItsFiles = async (directoryId) => {
   try {
+    const directory = await prisma.directory.findUnique({
+      where: { id: directoryId },
+    });
+
+    if (directory.rootOfUserId) {
+      throw new Error("Root directory cannot be deleted.");
+    }
+
     const result = await prisma.$transaction([
       prisma.file.deleteMany({ where: { directoryId: directoryId } }),
       prisma.directory.delete({ where: { id: directoryId } }),
