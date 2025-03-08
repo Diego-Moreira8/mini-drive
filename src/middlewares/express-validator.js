@@ -90,4 +90,24 @@ const validateUpdateProfileForm = [
   },
 ];
 
-module.exports = { validateSignUpForm, validateUpdateProfileForm };
+const validateDirectoryForm = [
+  body("name")
+    .trim()
+    .notEmpty()
+    .withMessage("A pasta precisa ter um nome")
+    .isLength({ max: 250 })
+    .withMessage("O nome pode ter no máximo 250 caracteres"),
+
+  /** @type {import("express").RequestHandler}} */
+  function storeErrors(req, res, next) {
+    const errors = validationResult(req);
+    res.locals = { ...res.locals, formErrors: errors.array() };
+    next();
+  },
+];
+
+module.exports = {
+  validateSignUpForm,
+  validateUpdateProfileForm,
+  validateDirectoryForm,
+};

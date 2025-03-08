@@ -4,6 +4,7 @@ const {
   getDirectoryIfOwnedByUser,
 } = require("../middlewares/custom-middlewares");
 const directoriesController = require("../controllers/directories-controller");
+const { validateDirectoryForm } = require("../middlewares/express-validator");
 
 const directoriesRouter = Router();
 
@@ -15,6 +16,19 @@ directoriesRouter.post(
   "/:id/criar",
   getDirectoryIfOwnedByUser,
   directoriesController.postCreateDirectory
+);
+
+directoriesRouter.get(
+  "/:id/renomear",
+  getDirectoryIfOwnedByUser,
+  directoriesController.getRenameDirectory
+);
+
+directoriesRouter.post(
+  "/:id/renomear",
+  getDirectoryIfOwnedByUser,
+  validateDirectoryForm,
+  directoriesController.postRenameDirectory
 );
 
 directoriesRouter.get(

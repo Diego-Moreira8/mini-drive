@@ -1,0 +1,28 @@
+<h1><%= locals.title %></h1>
+
+<% const createDirectoryAction = `/pasta/${locals.directory.parentId}/criar` %>
+<% const renameDirectoryAction = `/pasta/${locals.directory.id}/renomear` %>
+<% const action = isEdit ? renameDirectoryAction : createDirectoryAction %>
+
+<form action="<%= action %>" method="post">
+  <%- include("../partials/form-errors") %>
+
+  <label for="name">Novo nome:</label>
+  
+  <input 
+    type="text"
+    name="name"
+    id="name"
+    maxlength="250"
+    required
+    value="<%= isEdit ? locals.directory.name : "" %>"
+  />
+
+  <button type="submit"><%= isEdit ? "Salvar" : "Criar pasta" %></button>
+  
+  <a 
+    href="<%= `/pasta/${isEdit ? locals.directory.id : locals.directory.parentId}` %>"
+  >
+    Cancelar
+  </a>
+</form>

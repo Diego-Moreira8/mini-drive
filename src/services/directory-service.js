@@ -1,7 +1,7 @@
 const { prisma } = require("../prisma-client/prisma-client");
 
-const directoryNameExists = async (name, parentId) => {
-  const nameAlreadyExists = await prisma.directory.findFirst({
+const getByName = async (name, parentId) => {
+  const foundDirectory = await prisma.directory.findFirst({
     where: {
       AND: {
         name: name,
@@ -10,16 +10,16 @@ const directoryNameExists = async (name, parentId) => {
     },
   });
 
-  if (nameAlreadyExists) {
-    throw new Error(
-      `A directory with name "${name}" already exists in the directory with ID ${parentId}.`
-    );
-  }
+  return foundDirectory;
 };
 
 const create = async (name, userId, parentId) => {
   try {
-    await directoryNameExists(name, parentId);
+    if (await getByName(name, parentId)) {
+      throw new Error(
+        `A directory with name "${name}" already exists in the directory with ID ${parentId}.`
+      );
+    }
 
     const newDirectory = await prisma.directory.create({
       data: {
@@ -114,7 +114,11 @@ const renameDirectory = async (directoryId, newName) => {
       throw new Error("Root directory cannot be renamed.");
     }
 
-    await directoryNameExists(newName, directory.parentId);
+    if (await getByName(newName, directory.parentId)) {
+      throw new Error(
+        `A directory with name "${name}" already exists in the directory with ID ${parentId}.`
+      );
+    }
 
     const updatedDirectory = await prisma.directory.update({
       where: {
@@ -145,7 +149,11 @@ const moveDirectory = async (userId, directoryId, newParentId) => {
       );
     }
 
-    await directoryNameExists(directory.name, newParentId);
+    if (await getByName(directory.name, newParentId)) {
+      throw new Error(
+        `A directory with name "${name}" already exists in the directory with ID ${parentId}.`
+      );
+    }
 
     const updatedDirectory = await prisma.directory.update({
       where: {
@@ -187,6 +195,7 @@ const deleteDirectoryAndItsFiles = async (directoryId) => {
 module.exports = {
   create,
   getById,
+  getByName,
   getUserRoot,
   getChildrenDirectories,
   isDirectoryOfUser,
