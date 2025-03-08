@@ -1,5 +1,4 @@
 const { Router } = require("express");
-const multer = require("../middlewares/multer");
 const {
   checkUser,
   getDirectoryIfOwnedByUser,
@@ -19,18 +18,21 @@ directoriesRouter.post(
 );
 
 directoriesRouter.get(
+  "/:id/apagar",
+  getDirectoryIfOwnedByUser,
+  directoriesController.promptDeleteDirectory
+);
+
+directoriesRouter.post(
+  "/:id/apagar",
+  getDirectoryIfOwnedByUser,
+  directoriesController.postDeleteDirectory
+);
+
+directoriesRouter.get(
   "/:id",
   getDirectoryIfOwnedByUser,
   directoriesController.getDirectoryPage
 );
-
-// filesRouter.get("/meus-arquivos", filesController.getRoot);
-// filesRouter.post(
-//   "/enviar-arquivo",
-//   multer.uploadFile,
-//   filesController.uploadFile
-// );
-// filesRouter.get("/arquivo/baixar/:fileId", filesController.downloadFile);
-// filesRouter.get("/arquivo/apagar/:fileId", filesController.deleteFile);
 
 module.exports = directoriesRouter;

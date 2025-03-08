@@ -1,6 +1,11 @@
 <h1>
-  <%= locals.directory.rootOfUserId ? "Pasta raiz" : locals.directory.name %>
+  <%= locals.directory.rootOfUserId ? "Meus Arquivos" : locals.directory.name %>
 </h1>
+
+<% if (!locals.directory.rootOfUserId) { %>
+  <a href="<%= `/pasta/${directory.id}/renomear` %>">Renomear</a>
+  <a href="<%= `/pasta/${directory.id}/apagar` %>">Apagar</a>
+<% } %>
 
 <hr>
 <%- include("../partials/send-file-form") %>
@@ -19,7 +24,7 @@
         <th scope="col">Nome do arquivo</th>
         <th scope="col">Tamanho</th>
         <th scope="col">Data do envio</th>
-        <th scope="col">Opões</th>
+        <th scope="col">Opções</th>
       </tr>
     </thead>
 
@@ -32,7 +37,7 @@
             </td>
             <td></td>
             <td></td>
-            <td><a href="#">Apagar</a></td>
+            <td></td>
           </tr>
         <% }) %>
       <% } %>
@@ -44,8 +49,8 @@
             <td><%= file.size %> bytes</td>
             <td class="date"><%= file.uploadTime %></td>
             <td>
-              <a href="<%= `/arquivo/baixar/${file.id}` %>">Baixar</a>
-              <a href="<%= `/arquivo/apagar/${file.id}` %>">Apagar</a>
+              <a href="<%= `/arquivo/${file.id}/baixar` %>">Baixar</a>
+              <a href="<%= `/arquivo/${file.id}/apagar` %>">Apagar</a>
             </td>
           </tr>
         <% }) %>
