@@ -2,6 +2,8 @@
   <%= locals.directory.rootOfUserId ? "Meus Arquivos" : locals.directory.name %>
 </h1>
 
+<a href="<%= `/pasta/${directory.id}/criar` %>">Nova pasta</a>
+
 <% if (!locals.directory.rootOfUserId) { %>
   <a href="<%= `/pasta/${directory.id}/renomear` %>">Renomear</a>
   <a href="<%= `/pasta/${directory.id}/apagar` %>">Apagar</a>
@@ -9,8 +11,6 @@
 
 <hr>
 <%- include("../partials/send-file-form") %>
-<hr>
-<%- include("../partials/new-directory-form") %>
 <hr>
 
 <% const hasSubdirectories = locals.directory.subdirectories?.length > 0 %>

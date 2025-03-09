@@ -1,5 +1,25 @@
 const directoryService = require("../services/directory-service");
 
+const getCreateDirectoryFormView = (errorsArray, value) => {
+  return {
+    template: "pages/directory-form",
+    isEdit: false,
+    title: "Criar pasta",
+    errors: errorsArray || [],
+    value: value || "",
+  };
+};
+
+const getRenameDirectoryFormView = (directoryName, errorsArray, value) => {
+  return {
+    template: "pages/directory-form",
+    isEdit: true,
+    title: `Renomear pasta ${directoryName}`,
+    errors: errorsArray || [],
+    value: value || "",
+  };
+};
+
 /** @type {import("express").RequestHandler} */
 const getIndexPage = async (req, res, next) => {
   try {
@@ -19,8 +39,30 @@ const getDirectoryPage = async (req, res, next) => {
 };
 
 /** @type {import("express").RequestHandler} */
+const getCreateDirectory = async (req, res, next) => {
+  res.render("layout", getCreateDirectoryFormView());
+};
+
+/** @type {import("express").RequestHandler} */
 const postCreateDirectory = async (req, res, next) => {
   try {
+    const nameTaken = await directoryService.getByName(
+      req.body.name,
+      res.locals.directory.id
+    );
+    if (nameTaken) {
+      res.locals.formErrors.push({ msg: "Já existe uma pasta com este nome" });
+    }
+
+    if (res.locals.formErrors.length > 0) {
+      return res
+        .status(400)
+        .render(
+          "layout",
+          getCreateDirectoryFormView(res.locals.formErrors, req.body.name)
+        );
+    }
+
     const newDirectory = await directoryService.create(
       req.body.name,
       req.user.id,
@@ -34,17 +76,21 @@ const postCreateDirectory = async (req, res, next) => {
 
 /** @type {import("express").RequestHandler} */
 const getRenameDirectory = (req, res, next) => {
-  res.render("layout", {
-    template: "pages/directory-form",
-    isEdit: true,
-    title: `Renomear pasta ${res.locals.directory.name}`,
-    errors: [],
-  });
+  const currDirName = res.locals.directory.name;
+  res.render(
+    "layout",
+    getRenameDirectoryFormView(currDirName, [], currDirName)
+  );
 };
 
 /** @type {import("express").RequestHandler} */
 const postRenameDirectory = async (req, res, next) => {
   try {
+    const nameNotChanged = res.locals.directory.name === req.body.name;
+    if (nameNotChanged) {
+      return res.redirect(`/pasta/${res.locals.directory.id}`);
+    }
+
     const nameTaken = await directoryService.getByName(
       req.body.name,
       res.locals.directory.parentId
@@ -54,12 +100,16 @@ const postRenameDirectory = async (req, res, next) => {
     }
 
     if (res.locals.formErrors.length > 0) {
-      return res.status(400).render("layout", {
-        template: "pages/directory-form",
-        isEdit: true,
-        title: `Renomear pasta ${res.locals.directory.name}`,
-        errors: res.locals.formErrors,
-      });
+      return res
+        .status(400)
+        .render(
+          "layout",
+          getRenameDirectoryFormView(
+            res.locals.directory.name,
+            res.locals.formErrors,
+            req.body.name
+          )
+        );
     }
 
     await directoryService.renameDirectory(
@@ -103,6 +153,7 @@ const postDeleteDirectory = async (req, res, next) => {
 const directoriesController = {
   getIndexPage,
   getDirectoryPage,
+  getCreateDirectory,
   postCreateDirectory,
   getRenameDirectory,
   postRenameDirectory,

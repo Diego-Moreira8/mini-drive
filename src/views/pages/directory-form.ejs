@@ -1,13 +1,13 @@
 <h1><%= locals.title %></h1>
 
-<% const createDirectoryAction = `/pasta/${locals.directory.parentId}/criar` %>
+<% const createDirectoryAction = `/pasta/${locals.directory.id}/criar` %>
 <% const renameDirectoryAction = `/pasta/${locals.directory.id}/renomear` %>
 <% const action = isEdit ? renameDirectoryAction : createDirectoryAction %>
 
 <form action="<%= action %>" method="post">
   <%- include("../partials/form-errors") %>
 
-  <label for="name">Novo nome:</label>
+  <label for="name"><%= isEdit ? "Novo nome:" : "Nome:" %></label>
   
   <input 
     type="text"
@@ -15,7 +15,7 @@
     id="name"
     maxlength="250"
     required
-    value="<%= isEdit ? locals.directory.name : "" %>"
+    value="<%= value %>"
   />
 
   <button type="submit"><%= isEdit ? "Salvar" : "Criar pasta" %></button>

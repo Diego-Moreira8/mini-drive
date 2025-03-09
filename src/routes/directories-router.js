@@ -12,9 +12,16 @@ directoriesRouter.use(checkUser);
 
 directoriesRouter.get("/", directoriesController.getIndexPage);
 
+directoriesRouter.get(
+  "/:id/criar",
+  getDirectoryIfOwnedByUser,
+  directoriesController.getCreateDirectory
+);
+
 directoriesRouter.post(
   "/:id/criar",
   getDirectoryIfOwnedByUser,
+  validateDirectoryForm,
   directoriesController.postCreateDirectory
 );
 

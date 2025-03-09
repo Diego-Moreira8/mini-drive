@@ -1,18 +1,5 @@
 const { prisma } = require("../prisma-client/prisma-client");
 
-const getByName = async (name, parentId) => {
-  const foundDirectory = await prisma.directory.findFirst({
-    where: {
-      AND: {
-        name: name,
-        parentId: parentId,
-      },
-    },
-  });
-
-  return foundDirectory;
-};
-
 const create = async (name, userId, parentId) => {
   try {
     if (await getByName(name, parentId)) {
@@ -51,6 +38,19 @@ const getById = async (directoryId) => {
     console.error("Error at :", err.message);
     throw err;
   }
+};
+
+const getByName = async (name, parentId) => {
+  const foundDirectory = await prisma.directory.findFirst({
+    where: {
+      AND: {
+        name: name,
+        parentId: parentId,
+      },
+    },
+  });
+
+  return foundDirectory;
 };
 
 const getUserRoot = async (userId) => {
@@ -109,6 +109,10 @@ const renameDirectory = async (directoryId, newName) => {
         id: directoryId,
       },
     });
+
+    if (directory.name === newName) {
+      return directory;
+    }
 
     if (directory.rootOfUserId) {
       throw new Error("Root directory cannot be renamed.");
