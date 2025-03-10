@@ -32,7 +32,6 @@ model File {
   nameOnStorage String
   size          Int
   mimeType      String
-  encoding      String
   uploadTime    DateTime @default(now())
 
   owner   User @relation(fields: [ownerId], references: [id])

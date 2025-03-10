@@ -1,13 +1,13 @@
 <h2>Enviar Arquivo</h2>
 
-<form action="/enviar-arquivo" method="post" enctype="multipart/form-data">
-  <input type="file" name="file" id="file" required />
-
+<form action="/arquivo/enviar" method="post" enctype="multipart/form-data">
   <input
     type="hidden"
-    name="currDirectory"
+    name="directoryId"
     value="<%= locals.directory.id %>"
   />
+
+  <input type="file" name="file" id="file" required />
 
   <button type="submit">Enviar</button>
 </form>

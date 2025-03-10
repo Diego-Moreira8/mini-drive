@@ -1,17 +1,28 @@
+const fileService = require("../services/file-service");
+
 /** @type {import("express").RequestHandler} */
 const uploadFile = async (req, res, next) => {
-  if (!req.file) {
-    // No file sent
-    return res.redirect("/");
+  try {
+    const reloadDirectory = () =>
+      res.redirect(`/pasta/${req.body.directoryId}`);
+
+    if (!req.file) {
+      return reloadDirectory();
+    }
+
+    await fileService.create(
+      req.user.id,
+      parseInt(req.body.directoryId),
+      req.file.originalname,
+      req.file.filename,
+      req.file.size,
+      req.file.mimetype
+    );
+
+    return reloadDirectory();
+  } catch (err) {
+    next(err);
   }
-
-  await fileService.create(
-    req.user.id,
-    validateId(req.body.currDirectory),
-    req.file
-  );
-
-  res.redirect("/");
 };
 
 /** @type {import("express").RequestHandler} */
@@ -50,3 +61,11 @@ const deleteFile = async (req, res, next) => {
     return next(err);
   }
 };
+
+const filesController = {
+  uploadFile,
+  downloadFile,
+  deleteFile,
+};
+
+module.exports = filesController;

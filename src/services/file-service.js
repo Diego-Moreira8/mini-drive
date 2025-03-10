@@ -7,8 +7,7 @@ const create = async (
   fileName,
   nameOnStorage,
   size,
-  mimeType,
-  encoding
+  mimeType
 ) => {
   try {
     if (!(await directoryService.isDirectoryOfUser(directoryId, userId))) {
@@ -23,7 +22,6 @@ const create = async (
         nameOnStorage: nameOnStorage,
         size: size,
         mimeType: mimeType,
-        encoding: encoding,
         ownerId: userId,
         directoryId: directoryId,
       },
