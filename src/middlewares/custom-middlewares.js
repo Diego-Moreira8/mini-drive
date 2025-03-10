@@ -1,4 +1,5 @@
 const directoryService = require("../services/directory-service");
+const fileService = require("../services/file-service");
 
 /**
  * Middleware to attach user information to the response locals object for use
@@ -55,4 +56,36 @@ const getDirectoryIfOwnedByUser = async (req, res, next) => {
   }
 };
 
-module.exports = { addUserToLocals, checkUser, getDirectoryIfOwnedByUser };
+/** @type {import("express").RequestHandler} */
+const getFileIfOwnedByUser = async (req, res, next) => {
+  try {
+    const file = await fileService.getById(parseInt(req.params.id));
+
+    if (!file) {
+      throw {
+        statusCode: 404,
+        msgForUser: "O arquivo requisitado não existe.",
+      };
+    }
+
+    if (req.user.id !== file.ownerId) {
+      throw {
+        statusCode: 403,
+        msgForUser: "Você não tem permissão para acessar este arquivo.",
+      };
+    }
+
+    res.locals = { ...res.locals, file };
+
+    next();
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = {
+  addUserToLocals,
+  checkUser,
+  getDirectoryIfOwnedByUser,
+  getFileIfOwnedByUser,
+};

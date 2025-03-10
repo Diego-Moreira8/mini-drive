@@ -1,4 +1,5 @@
 const fileService = require("../services/file-service");
+const path = require("path");
 
 /** @type {import("express").RequestHandler} */
 const uploadFile = async (req, res, next) => {
@@ -28,12 +29,10 @@ const uploadFile = async (req, res, next) => {
 /** @type {import("express").RequestHandler} */
 const downloadFile = async (req, res, next) => {
   try {
-    const id = validateId(req.params.fileId);
-    const file = await fileService.getFile(id);
-    checkFilePermissions(file, req.user.id);
+    const { nameOnStorage, fileName } = res.locals.file;
     res.download(
-      path.join(__dirname, `../../uploads/${file.nameOnStorage}`),
-      file.fileName
+      path.join(__dirname, `../../multer-uploads/${nameOnStorage}`),
+      fileName
     );
   } catch (err) {
     return next(err);

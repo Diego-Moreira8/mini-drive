@@ -1,13 +1,23 @@
 const { Router } = require("express");
+const {
+  getFileIfOwnedByUser,
+  checkUser,
+} = require("../middlewares/custom-middlewares");
 const filesController = require("../controllers/files-controller");
 const multer = require("../middlewares/multer");
 
 const filesRouter = Router();
 
+filesRouter.use(checkUser);
+
 filesRouter.post("/enviar", multer.uploadFile, filesController.uploadFile);
 
-//filesRouter.get("/arquivo/:id/baixar", filesController.downloadFile);
+filesRouter.get(
+  "/:id/baixar",
+  getFileIfOwnedByUser,
+  filesController.downloadFile
+);
 
-//filesRouter.get("/arquivo/:id/apagar", filesController.deleteFile);
+//filesRouter.get("/:id/apagar", filesController.deleteFile);
 
 module.exports = filesRouter;
