@@ -27,6 +27,12 @@ const uploadFile = (req, res, next) => {
       });
     }
 
+    // Fix issue with accented characters
+    req.file.originalname = Buffer.from(
+      req.file.originalname,
+      "latin1"
+    ).toString("utf8");
+
     next();
   });
 };
