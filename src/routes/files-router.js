@@ -18,6 +18,10 @@ filesRouter.get(
   filesController.downloadFile
 );
 
-//filesRouter.get("/:id/apagar", filesController.deleteFile);
+filesRouter.get(
+  "/:id/apagar",
+  getFileIfOwnedByUser,
+  filesController.deleteFile
+);
 
 module.exports = filesRouter;

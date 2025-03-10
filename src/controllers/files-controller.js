@@ -1,5 +1,6 @@
 const fileService = require("../services/file-service");
 const path = require("path");
+const fs = require("fs/promises");
 
 /** @type {import("express").RequestHandler} */
 const uploadFile = async (req, res, next) => {
@@ -42,20 +43,12 @@ const downloadFile = async (req, res, next) => {
 /** @type {import("express").RequestHandler} */
 const deleteFile = async (req, res, next) => {
   try {
-    const id = validateId(req.params.fileId);
-    const file = await fileService.getFile(id);
-    checkFilePermissions(file, req.user.id);
-    const deletedFile = await fileService.deleteFile(id);
-
-    // Delete from uploads directory
-    unlink(
-      path.join(__dirname, `../../uploads/${deletedFile.nameOnStorage}`),
-      (err) => {
-        if (err) throw err;
-      }
+    const { id, nameOnStorage, directoryId } = res.locals.file;
+    await fs.unlink(
+      path.join(__dirname, `../../multer-uploads/${nameOnStorage}`)
     );
-
-    res.redirect("/");
+    await fileService.deleteFile(id);
+    res.redirect(`/pasta/${directoryId}`);
   } catch (err) {
     return next(err);
   }
