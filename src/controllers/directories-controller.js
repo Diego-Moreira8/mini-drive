@@ -126,9 +126,9 @@ const postRenameDirectory = async (req, res, next) => {
 const promptDeleteDirectory = (req, res, next) => {
   res.render("layout", {
     template: "pages/prompt",
-    promptTitle: `Apagar Diretório ${res.locals.directory.name}`,
-    promptText:
-      "Tem certeza que deseja apagar o diretório e todos os seus arquivos?",
+    title: "Apagar Diretório",
+    promptTitle: "Apagar Diretório",
+    promptText: `Tem certeza que deseja apagar o diretório "${res.locals.directory.name}" e todos os seus arquivos?`,
     action: `/pasta/${res.locals.directory.id}/apagar`,
   });
 };
@@ -139,7 +139,6 @@ const postDeleteDirectory = async (req, res, next) => {
     const deleteConfirmed = req.body.response === "true";
 
     if (!deleteConfirmed) {
-      console.log("hi");
       return res.redirect(`/pasta/${res.locals.directory.id}`);
     }
 

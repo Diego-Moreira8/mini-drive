@@ -21,7 +21,15 @@ filesRouter.get(
 filesRouter.get(
   "/:id/apagar",
   getFileIfOwnedByUser,
-  filesController.deleteFile
+  filesController.promptDeleteFile
 );
+
+filesRouter.post(
+  "/:id/apagar",
+  getFileIfOwnedByUser,
+  filesController.postDeleteFile
+);
+
+filesRouter.get("/:id", getFileIfOwnedByUser, filesController.getFileDetails);
 
 module.exports = filesRouter;

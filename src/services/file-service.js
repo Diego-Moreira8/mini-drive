@@ -36,7 +36,14 @@ const create = async (
 
 const getById = async (fileId) => {
   try {
-    const file = await prisma.file.findUnique({ where: { id: fileId } });
+    const file = await prisma.file.findUnique({
+      where: {
+        id: fileId,
+      },
+      include: {
+        owner: true,
+      },
+    });
     return file;
   } catch (err) {
     console.error("Error at retrieving file:", err.message);

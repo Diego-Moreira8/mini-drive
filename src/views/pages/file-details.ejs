@@ -1,0 +1,8 @@
+<h1><%= locals.title %></h1>
+
+<p><b>Nome: </b><%= locals.file.fileName %></p>
+<p><b>Tamanho: </b><%= locals.file.size %> bytes</p>
+<p><b>Proprietário: </b><%= locals.file.owner.username %></p>
+
+<a href="<%= `/arquivo/${locals.file.id}/baixar` %>">Baixar</a>
+<a href="<%= `/arquivo/${locals.file.id}/apagar` %>">Apagar</a>

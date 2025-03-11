@@ -45,7 +45,9 @@
       <% if (hasFiles) { %>
         <% locals.directory.files.forEach(file => { %>
           <tr>
-            <td><%= file.fileName %></td>
+            <td>
+              <a href="<%= `/arquivo/${file.id}` %>"><%= file.fileName %></a>
+            </td>
             <td><%= file.size %> bytes</td>
             <td class="date"><%= file.uploadTime %></td>
             <td>
