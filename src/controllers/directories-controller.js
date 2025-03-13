@@ -1,4 +1,5 @@
 const directoryService = require("../services/directory-service");
+const hierarchizeDirectories = require("../utils/hierarchize-directories");
 
 const getCreateDirectoryFormView = (errorsArray, value) => {
   return {
@@ -32,9 +33,16 @@ const getIndexPage = async (req, res, next) => {
 
 /** @type {import("express").RequestHandler} */
 const getDirectoryPage = async (req, res, next) => {
+  const allDirectories = hierarchizeDirectories(
+    await directoryService.getUserDirectories(req.user.id)
+  );
+
+  console.dir(allDirectories);
+
   res.render("layout", {
-    template: "pages/files-table",
+    template: "pages/file-explorer",
     directory: res.locals.directory,
+    allDirectories,
   });
 };
 

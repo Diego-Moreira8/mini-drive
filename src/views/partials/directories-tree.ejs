@@ -1,0 +1,16 @@
+<h1>Hierarquia</h1>
+<ul>
+  <% function renderHierarchy(allDirectories) { %>
+    <% allDirectories.forEach(dir => { %>
+      <li>
+        <a href="<%= `/pasta/${dir.id}` %>"><%= dir.name %></a>
+        <% if (dir.children?.length > 0) { %>
+          <ul>
+            <% renderHierarchy(dir.children) %>
+          </ul>
+        <% } %>
+      </li>
+    <% }) %>
+  <% } %>
+  <% renderHierarchy([locals.allDirectories]); %>
+</ul>
