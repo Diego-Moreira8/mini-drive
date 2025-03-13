@@ -67,6 +67,23 @@ const getUserRoot = async (userId) => {
   }
 };
 
+const getUserDirectories = async (userId) => {
+  try {
+    const directories = prisma.directory.findMany({
+      where: {
+        ownerId: userId,
+      },
+      orderBy: {
+        name: "asc",
+      },
+    });
+    return directories;
+  } catch (err) {
+    console.error("Error at retrieving user's directories:", err.message);
+    throw err;
+  }
+};
+
 const getChildrenDirectories = async (parentId) => {
   try {
     const directories = await prisma.directory.findMany({
@@ -201,6 +218,7 @@ module.exports = {
   getById,
   getByName,
   getUserRoot,
+  getUserDirectories,
   getChildrenDirectories,
   isDirectoryOfUser,
   renameDirectory,
