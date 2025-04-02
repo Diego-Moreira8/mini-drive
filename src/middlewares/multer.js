@@ -1,21 +1,14 @@
-const path = require("path");
+require("dotenv").config();
 const multer = require("multer");
 
-const uploadSingleFile = multer({
-  dest: path.join(__dirname, `../../multer-uploads/`),
-  limits: { fileSize: 25000000 /*25 MB*/ },
+const uploadSingle = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: parseInt(process.env.UPLOAD_LIMIT) },
 }).single("file");
 
 /** @type {import("express").RequestHandler} */
-const uploadFile = (req, res, next) => {
-  if (!req.user) {
-    throw {
-      statusCode: 401,
-      message: "Para enviar um arquivo um usuário precisa estar conectado.",
-    };
-  }
-
-  uploadSingleFile(req, res, function (err) {
+const uploadSingleFile = (req, res, next) => {
+  uploadSingle(req, res, (err) => {
     if (err instanceof multer.MulterError && err.code === "LIMIT_FILE_SIZE") {
       return next({
         statusCode: 400,
@@ -37,4 +30,4 @@ const uploadFile = (req, res, next) => {
   });
 };
 
-module.exports = { uploadFile };
+module.exports = uploadSingleFile;

@@ -1,13 +1,18 @@
+const uuid = require("uuid").v4;
+
 const { prisma } = require("../prisma-client/prisma-client");
+const supabase = require("../supabase-client/supabase-client");
 const directoryService = require("./directory-service");
+
+const USERS_FILES_BUCKET = "users-files";
 
 const create = async (
   userId,
   directoryId,
   fileName,
-  nameOnStorage,
   size,
-  mimeType
+  mimeType,
+  fileBuffer
 ) => {
   try {
     if (!(await directoryService.isDirectoryOfUser(directoryId, userId))) {
@@ -16,16 +21,29 @@ const create = async (
       );
     }
 
+    const nameOnStorage = uuid();
+
+    // Store file details on database
     const newFile = await prisma.file.create({
       data: {
+        nameOnStorage,
         fileName: fileName,
-        nameOnStorage: nameOnStorage,
         size: size,
         mimeType: mimeType,
         ownerId: userId,
         directoryId: directoryId,
       },
     });
+
+    // Upload file to user's folders in the bucket
+    const { error } = await supabase.storage
+      .from(USERS_FILES_BUCKET)
+      .upload(`${userId}/${nameOnStorage}`, fileBuffer);
+
+    if (error) {
+      await prisma.file.delete({ where: { id: newFile.id } });
+      throw error;
+    }
 
     return newFile;
   } catch (err) {
@@ -93,9 +111,32 @@ const renameSafe = async (fileId, newName) => {
 const deleteFile = async (fileId) => {
   try {
     const deletedFile = await prisma.file.delete({ where: { id: fileId } });
+    const { ownerId, nameOnStorage } = deletedFile;
+
+    await supabase.storage
+      .from(USERS_FILES_BUCKET)
+      .remove(`${ownerId}/${nameOnStorage}`);
+
     return deletedFile;
   } catch (err) {
     console.error("Error at deleting file:", err.message);
+    throw err;
+  }
+};
+
+const getSignedUrl = async (userId, nameOnStorage, originalName) => {
+  try {
+    const { data, error } = await supabase.storage
+      .from(USERS_FILES_BUCKET)
+      .createSignedUrl(`${userId}/${nameOnStorage}`, 60, {
+        download: originalName,
+      });
+
+    if (error) throw error;
+
+    return data.signedUrl;
+  } catch (err) {
+    console.error("Error at generating signed URL of the file.");
     throw err;
   }
 };
@@ -106,4 +147,5 @@ module.exports = {
   rename,
   renameSafe,
   deleteFile,
+  getSignedUrl,
 };
