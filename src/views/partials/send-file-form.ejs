@@ -3,8 +3,8 @@
 <form action="/arquivo/enviar" method="post" enctype="multipart/form-data">
   <input
     type="hidden"
-    name="directoryId"
-    value="<%= locals.directory.id %>"
+    name="folderId"
+    value="<%= locals.folder.id %>"
   />
 
   <input type="file" name="file" id="file" required />

@@ -1,4 +1,4 @@
-const directoryService = require("../services/directory-service");
+const folderService = require("../services/folder-service");
 const fileService = require("../services/file-service");
 
 /**
@@ -30,25 +30,25 @@ const checkUser = (req, res, next) => {
 };
 
 /** @type {import("express").RequestHandler} */
-const getDirectoryIfOwnedByUser = async (req, res, next) => {
+const getFolderIfOwnedByUser = async (req, res, next) => {
   try {
-    const directory = await directoryService.getById(parseInt(req.params.id));
+    const folder = await folderService.getById(parseInt(req.params.id));
 
-    if (!directory) {
+    if (!folder) {
       throw {
         statusCode: 404,
         msgForUser: "O diretório requisitado não existe.",
       };
     }
 
-    if (req.user.id !== directory.ownerId) {
+    if (req.user.id !== folder.ownerId) {
       throw {
         statusCode: 403,
         msgForUser: "Você não tem permissão para acessar este diretório.",
       };
     }
 
-    res.locals = { ...res.locals, directory };
+    res.locals = { ...res.locals, folder };
 
     next();
   } catch (err) {
@@ -86,6 +86,6 @@ const getFileIfOwnedByUser = async (req, res, next) => {
 module.exports = {
   addUserToLocals,
   checkUser,
-  getDirectoryIfOwnedByUser,
+  getFolderIfOwnedByUser,
   getFileIfOwnedByUser,
 };

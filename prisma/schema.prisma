@@ -20,10 +20,10 @@ model User {
   password String
   name     String?
 
-  files       File[]
-  directories Directory[] @relation("UserDirectories")
+  files   File[]
+  folders Folder[] @relation("UserFolders")
 
-  rootDirectory Directory? @relation("RootDirectoryOfUser")
+  rootFolder Folder? @relation("RootFolderOfUser")
 }
 
 model File {
@@ -37,23 +37,23 @@ model File {
   owner   User @relation(fields: [ownerId], references: [id])
   ownerId Int
 
-  directory   Directory @relation(fields: [directoryId], references: [id])
-  directoryId Int
+  folder   Folder @relation(fields: [folderId], references: [id])
+  folderId Int
 }
 
-model Directory {
+model Folder {
   id   Int    @id @default(autoincrement())
   name String
 
-  owner   User @relation("UserDirectories", fields: [ownerId], references: [id])
+  owner   User @relation("UserFolders", fields: [ownerId], references: [id])
   ownerId Int
 
-  rootOfUser   User? @relation("RootDirectoryOfUser", fields: [rootOfUserId], references: [id])
+  rootOfUser   User? @relation("RootFolderOfUser", fields: [rootOfUserId], references: [id])
   rootOfUserId Int?  @unique
 
-  subdirectories Directory[] @relation("DirectoryToSubdirectory")
-  parent         Directory?  @relation("DirectoryToSubdirectory", fields: [parentId], references: [id])
-  parentId       Int?
+  subFolders Folder[] @relation("FolderToSubfolder")
+  parent     Folder?  @relation("FolderToSubfolder", fields: [parentId], references: [id])
+  parentId   Int?
 
   files File[]
 }

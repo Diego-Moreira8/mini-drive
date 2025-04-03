@@ -1,21 +1,21 @@
 <h1>
-  <%= locals.directory.rootOfUserId ? "Meus Arquivos" : locals.directory.name %>
+  <%= locals.folder.rootOfUserId ? "Meus Arquivos" : locals.folder.name %>
 </h1>
 
-<a href="<%= `/pasta/${directory.id}/criar` %>">Nova pasta</a>
+<a href="<%= `/pasta/${folder.id}/criar` %>">Nova pasta</a>
 
-<% if (!locals.directory.rootOfUserId) { %>
-  <a href="<%= `/pasta/${directory.id}/renomear` %>">Renomear</a>
-  <a href="<%= `/pasta/${directory.id}/apagar` %>">Apagar</a>
+<% if (!locals.folder.rootOfUserId) { %>
+  <a href="<%= `/pasta/${folder.id}/renomear` %>">Renomear</a>
+  <a href="<%= `/pasta/${folder.id}/apagar` %>">Apagar</a>
 <% } %>
 
 <hr>
 <%- include("../partials/send-file-form") %>
 <hr>
 
-<% const hasSubdirectories = locals.directory.subdirectories?.length > 0 %>
-<% const hasFiles = locals.directory.files?.length > 0 %>
-<% const notEmpty = hasSubdirectories || hasFiles %>
+<% const hasSubfolders = locals.folder.subFolders?.length > 0 %>
+<% const hasFiles = locals.folder.files?.length > 0 %>
+<% const notEmpty = hasSubfolders || hasFiles %>
 
 <% if (notEmpty) { %>
   <table>
@@ -29,8 +29,8 @@
     </thead>
 
     <tbody>
-      <% if (hasSubdirectories) { %>
-        <% locals.directory.subdirectories.forEach(dir => { %>
+      <% if (hasSubfolders) { %>
+        <% locals.folder.subFolders.forEach(dir => { %>
           <tr>
             <td>
               <a href="<%= `/pasta/${dir.id}` %>"><%= dir.name %></a>
@@ -43,7 +43,7 @@
       <% } %>
 
       <% if (hasFiles) { %>
-        <% locals.directory.files.forEach(file => { %>
+        <% locals.folder.files.forEach(file => { %>
           <tr>
             <td>
               <a href="<%= `/arquivo/${file.id}` %>"><%= file.fileName %></a>

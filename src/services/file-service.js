@@ -2,22 +2,22 @@ const uuid = require("uuid").v4;
 
 const { prisma } = require("../prisma-client/prisma-client");
 const supabase = require("../supabase-client/supabase-client");
-const directoryService = require("./directory-service");
+const folderService = require("./folder-service");
 
 const USERS_FILES_BUCKET = "users-files";
 
 const create = async (
   userId,
-  directoryId,
+  folderId,
   fileName,
   size,
   mimeType,
   fileBuffer
 ) => {
   try {
-    if (!(await directoryService.isDirectoryOfUser(directoryId, userId))) {
+    if (!(await folderService.isFolderOfUser(folderId, userId))) {
       throw new Error(
-        `The user with ID ${userId} cannot manipulate the directory with ID ${directoryId}.`
+        `The user with ID ${userId} cannot manipulate the folder with ID ${folderId}.`
       );
     }
 
@@ -31,7 +31,7 @@ const create = async (
         size: size,
         mimeType: mimeType,
         ownerId: userId,
-        directoryId: directoryId,
+        folderId: folderId,
       },
     });
 

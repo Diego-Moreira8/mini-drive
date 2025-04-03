@@ -90,7 +90,7 @@ const validateUpdateProfileForm = [
   },
 ];
 
-const validateDirectoryForm = [
+const validateFolderForm = [
   body("name")
     .trim()
     .notEmpty()
@@ -109,5 +109,5 @@ const validateDirectoryForm = [
 module.exports = {
   validateSignUpForm,
   validateUpdateProfileForm,
-  validateDirectoryForm,
+  validateFolderForm,
 };

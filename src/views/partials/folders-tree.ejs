@@ -1,7 +1,7 @@
 <h1>Hierarquia</h1>
 <ul>
-  <% function renderHierarchy(allDirectories) { %>
-    <% allDirectories.forEach(dir => { %>
+  <% function renderHierarchy(allFolders) { %>
+    <% allFolders.forEach(dir => { %>
       <li>
         <a href="<%= `/pasta/${dir.id}` %>"><%= dir.name %></a>
         <% if (dir.children?.length > 0) { %>
@@ -12,5 +12,5 @@
       </li>
     <% }) %>
   <% } %>
-  <% renderHierarchy([locals.allDirectories]); %>
+  <% renderHierarchy([locals.allFolders]); %>
 </ul>

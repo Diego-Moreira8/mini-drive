@@ -14,7 +14,7 @@ const create = async (username, password, name) => {
         },
       });
 
-      const rootDirectory = await tx.directory.create({
+      const rootFolder = await tx.folder.create({
         data: {
           name: "__root__",
           owner: {
@@ -26,7 +26,7 @@ const create = async (username, password, name) => {
         },
       });
 
-      return { user, rootDirectory };
+      return { user, rootFolder };
     });
   } catch (err) {
     console.error("Error at creating user:", err.message);
@@ -100,7 +100,7 @@ const deleteUserAndItsData = async (userId) => {
   try {
     const result = await prisma.$transaction([
       prisma.file.deleteMany({ where: { ownerId: userId } }),
-      prisma.directory.deleteMany({ where: { ownerId: userId } }),
+      prisma.folder.deleteMany({ where: { ownerId: userId } }),
       prisma.user.delete({ where: { id: userId } }),
     ]);
     return result;

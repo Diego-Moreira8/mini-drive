@@ -12,23 +12,22 @@ const getFileDetails = (req, res, next) => {
 /** @type {import("express").RequestHandler} */
 const uploadFile = async (req, res, next) => {
   try {
-    const reloadDirectory = () =>
-      res.redirect(`/pasta/${req.body.directoryId}`);
+    const reloadFolder = () => res.redirect(`/pasta/${req.body.folderId}`);
 
     if (!req.file) {
-      return reloadDirectory();
+      return reloadFolder();
     }
 
     await fileService.create(
       req.user.id,
-      parseInt(req.body.directoryId),
+      parseInt(req.body.folderId),
       req.file.originalname,
       req.file.size,
       req.file.mimetype,
       req.file.buffer
     );
 
-    return reloadDirectory();
+    return reloadFolder();
   } catch (err) {
     next(err);
   }
@@ -63,15 +62,15 @@ const promptDeleteFile = (req, res, next) => {
 /** @type {import("express").RequestHandler} */
 const postDeleteFile = async (req, res, next) => {
   try {
-    const { id, directoryId } = res.locals.file;
+    const { id, folderId } = res.locals.file;
     const deleteConfirmed = req.body.response === "true";
 
     if (!deleteConfirmed) {
-      return res.redirect(`/pasta/${directoryId}`);
+      return res.redirect(`/pasta/${folderId}`);
     }
 
     await fileService.deleteFile(id);
-    res.redirect(`/pasta/${directoryId}`);
+    res.redirect(`/pasta/${folderId}`);
   } catch (err) {
     return next(err);
   }
