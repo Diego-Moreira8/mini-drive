@@ -2,15 +2,15 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const logger = require("morgan");
-const { passport } = require("./authentication/passport");
+const { passport } = require("./config/passport");
 const errorController = require("./controllers/error-controller");
 const { configureSession } = require("./middlewares/express-session");
 const { addUserToLocals } = require("./middlewares/custom-middlewares");
-const indexRouter = require("./routes/index-router");
-const authRouter = require("./routes/auth-router");
-const userProfileRouter = require("./routes/user-profile-router");
-const foldersRouter = require("./routes/folders-router");
-const filesRouter = require("./routes/files-router");
+const indexRouter = require("./routers/index-router");
+const authRouter = require("./routers/auth-router");
+const userProfileRouter = require("./routers/user-profile-router");
+const foldersRouter = require("./routers/folders-router");
+const filesRouter = require("./routers/files-router");
 
 const app = express();
 

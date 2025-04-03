@@ -1,5 +1,5 @@
 const userService = require("../services/user-service");
-const { passport } = require("../authentication/passport");
+const { passport } = require("../config/passport");
 
 const signUpViewData = {
   template: "pages/sign-up",

@@ -1,7 +1,7 @@
 require("dotenv").config();
 const expressSession = require("express-session");
 const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
-const { prisma } = require("../prisma-client/prisma-client");
+const { prisma } = require("../config/prisma-client");
 
 /**
  * Configures and returns the session middleware.

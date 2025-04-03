@@ -1,5 +1,5 @@
-const { hashPassword, comparePassword } = require("../authentication/bcrypt");
-const { prisma } = require("../prisma-client/prisma-client");
+const { hashPassword, comparePassword } = require("../config/bcrypt");
+const { prisma } = require("../config/prisma-client");
 
 const create = async (username, password, name) => {
   try {
