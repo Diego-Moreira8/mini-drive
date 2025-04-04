@@ -1,6 +1,5 @@
 const uuid = require("uuid").v4;
-
-const { prisma } = require("../config/prisma-client");
+const prisma = require("../config/prisma-client");
 const supabase = require("../config/supabase-client");
 const folderService = require("./folder-service");
 

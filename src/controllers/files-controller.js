@@ -76,12 +76,10 @@ const postDeleteFile = async (req, res, next) => {
   }
 };
 
-const filesController = {
+module.exports = {
   getFileDetails,
   uploadFile,
   downloadFile,
   promptDeleteFile,
   postDeleteFile,
 };
-
-module.exports = filesController;

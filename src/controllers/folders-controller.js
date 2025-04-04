@@ -149,7 +149,7 @@ const postDeleteFolder = async (req, res, next) => {
   }
 };
 
-const foldersController = {
+module.exports = {
   getIndexPage,
   getFolderPage,
   getCreateFolder,
@@ -159,4 +159,3 @@ const foldersController = {
   promptDeleteFolder,
   postDeleteFolder,
 };
-module.exports = foldersController;

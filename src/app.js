@@ -1,16 +1,22 @@
+// Packages
 require("dotenv").config();
-const express = require("express");
 const path = require("path");
+const express = require("express");
+const expressSession = require("express-session");
 const logger = require("morgan");
-const { passport } = require("./config/passport");
-const errorController = require("./controllers/error-controller");
-const { configureSession } = require("./middlewares/express-session");
-const { addUserToLocals } = require("./middlewares/custom-middlewares");
+// Configs
+const passport = require("./config/passport");
+const expressSessionOptions = require("./config/express-session");
+// Routers
 const indexRouter = require("./routers/index-router");
 const authRouter = require("./routers/auth-router");
 const userProfileRouter = require("./routers/user-profile-router");
 const foldersRouter = require("./routers/folders-router");
 const filesRouter = require("./routers/files-router");
+// Controllers
+const errorController = require("./controllers/error-controller");
+// Middlewares
+const { addUserToLocals } = require("./middlewares/custom-middlewares");
 
 const app = express();
 
@@ -19,7 +25,7 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(logger("dev"));
 app.use(express.urlencoded({ extended: true }));
-app.use(configureSession());
+app.use(expressSession(expressSessionOptions));
 app.use(passport.session());
 app.use(addUserToLocals);
 
