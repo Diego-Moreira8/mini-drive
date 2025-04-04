@@ -11,10 +11,7 @@ const addUserToLocals = (req, res, next) => {
   }
 
   const { name, username } = req.user;
-  res.locals = {
-    ...res.locals,
-    user: { name, username },
-  };
+  res.locals.user = { name, username };
   next();
 };
 
@@ -51,8 +48,8 @@ const getFolderIfOwnedByUser = async (req, res, next) => {
     res.locals = { ...res.locals, folder };
 
     next();
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    next(error);
   }
 };
 
@@ -78,8 +75,8 @@ const getFileIfOwnedByUser = async (req, res, next) => {
     res.locals = { ...res.locals, file };
 
     next();
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    next(error);
   }
 };
 

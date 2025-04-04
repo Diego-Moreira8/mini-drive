@@ -28,9 +28,9 @@ const create = async (username, password, name) => {
 
       return { user, rootFolder };
     });
-  } catch (err) {
-    console.error("Error at creating user:", err.message);
-    throw err;
+  } catch (error) {
+    console.error("Error at creating user");
+    throw error;
   }
 };
 
@@ -38,9 +38,9 @@ const getById = async (id) => {
   try {
     const user = await prisma.user.findUnique({ where: { id } });
     return user;
-  } catch (err) {
-    console.error("Error at retrieving user by ID:", err.message);
-    throw err;
+  } catch (error) {
+    console.error("Error at retrieving user by ID");
+    throw error;
   }
 };
 
@@ -52,9 +52,9 @@ const getByUsername = async (username) => {
       },
     });
     return user;
-  } catch (err) {
-    console.error("Error at searching for username:", err.message);
-    throw err;
+  } catch (error) {
+    console.error("Error at retrieving user by username");
+    throw error;
   }
 };
 
@@ -79,9 +79,9 @@ const update = async (id, { newUsername, newPassword, newName }) => {
     });
 
     return result;
-  } catch (err) {
-    console.error("Error at updating user:", err.message);
-    throw err;
+  } catch (error) {
+    console.error("Error at updating user");
+    throw error;
   }
 };
 
@@ -90,9 +90,9 @@ const verifyPassword = async (userId, plainPassword) => {
     const user = await prisma.user.findUnique({ where: { id: userId } });
     const result = await comparePassword(plainPassword, user.password);
     return result;
-  } catch (err) {
-    console.error("Error at verifying password:", err.message);
-    throw err;
+  } catch (error) {
+    console.error("Error at verifying password");
+    throw error;
   }
 };
 
@@ -104,9 +104,9 @@ const deleteUserAndItsData = async (userId) => {
       prisma.user.delete({ where: { id: userId } }),
     ]);
     return result;
-  } catch (err) {
-    console.error("Error at deleting user:", err.message);
-    throw err;
+  } catch (error) {
+    console.error("Error at deleting user");
+    throw error;
   }
 };
 

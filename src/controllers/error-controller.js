@@ -6,11 +6,11 @@ const routeNotFound = (req, res, next) => {
 };
 
 /** @type {import("express").ErrorRequestHandler} */
-const errorHandler = (err, req, res, next) => {
-  console.error(err);
+const errorHandler = (error, req, res, next) => {
+  console.error(error);
 
-  const statusCode = err.statusCode || 500;
-  const msgForUser = err.msgForUser || "Erro interno do servidor.";
+  const statusCode = error.statusCode || 500;
+  const msgForUser = error.msgForUser || "Erro interno do servidor.";
 
   res.status(statusCode).render("layout", {
     template: "error",

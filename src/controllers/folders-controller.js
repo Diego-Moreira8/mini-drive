@@ -26,8 +26,8 @@ const getIndexPage = async (req, res, next) => {
   try {
     const rootFolder = await folderService.getUserRoot(req.user.id);
     res.redirect(`/pasta/${rootFolder.id}`);
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    next(error);
   }
 };
 
@@ -75,8 +75,8 @@ const postCreateFolder = async (req, res, next) => {
       parseInt(req.params.id)
     );
     res.redirect(`/pasta/${newFolder.id}`);
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    next(error);
   }
 };
 
@@ -117,8 +117,8 @@ const postRenameFolder = async (req, res, next) => {
 
     await folderService.renameFolder(res.locals.folder.id, req.body.name);
     res.redirect(`/pasta/${res.locals.folder.id}`);
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    next(error);
   }
 };
 
@@ -144,8 +144,8 @@ const postDeleteFolder = async (req, res, next) => {
 
     await folderService.deleteFolderAndItsFiles(res.locals.folder.id);
     res.redirect(`/pasta/${res.locals.folder.parentId}`);
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    next(error);
   }
 };
 

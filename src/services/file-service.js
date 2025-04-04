@@ -45,9 +45,9 @@ const create = async (
     }
 
     return newFile;
-  } catch (err) {
-    console.error("Error at creating file:", err.message);
-    throw err;
+  } catch (error) {
+    console.error("Error at creating file");
+    throw error;
   }
 };
 
@@ -62,9 +62,9 @@ const getById = async (fileId) => {
       },
     });
     return file;
-  } catch (err) {
-    console.error("Error at retrieving file:", err.message);
-    throw err;
+  } catch (error) {
+    console.error("Error at retrieving file");
+    throw error;
   }
 };
 
@@ -79,9 +79,9 @@ const rename = async (fileId, newName) => {
       },
     });
     return file;
-  } catch (err) {
-    console.error("Error at renaming file:", err.message);
-    throw err;
+  } catch (error) {
+    console.error("Error at renaming file");
+    throw error;
   }
 };
 
@@ -101,9 +101,9 @@ const renameSafe = async (fileId, newName) => {
     );
 
     return updatedFile;
-  } catch (err) {
-    console.error("Error at safe renaming file:", err.message);
-    throw err;
+  } catch (error) {
+    console.error("Error at safe renaming file");
+    throw error;
   }
 };
 
@@ -117,9 +117,9 @@ const deleteFile = async (fileId) => {
       .remove(`${ownerId}/${nameOnStorage}`);
 
     return deletedFile;
-  } catch (err) {
-    console.error("Error at deleting file:", err.message);
-    throw err;
+  } catch (error) {
+    console.error("Error at deleting file");
+    throw error;
   }
 };
 
@@ -134,9 +134,9 @@ const getSignedUrl = async (userId, nameOnStorage, originalName) => {
     if (error) throw error;
 
     return data.signedUrl;
-  } catch (err) {
+  } catch (error) {
     console.error("Error at generating signed URL of the file.");
-    throw err;
+    throw error;
   }
 };
 

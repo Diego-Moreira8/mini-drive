@@ -37,8 +37,8 @@ const postSignUp = async (req, res, next) => {
     await userService.create(username, password, name);
     // Redirect to log-in page
     res.redirect("/entrar");
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    next(error);
   }
 };
 
@@ -49,9 +49,9 @@ const getLogin = (req, res, next) => {
 
 /** @type {import("express").RequestHandler} */
 const postLogin = (req, res, next) => {
-  passport.authenticate("local", (err, user, info) => {
-    if (err) {
-      return next(err);
+  passport.authenticate("local", (error, user, info) => {
+    if (error) {
+      return next(error);
     }
 
     if (!user) {
@@ -62,9 +62,9 @@ const postLogin = (req, res, next) => {
       });
     }
 
-    req.logIn(user, (err) => {
-      if (err) {
-        return next(err);
+    req.logIn(user, (error) => {
+      if (error) {
+        return next(error);
       }
       res.redirect("/");
     });
@@ -73,9 +73,9 @@ const postLogin = (req, res, next) => {
 
 /** @type {import("express").RequestHandler} */
 const getLogout = (req, res, next) => {
-  req.logout((err) => {
-    if (err) {
-      return next(err);
+  req.logout((error) => {
+    if (error) {
+      return next(error);
     }
     res.redirect("/");
   });

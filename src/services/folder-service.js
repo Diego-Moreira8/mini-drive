@@ -16,9 +16,9 @@ const create = async (name, userId, parentId) => {
       },
     });
     return newFolder;
-  } catch (err) {
-    console.error("Error at creating folder:", err.message);
-    throw err;
+  } catch (error) {
+    console.error("Error at creating folder");
+    throw error;
   }
 };
 
@@ -34,9 +34,9 @@ const getById = async (folderId) => {
       },
     });
     return folder;
-  } catch (err) {
-    console.error("Error at :", err.message);
-    throw err;
+  } catch (error) {
+    console.error("Error at retrieving folder by ID");
+    throw error;
   }
 };
 
@@ -61,9 +61,9 @@ const getUserRoot = async (userId) => {
       },
     });
     return folder;
-  } catch (err) {
-    console.error("Error at retrieving user's root folder:", err.message);
-    throw err;
+  } catch (error) {
+    console.error("Error at retrieving user's root folder");
+    throw error;
   }
 };
 
@@ -78,9 +78,9 @@ const getUserFolders = async (userId) => {
       },
     });
     return folders;
-  } catch (err) {
-    console.error("Error at retrieving user's folders:", err.message);
-    throw err;
+  } catch (error) {
+    console.error("Error at retrieving user's folders");
+    throw error;
   }
 };
 
@@ -95,9 +95,9 @@ const getChildrenFolders = async (parentId) => {
       },
     });
     return folders;
-  } catch (err) {
-    console.error("Error at retrieving children folders:", err.message);
-    throw err;
+  } catch (error) {
+    console.error("Error at retrieving children folders from parent");
+    throw error;
   }
 };
 
@@ -110,9 +110,9 @@ const isFolderOfUser = async (folderId, userId) => {
     });
 
     return folder.ownerId === userId;
-  } catch (err) {
-    console.error("Error at checking if folder belongs to user:", err.message);
-    throw err;
+  } catch (error) {
+    console.error("Error at checking if folder belongs to user");
+    throw error;
   }
 };
 
@@ -147,9 +147,9 @@ const renameFolder = async (folderId, newName) => {
       },
     });
     return updatedFolder;
-  } catch (err) {
-    console.error("Error at renaming folder:", err.message);
-    throw err;
+  } catch (error) {
+    console.error("Error at renaming folder");
+    throw error;
   }
 };
 
@@ -183,9 +183,9 @@ const moveFolder = async (userId, folderId, newParentId) => {
     });
 
     return updatedFolder;
-  } catch (err) {
-    console.error("Error at moving folder:", err.message);
-    throw err;
+  } catch (error) {
+    console.error("Error at moving folder");
+    throw error;
   }
 };
 
@@ -204,9 +204,9 @@ const deleteFolderAndItsFiles = async (folderId) => {
       prisma.folder.delete({ where: { id: folderId } }),
     ]);
     return result;
-  } catch (err) {
-    console.error("Error at deleting folder and its files:", err.message);
-    throw err;
+  } catch (error) {
+    console.error("Error at deleting folder and its files");
+    throw error;
   }
 };
 

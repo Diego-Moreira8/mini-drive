@@ -28,8 +28,8 @@ const uploadFile = async (req, res, next) => {
     );
 
     return reloadFolder();
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    next(error);
   }
 };
 
@@ -43,8 +43,8 @@ const downloadFile = async (req, res, next) => {
       fileName
     );
     res.redirect(signedUrl);
-  } catch (err) {
-    return next(err);
+  } catch (error) {
+    return next(error);
   }
 };
 
@@ -71,8 +71,8 @@ const postDeleteFile = async (req, res, next) => {
 
     await fileService.deleteFile(id);
     res.redirect(`/pasta/${folderId}`);
-  } catch (err) {
-    return next(err);
+  } catch (error) {
+    return next(error);
   }
 };
 

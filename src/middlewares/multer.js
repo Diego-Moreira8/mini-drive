@@ -8,13 +8,16 @@ const uploadSingle = multer({
 
 /** @type {import("express").RequestHandler} */
 const uploadSingleFile = (req, res, next) => {
-  uploadSingle(req, res, (err) => {
-    if (err instanceof multer.MulterError && err.code === "LIMIT_FILE_SIZE") {
+  uploadSingle(req, res, (error) => {
+    if (
+      error instanceof multer.MulterError &&
+      error.code === "LIMIT_FILE_SIZE"
+    ) {
       return next({
         statusCode: 400,
         message: "Tamanho máximo de arquivo excedido.",
       });
-    } else if (err) {
+    } else if (error) {
       return next({
         message: "Houve um erro ao enviar o arquivo.",
       });

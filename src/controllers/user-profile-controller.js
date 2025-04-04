@@ -19,10 +19,6 @@ const getDeleteAccountViewData = (errorsArray) => {
 
 /** @type {import("express").RequestHandler} */
 const getProfilePage = (req, res, next) => {
-  if (!req.user) {
-    throw { statusCode: 401, msgForUser: "Esta página requer autenticação." };
-  }
-
   const { name, username } = req.user;
   res.render("layout", getProfileViewData([], { name, username }));
 };
@@ -71,8 +67,8 @@ const postProfileUpdate = async (req, res, next) => {
       title: "Modificações Salvas",
       message: "Modificações realizadas com sucesso!",
     });
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    next(error);
   }
 };
 
@@ -102,12 +98,12 @@ const postProfileDelete = async (req, res, next) => {
 
     await userService.deleteUserAndItsData(req.user.id);
 
-    req.logout((err) => {
-      if (err) throw err;
+    req.logout((error) => {
+      if (error) throw error;
       res.redirect("/");
     });
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    next(error);
   }
 };
 
