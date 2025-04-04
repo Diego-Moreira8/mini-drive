@@ -1,4 +1,5 @@
 const { body, validationResult } = require("express-validator");
+const { isValidUsername } = require("../services/user-service");
 
 const validateSignUpForm = [
   body("name")
@@ -11,7 +12,13 @@ const validateSignUpForm = [
     .notEmpty()
     .withMessage("Um nome de usuário precisa ser fornecido")
     .isLength({ max: 50 })
-    .withMessage("O nome de usuário pode ter até 50 caracteres"),
+    .withMessage("O nome de usuário pode ter até 50 caracteres")
+    .custom((input) => {
+      if (!isValidUsername(input)) {
+        throw new Error("O nome de usuário contém caracteres não permitidos");
+      }
+      return true;
+    }),
 
   body("password")
     .notEmpty()
@@ -54,7 +61,13 @@ const validateUpdateProfileForm = [
     .notEmpty()
     .withMessage("Um nome de usuário precisa ser fornecido")
     .isLength({ max: 50 })
-    .withMessage("O nome de usuário pode ter até 50 caracteres"),
+    .withMessage("O nome de usuário pode ter até 50 caracteres")
+    .custom((input) => {
+      if (!isValidUsername(input)) {
+        throw new Error("O nome de usuário contém caracteres não permitidos");
+      }
+      return true;
+    }),
 
   body("newPassword").custom((input, { req }) => {
     if (input.length > 0 && (input.length < 8 || input.length > 50)) {

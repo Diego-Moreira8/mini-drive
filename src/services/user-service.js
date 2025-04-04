@@ -1,14 +1,20 @@
 const { hashPassword, comparePassword } = require("../config/bcrypt");
 const prisma = require("../config/prisma-client");
 
+const isValidUsername = (username) => /^[a-zA-Z0-9]+$/.test(username);
+
 const create = async (username, password, name) => {
   try {
+    if (!isValidUsername(username)) {
+      throw new Error("Invalid username");
+    }
+
     return prisma.$transaction(async (tx) => {
       const hashedPassword = await hashPassword(password);
 
       const user = await tx.user.create({
         data: {
-          username,
+          username: username.toLowerCase(),
           password: hashedPassword,
           name,
         },
@@ -48,7 +54,7 @@ const getByUsername = async (username) => {
   try {
     const user = await prisma.user.findUnique({
       where: {
-        username: username,
+        username: username.toLowerCase(),
       },
     });
     return user;
@@ -63,6 +69,9 @@ const update = async (id, { newUsername, newPassword, newName }) => {
     const newData = {};
 
     if (newUsername) {
+      if (!isValidUsername(newUsername)) {
+        throw new Error("Invalid username");
+      }
       newData.username = newUsername;
     }
     if (newPassword) {
@@ -111,6 +120,7 @@ const deleteUserAndItsData = async (userId) => {
 };
 
 module.exports = {
+  isValidUsername,
   create,
   getById,
   getByUsername,
