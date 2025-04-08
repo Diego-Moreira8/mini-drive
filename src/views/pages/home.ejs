@@ -1,6 +1,57 @@
-<% if (locals.user) { %>
-  <h1>Olá, <%= locals.user.name || locals.user.username %>!</h1>
-<% } else { %>
-  <h1>Olá! Faça log-in e comece a usar o serviço!</h1>
-<% } %>
+<div class="homePage">
+  <header>
+    <img src="/logo.svg" alt="miniDrive Logo">
 
+    <div class="buttons">
+      <a class="button" href="/entrar">Entrar</a>
+      <a class="button" href="/registrar">Criar conta</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="blocks">
+      <p>
+        <span>Este é o MiniDrive.</span>
+        <span>Aqui você tem 50 MegaBytes para armazenar o que quiser!</span>
+      </p>
+      
+      <p>
+        <span><b>50</b></span>
+        <span>MB</span>
+      </p>
+
+      <p>
+        <span>Fotos?</span>
+        <span>Sim!</span>
+      </p>
+
+      <p>
+        <span>PDFs, textos, planilhas?</span>
+        <span>Pode mandar!</span>
+      </p>
+
+      <p>
+        <span>Vídeos?</span>
+        <span>Hmm... Talvez. Se forem curtos!</span>
+      </p>
+
+      <p>
+        <span>Simples, grátis e pronto para uso.</span>
+        <span>Aproveite!</span>
+      </p>
+    </div>
+
+    <div class="disclaimer">
+      <b>Atenção!</b>
+      <br>
+      O Mini Drive é um projeto de estudo, então não confie nele para armazenar
+      arquivos importantes ou sensíveis. Os dados podem sumir a qualquer
+      momento, sem aviso prévio. Use por sua conta e risco!
+    </div>
+  </main>
+
+  <footer>
+    Construído em 2025 por
+    <a href="https://diegomoreira.vercel.app/" target="_blank">Diego Moreira</a>
+  </footer>
+</div>

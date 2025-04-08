@@ -3,18 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
-      :root {
-        font-family: sans-serif;
-      }
-    </style>
-    <title>Projeto | <%= locals.title %></title>
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/reset.css">
+    <link rel="stylesheet" href="/style.css">
+    
+    <title>miniDrive<%= locals.title ? ` | ${locals.title}` : "" %></title>
   </head>
   <body>
     <%- include("partials/nav") %>
-    <hr />
-    <main><%- include(locals.template) %></main>
-    <hr />
-    <%# include("partials/footer") %>
+    <%- include(locals.template) %>
   </body>
 </html>

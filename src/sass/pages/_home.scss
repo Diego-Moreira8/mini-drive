@@ -1,0 +1,160 @@
+@use "../base/breakpoints";
+@use "../base/colors";
+
+.homePage {
+  min-height: 100svh;
+  display: flex;
+  flex-flow: column;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+
+  header {
+    display: flex;
+    flex-flow: column;
+    gap: 3rem;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem;
+
+    @media (min-width: breakpoints.$small) {
+      flex-flow: row;
+    }
+
+    img {
+      height: 3rem;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+  }
+
+  main {
+    flex-grow: 1;
+    display: flex;
+    flex-flow: column;
+    gap: 2rem;
+    margin: 2rem;
+    max-width: 700px;
+    margin: 0 auto;
+
+    .blocks {
+      display: grid;
+      grid: repeat(4, 1fr) / repeat(3, 1fr);
+      gap: 0.25rem;
+
+      p {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: center;
+
+        padding: 1rem;
+        border-radius: 0.5rem;
+
+        color: colors.$bg;
+        font-weight: bold;
+        text-align: center;
+
+        cursor: default;
+
+        $bgc1: #3a0ca3;
+        $bgc2: #7209b7;
+        $bgc3: #f72585;
+
+        opacity: 0.9;
+        transition: opacity 100ms;
+
+        @media (min-width: breakpoints.$small) {
+          padding: 2rem;
+        }
+
+        &:hover {
+          opacity: 1;
+        }
+
+        &:nth-of-type(1) {
+          background-color: $bgc1;
+          grid-area: 1/1/2/3;
+          font-size: 1.25rem;
+        }
+
+        &:nth-of-type(2) {
+          background-color: $bgc3;
+          grid-area: 1/3/2/4;
+
+          span {
+            &:nth-of-type(1) {
+              font-size: 3rem;
+            }
+            &:nth-of-type(2) {
+              font-size: 2rem;
+            }
+          }
+        }
+
+        &:nth-of-type(3) {
+          background-color: $bgc2;
+          grid-area: 2/1/3/2;
+
+          span {
+            &:nth-of-type(1) {
+              font-size: 2rem;
+            }
+            &:nth-of-type(2) {
+              font-size: 3rem;
+            }
+          }
+        }
+
+        &:nth-of-type(4) {
+          background-color: $bgc2;
+          grid-area: 2/2/3/4;
+
+          span {
+            &:nth-of-type(1) {
+              font-size: 1.5rem;
+            }
+            &:nth-of-type(2) {
+              font-size: 2.5rem;
+            }
+          }
+        }
+
+        &:nth-of-type(5) {
+          background-color: $bgc2;
+          grid-area: 3/1/4/4;
+
+          span {
+            &:nth-of-type(1) {
+              font-size: 4rem;
+            }
+            &:nth-of-type(2) {
+              font-size: 1.1rem;
+            }
+          }
+        }
+
+        &:nth-of-type(6) {
+          background-color: $bgc1;
+          grid-area: 4/1/5/4;
+          font-size: 1.75rem;
+        }
+      }
+    }
+
+    .disclaimer {
+      background-color: #ffd166;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      text-align: center;
+    }
+  }
+
+  footer {
+    text-align: center;
+    margin: 2rem 0;
+  }
+}
