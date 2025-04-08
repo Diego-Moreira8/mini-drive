@@ -1,0 +1,51 @@
+@use "../base/colors";
+
+form {
+  margin: 1rem 0;
+
+  ul.formErrors {
+    margin: 1rem 0;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background-color: colors.$dangerLight;
+    color: colors.$text;
+    list-style-type: disc;
+
+    li {
+      margin: 0.5rem 0 0.5rem 2rem;
+    }
+  }
+
+  .formRow {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+
+    label {
+      padding-bottom: 0.25rem;
+      font-size: 1rem;
+
+      .requiredField {
+        color: colors.$danger;
+      }
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      border: 1px solid colors.$text;
+      border-radius: 0.5rem;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+    }
+  }
+
+  .formControls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem;
+  }
+}

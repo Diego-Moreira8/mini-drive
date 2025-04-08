@@ -1,57 +1,77 @@
-<h1><%= locals.title %></h1>
+<div class="signUpPage">
+  <%- include("../partials/logo") %>
 
-<form action="/registrar" method="post">
-  <%- include("../partials/form-errors") %>
+  <main>
+    <div class="graphic"></div>
+    
+    <div class="container">
+      <h1>Criar Conta</h1>
 
-  <div class="formRow">
-    <label for="name">Nome completo: (opcional)</label>
-    <input
-      type="text"
-      name="name"
-      id="name"
-      minlength="2"
-      maxlength="250"
-      value="<%= locals.values.name %>"
-    />
-  </div>
+      <form action="/criar-conta" method="post">
+        <%- include("../partials/form-errors") %>
 
-  <div class="formRow">
-    <label for="username">Nome de usuário:</label>
-    <input
-      type="text"
-      name="username"
-      id="username"
-      maxlength="50"
-      required
-      value="<%= locals.values.username %>"
-    />
-  </div>
+        <div class="formRow">
+          <label for="name">Nome completo (opcional):</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            minlength="2"
+            maxlength="250"
+            value="<%= locals.values.name %>"
+          />
+        </div>
 
-  <div class="formRow">
-    <label for="password">Senha:</label>
-    <input
-      type="password"
-      name="password"
-      id="password"
-      minlength="8"
-      maxlength="50"
-      required
-      value="<%= locals.values.password %>"
-    />
-  </div>
+        <div class="formRow">
+          <label for="username">
+            Nome de usuário: <span class="requiredField">*</span>
+          </label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            maxlength="50"
+            required
+            value="<%= locals.values.username %>"
+          />
+        </div>
 
-  <div class="formRow">
-    <label for="confirmPassword">Repita a senha:</label>
-    <input
-      type="password"
-      name="confirmPassword"
-      id="confirmPassword"
-      required
-      value="<%= locals.values.confirmPassword %>"
-    />
-  </div>
+        <div class="formRow">
+          <label for="password">
+            Senha: <span class="requiredField">*</span>
+          </label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            minlength="8"
+            maxlength="50"
+            required
+            value="<%= locals.values.password %>"
+          />
+        </div>
 
-  <div class="formControl">
-    <button type="submit">Criar conta</button>
-  </div>
-</form>
+        <div class="formRow">
+          <label for="confirmPassword">
+            Repita a senha: <span class="requiredField">*</span>
+          </label>
+          <input
+            type="password"
+            name="confirmPassword"
+            id="confirmPassword"
+            required
+            value="<%= locals.values.confirmPassword %>"
+          />
+        </div>
+
+        <div class="formControls">
+          <button type="submit">Criar conta</button>
+        </div>
+      </form>
+
+      <p>Já tem uma conta? <a href="/entrar">Entrar</a></p>
+    </div>
+  </main>
+
+  <%- include("../partials/footer") %>
+</div>

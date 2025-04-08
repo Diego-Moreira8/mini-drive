@@ -8,9 +8,6 @@ const getIndex = (req, res, next) => {
 
 /** @type {import("express").RequestHandler} */
 const getHome = async (req, res, next) => {
-  if (req.user) {
-    return res.redirect("/pasta");
-  }
   res.render("layout", {
     template: "pages/home",
   });

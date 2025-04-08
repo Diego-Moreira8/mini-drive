@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/app.js"
+    "dev": "nodemon src/app.js",
+    "sass": "sass --watch src/sass/main.scss src/public/styles/style.css"
   },
   "keywords": [],
   "author": "",

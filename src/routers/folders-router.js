@@ -1,14 +1,9 @@
 const { Router } = require("express");
-const {
-  checkUser,
-  getFolderIfOwnedByUser,
-} = require("../middlewares/custom-middlewares");
+const { getFolderIfOwnedByUser } = require("../middlewares/custom-middlewares");
 const foldersController = require("../controllers/folders-controller");
 const { validateFolderForm } = require("../middlewares/express-validator");
 
 const foldersRouter = Router();
-
-foldersRouter.use(checkUser);
 
 foldersRouter.get("/", foldersController.getIndexPage);
 

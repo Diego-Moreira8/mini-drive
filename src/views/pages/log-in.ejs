@@ -1,25 +1,40 @@
-<h1><%= locals.title %></h1>
+<div class="logInPage">
+  <%- include("../partials/logo") %>
 
-<form action="/entrar" method="post">
-  <%- include("../partials/form-errors") %>
+  <main>
+    <div class="graphic"></div>
 
-  <div class="formRow">
-    <label for="username">Nome de usuário:</label>
-    <input
-      type="text"
-      name="username"
-      id="username"
-      required
-      value="<%= locals.values.username %>"
-    />
-  </div>
+    <div class="container">
+      
+      <h1>Entrar</h1>
+  
+      <form action="/entrar" method="post">
+        <%- include("../partials/form-errors") %>
+        
+        <div class="formRow">
+          <label for="username">Nome de usuário:</label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            required
+            value="<%= locals.values.username %>"
+          />
+        </div>
 
-  <div class="formRow">
-    <label for="password">Senha:</label>
-    <input type="password" name="password" id="password" required />
-  </div>
+        <div class="formRow">
+          <label for="password">Senha:</label>
+          <input type="password" name="password" id="password" required />
+        </div>
 
-  <div class="formControl">
-    <button type="submit">Entrar</button>
-  </div>
-</form>
+        <div class="formControls">
+          <button type="submit">Entrar</button>
+        </div>
+      </form>
+
+      <p>Ainda não tem uma conta? <a href="/criar-conta">Registre-se</a></p>
+    </div>
+  </main>
+
+  <%- include("../partials/footer") %>
+</div>

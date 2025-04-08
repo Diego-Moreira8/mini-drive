@@ -16,12 +16,17 @@ const addUserToLocals = (req, res, next) => {
 };
 
 /** @type {import("express").RequestHandler} */
-const checkUser = (req, res, next) => {
+const isUserConnected = (req, res, next) => {
   if (!req.user) {
-    return next({
-      statusCode: 401,
-      msgForUser: "Você precisa estar conectado para acessar este recurso.",
-    });
+    return res.status(403).redirect("/");
+  }
+  next();
+};
+
+/** @type {import("express").RequestHandler} */
+const isUserDisconnected = (req, res, next) => {
+  if (req.user) {
+    return res.status(403).redirect("/");
   }
   next();
 };
@@ -82,7 +87,8 @@ const getFileIfOwnedByUser = async (req, res, next) => {
 
 module.exports = {
   addUserToLocals,
-  checkUser,
+  isUserConnected,
+  isUserDisconnected,
   getFolderIfOwnedByUser,
   getFileIfOwnedByUser,
 };

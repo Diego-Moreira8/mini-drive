@@ -1,0 +1,61 @@
+@use "../base/breakpoints";
+
+.signUpPage,
+.logInPage {
+  display: flex;
+  flex-flow: column;
+  min-height: 100svh;
+  margin: 0 auto;
+  padding: 1rem;
+
+  @media (min-width: breakpoints.$large) {
+    padding: 0;
+  }
+
+  a.logo {
+    height: 3rem;
+    margin: 2rem auto;
+  }
+
+  main {
+    flex-grow: 1;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+
+    @media (min-width: breakpoints.$large) {
+      display: grid;
+      grid-template-columns: 1fr auto;
+    }
+
+    .graphic {
+      display: none;
+      background: repeating-linear-gradient(315deg, #808181, #9eb8d6 100px);
+      border-radius: 0 0 5rem 0;
+
+      @media (min-width: breakpoints.$large) {
+        display: block;
+      }
+    }
+
+    .container {
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      width: 100%;
+      margin: 0 auto 2rem auto;
+
+      @media (min-width: breakpoints.$small) {
+        width: 500px;
+      }
+
+      @media (min-width: breakpoints.$large) {
+        margin: 1rem 5rem;
+      }
+
+      p {
+        text-align: center;
+      }
+    }
+  }
+}

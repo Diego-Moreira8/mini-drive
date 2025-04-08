@@ -23,12 +23,29 @@ a.button {
 
   &:hover,
   &:focus-visible {
-    background-color: colors.$bg-hover;
+    background-color: colors.$bgHover;
     outline: 1px solid colors.$text;
   }
 
   &:active {
     background-color: colors.$text;
     color: colors.$bg;
+  }
+
+  &[type="submit"] {
+    background-color: colors.$okLight;
+    border: 2px solid colors.$ok;
+    color: colors.$text;
+
+    &:hover,
+    &:focus-visible {
+      background-color: colors.$okHover;
+      outline: 1px solid colors.$ok;
+    }
+
+    &:active {
+      background-color: colors.$ok;
+      color: colors.$bg;
+    }
   }
 }
