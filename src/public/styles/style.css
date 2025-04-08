@@ -131,6 +131,149 @@ a.logo {
   display: block;
   width: fit-content;
 }
+a.logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem;
+}
+nav a.logo {
+  height: 1.25rem;
+}
+@media (min-width: 600px) {
+  nav a.logo {
+    height: 2rem;
+  }
+}
+nav .driveUsage {
+  display: flex;
+  flex-flow: column;
+}
+nav .driveUsage .numbers {
+  display: flex;
+  align-items: flex-end;
+}
+nav .driveUsage .numbers .used {
+  font-weight: bold;
+  font-size: 1rem;
+}
+@media (min-width: 600px) {
+  nav .driveUsage .numbers .used {
+    font-size: 1.5rem;
+  }
+}
+nav .driveUsage .numbers .size {
+  font-size: 0.75rem;
+}
+@media (min-width: 600px) {
+  nav .driveUsage .numbers .size {
+    font-size: 1rem;
+  }
+}
+nav .driveUsage .progressBar .size {
+  width: 100%;
+  height: 5px;
+  border-radius: 5px;
+  background-color: #d3d3d3;
+}
+@media (min-width: 600px) {
+  nav .driveUsage .progressBar .size {
+    height: 10px;
+  }
+}
+nav .driveUsage .progressBar .size .used {
+  height: 100%;
+  border-radius: inherit;
+  background-color: #008600;
+}
+nav .driveUsage .progressBar .size .used.danger {
+  background-color: #f00;
+}
+nav .options {
+  display: flex;
+  gap: 1rem;
+}
+
+.signUpPage,
+.logInPage {
+  display: flex;
+  flex-flow: column;
+  min-height: 100svh;
+  margin: 0 auto;
+  padding: 1rem;
+}
+@media (min-width: 1200px) {
+  .signUpPage,
+  .logInPage {
+    padding: 0;
+  }
+}
+.signUpPage a.logo,
+.logInPage a.logo {
+  height: 3rem;
+  margin: 2rem auto;
+}
+.signUpPage main,
+.logInPage main {
+  flex-grow: 1;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+@media (min-width: 1200px) {
+  .signUpPage main,
+  .logInPage main {
+    display: grid;
+    grid-template-columns: 1fr auto;
+  }
+}
+.signUpPage main .graphic,
+.logInPage main .graphic {
+  display: none;
+  background: repeating-linear-gradient(315deg, #808181, #9eb8d6 100px);
+  border-radius: 0 0 5rem 0;
+}
+@media (min-width: 1200px) {
+  .signUpPage main .graphic,
+  .logInPage main .graphic {
+    display: block;
+  }
+}
+.signUpPage main .container,
+.logInPage main .container {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto 2rem auto;
+}
+@media (min-width: 600px) {
+  .signUpPage main .container,
+  .logInPage main .container {
+    width: 500px;
+  }
+}
+@media (min-width: 1200px) {
+  .signUpPage main .container,
+  .logInPage main .container {
+    margin: 1rem 5rem;
+  }
+}
+.signUpPage main .container p,
+.logInPage main .container p {
+  text-align: center;
+}
+
+.folderPage {
+  display: flex;
+  flex-flow: column;
+}
 
 .homePage {
   min-height: 100svh;
@@ -250,76 +393,6 @@ a.logo {
   background-color: #ffd166;
   padding: 1rem;
   border-radius: 0.5rem;
-  text-align: center;
-}
-
-.signUpPage,
-.logInPage {
-  display: flex;
-  flex-flow: column;
-  min-height: 100svh;
-  margin: 0 auto;
-  padding: 1rem;
-}
-@media (min-width: 1200px) {
-  .signUpPage,
-  .logInPage {
-    padding: 0;
-  }
-}
-.signUpPage a.logo,
-.logInPage a.logo {
-  height: 3rem;
-  margin: 2rem auto;
-}
-.signUpPage main,
-.logInPage main {
-  flex-grow: 1;
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-}
-@media (min-width: 1200px) {
-  .signUpPage main,
-  .logInPage main {
-    display: grid;
-    grid-template-columns: 1fr auto;
-  }
-}
-.signUpPage main .graphic,
-.logInPage main .graphic {
-  display: none;
-  background: repeating-linear-gradient(315deg, #808181, #9eb8d6 100px);
-  border-radius: 0 0 5rem 0;
-}
-@media (min-width: 1200px) {
-  .signUpPage main .graphic,
-  .logInPage main .graphic {
-    display: block;
-  }
-}
-.signUpPage main .container,
-.logInPage main .container {
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  width: 100%;
-  margin: 0 auto 2rem auto;
-}
-@media (min-width: 600px) {
-  .signUpPage main .container,
-  .logInPage main .container {
-    width: 500px;
-  }
-}
-@media (min-width: 1200px) {
-  .signUpPage main .container,
-  .logInPage main .container {
-    margin: 1rem 5rem;
-  }
-}
-.signUpPage main .container p,
-.logInPage main .container p {
   text-align: center;
 }
 

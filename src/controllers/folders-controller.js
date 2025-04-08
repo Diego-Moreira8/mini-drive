@@ -1,4 +1,6 @@
+require("dotenv").config();
 const folderService = require("../services/folder-service");
+const { getDriveUsage } = require("../services/user-service");
 const hierarchizeFolders = require("../utils/hierarchize-folders");
 
 const getCreateFolderFormView = (errorsArray, value) => {
@@ -33,14 +35,32 @@ const getIndexPage = async (req, res, next) => {
 
 /** @type {import("express").RequestHandler} */
 const getFolderPage = async (req, res, next) => {
+  const currentFolder = res.locals.folder;
+
+  const title = currentFolder.rootOfUserId
+    ? "Meus Arquivos"
+    : `Pasta: ${currentFolder.name}`;
+
   const allFolders = hierarchizeFolders(
     await folderService.getUserFolders(req.user.id)
   );
 
+  const driveUsage = await getDriveUsage(req.user.id);
+
+  const driveUsageMB = driveUsage === 0 ? 0 : parseInt(driveUsage / 1e6);
+
+  const driveUsagePercentage =
+    driveUsage === 0
+      ? 0
+      : parseInt((driveUsage / parseInt(process.env.UPLOAD_LIMIT)) * 100);
+
   res.render("layout", {
     template: "pages/file-explorer",
-    folder: res.locals.folder,
+    title,
+    currentFolder,
     allFolders,
+    driveUsageMB,
+    driveUsagePercentage,
   });
 };
 

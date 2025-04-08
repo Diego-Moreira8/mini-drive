@@ -64,6 +64,16 @@ const getByUsername = async (username) => {
   }
 };
 
+const getDriveUsage = async (userId) => {
+  try {
+    const filesSizes = await prisma.file.findMany({ select: { size: true } });
+    const totalBytes = filesSizes.reduce((a, c) => a + c.size, 0);
+    return totalBytes;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const update = async (id, { newUsername, newPassword, newName }) => {
   try {
     const newData = {};
@@ -124,6 +134,7 @@ module.exports = {
   create,
   getById,
   getByUsername,
+  getDriveUsage,
   update,
   verifyPassword,
   deleteUserAndItsData,
