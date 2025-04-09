@@ -41,9 +41,9 @@ const getFolderPage = async (req, res, next) => {
     ? "Meus Arquivos"
     : `Pasta: ${currentFolder.name}`;
 
-  const allFolders = hierarchizeFolders(
-    await folderService.getUserFolders(req.user.id)
-  );
+  const allFolders = await folderService.getUserFolders(req.user.id);
+
+  const hierarchicalFolders = hierarchizeFolders(allFolders);
 
   const driveUsage = await getDriveUsage(req.user.id);
 
@@ -59,6 +59,7 @@ const getFolderPage = async (req, res, next) => {
     title,
     currentFolder,
     allFolders,
+    hierarchicalFolders,
     driveUsageMB,
     driveUsagePercentage,
   });

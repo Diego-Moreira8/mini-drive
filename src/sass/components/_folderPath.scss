@@ -1,0 +1,63 @@
+@use "../base/colors";
+
+.folderPath {
+  display: flex;
+  align-items: center;
+
+  button.toggleHierarchy {
+    border: 1px solid colors.$bg;
+    padding: 0;
+    width: 2rem;
+    height: 2rem;
+
+    &:hover {
+      outline: none;
+      border: 1px solid colors.$text;
+    }
+
+    &:focus {
+      border: 1px solid colors.$text;
+    }
+
+    &:active {
+      background-color: colors.$bgHover;
+    }
+  }
+
+  ul {
+    display: flex;
+    padding: 0.25rem 1rem 0.25rem 0;
+    overflow-x: auto;
+    white-space: nowrap;
+
+    li {
+      display: flex;
+      align-items: center;
+
+      span {
+        pointer-events: none;
+      }
+
+      b,
+      a {
+        display: block;
+        margin: 0 0.25rem;
+        padding: 0.25rem;
+      }
+
+      a {
+        text-decoration: none;
+        font-weight: normal;
+        color: colors.$text;
+        border-radius: 0.25rem;
+
+        &:hover,
+        &:focus {
+          background-color: colors.$bgHover;
+          color: colors.$link;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

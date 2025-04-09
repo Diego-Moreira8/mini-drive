@@ -2,8 +2,8 @@
   <h2>Hierarquia de Pastas</h2>
 
   <ul>
-    <% function renderHierarchy(allFolders) { %>
-      <% allFolders.forEach(folder => { %>
+    <% (function renderHierarchy(hierarchicalFolders) { %>
+      <% hierarchicalFolders.forEach(folder => { %>
         <li>
           <% if (folder.id === locals.currentFolder.id) { %>
             <b>
@@ -22,8 +22,6 @@
           <% } %>
         </li>
       <% }) %>
-    <% } %>
-
-    <% renderHierarchy([locals.allFolders]); %>
+    <% })([locals.hierarchicalFolders]) %>
   </ul>
 </div>

@@ -126,8 +126,58 @@ form .formControls {
   margin: 2rem;
 }
 
+.folderPath {
+  display: flex;
+  align-items: center;
+}
+.folderPath button.toggleHierarchy {
+  border: 1px solid #fff;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+}
+.folderPath button.toggleHierarchy:hover {
+  outline: none;
+  border: 1px solid #000;
+}
+.folderPath button.toggleHierarchy:focus {
+  border: 1px solid #000;
+}
+.folderPath button.toggleHierarchy:active {
+  background-color: #eaeaea;
+}
+.folderPath ul {
+  display: flex;
+  padding: 0.25rem 1rem 0.25rem 0;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.folderPath ul li {
+  display: flex;
+  align-items: center;
+}
+.folderPath ul li span {
+  pointer-events: none;
+}
+.folderPath ul li b,
+.folderPath ul li a {
+  display: block;
+  margin: 0 0.25rem;
+  padding: 0.25rem;
+}
+.folderPath ul li a {
+  text-decoration: none;
+  font-weight: normal;
+  color: #000;
+  border-radius: 0.25rem;
+}
+.folderPath ul li a:hover, .folderPath ul li a:focus {
+  background-color: #eaeaea;
+  color: #0042bf;
+  text-decoration: underline;
+}
+
 .foldersTree {
-  margin: 1rem;
   display: flex;
   flex-flow: column;
   gap: 2rem;
@@ -168,6 +218,7 @@ footer {
 a.logo {
   display: block;
   width: fit-content;
+  padding: 0.25rem;
 }
 a.logo img {
   display: block;
@@ -182,7 +233,7 @@ nav {
   margin: 1rem;
 }
 nav a.logo {
-  height: 1.25rem;
+  height: 1.75rem;
 }
 @media (min-width: 600px) {
   nav a.logo {

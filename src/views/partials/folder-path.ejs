@@ -1,0 +1,42 @@
+<div class="folderPath">
+  <button class="toggleHierarchy" title="Mostrar hierarquia de pastas">
+    <img src="/images/hierarchy.svg">
+  </button>
+
+  <ul>
+    <% (function renderPath(allFolders, currentFolder, isOpen) { %>
+      <% if (currentFolder.rootOfUserId) { %>
+        <% if (isOpen) { %>
+          <li>
+            <b>Meus Arquivos</b>
+          </li>
+        <% } else { %>
+          <li>
+            <a href="<%= `/pasta/${currentFolder.id}` %>">
+              Meus Arquivos
+            </a>
+          </li>
+        <% } %>
+      <% } else { %>
+        <% 
+          renderPath(
+            allFolders,
+            allFolders.find(f => f.id === currentFolder.parentId)
+          ) 
+        %>
+
+        <li>
+          <span>&gt;</span>
+
+          <% if (isOpen) { %>
+            <b><%= currentFolder.name %></b>
+          <% } else { %>
+            <a href="<%= `/pasta/${currentFolder.id}` %>">
+              <%= currentFolder.name %>
+            </a>
+          <% } %>
+        </li>
+      <% }  %>
+    <% })(locals.allFolders, locals.currentFolder, true) %>
+  </ul>
+</div>
