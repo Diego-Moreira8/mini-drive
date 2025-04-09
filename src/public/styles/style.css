@@ -20,6 +20,10 @@ h1 {
   font-size: 2.25rem;
 }
 
+h2 {
+  font-size: 2rem;
+}
+
 a {
   font-weight: bold;
   color: #0042bf;
@@ -120,6 +124,40 @@ form .formControls {
   align-items: center;
   gap: 1rem;
   margin: 2rem;
+}
+
+.foldersTree {
+  margin: 1rem;
+  display: flex;
+  flex-flow: column;
+  gap: 2rem;
+}
+.foldersTree ul {
+  margin-left: 1rem;
+}
+.foldersTree ul li a,
+.foldersTree ul li b {
+  display: block;
+  padding: 0.5rem;
+  text-decoration: none;
+  color: #000;
+}
+.foldersTree ul li a:hover,
+.foldersTree ul li b:hover {
+  background-color: #eaeaea;
+}
+.foldersTree ul li a {
+  font-weight: normal;
+}
+.foldersTree ul li a:hover {
+  color: #0042bf;
+  text-decoration: underline;
+}
+.foldersTree > ul {
+  margin-left: 0;
+}
+.foldersTree .prefix {
+  font-family: monospace;
 }
 
 footer {

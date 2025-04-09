@@ -1,0 +1,43 @@
+@use "../base/colors";
+
+.foldersTree {
+  margin: 1rem;
+  display: flex;
+  flex-flow: column;
+  gap: 2rem;
+
+  ul {
+    margin-left: 1rem;
+
+    li {
+      a,
+      b {
+        display: block;
+        padding: 0.5rem;
+        text-decoration: none;
+        color: colors.$text;
+
+        &:hover {
+          background-color: colors.$bgHover;
+        }
+      }
+
+      a {
+        font-weight: normal;
+
+        &:hover {
+          color: colors.$link;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  > ul {
+    margin-left: 0;
+  }
+
+  .prefix {
+    font-family: monospace;
+  }
+}
