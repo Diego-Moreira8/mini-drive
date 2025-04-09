@@ -129,6 +129,7 @@ form .formControls {
 .folderPath {
   display: flex;
   align-items: center;
+  margin: 1rem 0;
 }
 .folderPath button.toggleHierarchy {
   border: 1px solid #fff;
@@ -362,6 +363,21 @@ nav .options {
 .folderPage {
   display: flex;
   flex-flow: column;
+}
+.folderPage main {
+  margin: 1rem;
+}
+.folderPage main .foldersTree {
+  display: none;
+}
+.folderPage main .foldersTree.visible {
+  display: block;
+}
+.folderPage main .contentTable {
+  display: none;
+}
+.folderPage main .contentTable.visible {
+  display: block;
 }
 
 .homePage {

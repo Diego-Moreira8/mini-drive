@@ -1,4 +1,28 @@
 .folderPage {
   display: flex;
   flex-flow: column;
+
+  main {
+    margin: 1rem;
+
+    .foldersTree {
+      display: none;
+      //visibility: hidden;
+
+      &.visible {
+        display: block;
+        //visibility: visible;
+      }
+    }
+
+    .contentTable {
+      display: none;
+      //visibility: hidden;
+
+      &.visible {
+        display: block;
+        //visibility: visible;
+      }
+    }
+  }
 }
