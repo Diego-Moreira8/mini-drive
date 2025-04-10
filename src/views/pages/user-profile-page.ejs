@@ -1,0 +1,80 @@
+<div class="userProfilePage">
+  <h1>Meu Perfil</h1>
+
+  <form action="/minha-conta" method="post">
+    <%- include("../partials/form-errors") %>
+    <%- include("../partials/form-success-message") %>
+
+    <div class="formRow">
+      <label for="name">Nome completo: (opcional)</label>
+      <input
+        type="text"
+        name="name"
+        id="name"
+        minlength="2"
+        maxlength="250"
+        value="<%= locals.values.name %>"
+        autocomplete="name"
+        />
+      </div>
+      
+      <div class="formRow">
+        <label for="username">
+          Nome de usuário:
+          <span class="requiredField">*</span>
+        </label>
+        <input
+        type="text"
+        name="username"
+        id="username"
+        maxlength="50"
+        required
+        value="<%= locals.values.username %>"
+        autocomplete="username"
+      />
+    </div>
+
+    <fieldset>
+      <h2>Alterar senha</h2>
+      <p>Deixe em branco se não quiser fazer isso agora.</p>
+
+      <div class="formRow">
+        <label for="currentPassword">Senha atual:</label>
+        <input 
+          type="password"
+          name="currentPassword"
+          id="currentPassword" 
+          autocomplete="current-password"
+        />
+      </div>
+
+      <div class="formRow">
+        <label for="newPassword">Nova senha:</label>
+        <input
+          type="password"
+          name="newPassword"
+          id="newPassword"
+          minlength="8"
+          maxlength="50"
+          autocomplete="new-password"
+          />
+        </div>
+        
+        <div class="formRow">
+          <label for="confirmPassword">Repita a nova senha:</label>
+          <input 
+          type="password"
+          name="confirmPassword"
+          id="confirmPassword"
+          autocomplete="new-password"
+        />
+      </div>
+    </fieldset>
+
+    <div class="formControls">
+      <button type="submit">Salvar alterações</button>
+    </div>
+  </form>
+
+  <a href="/minha-conta/apagar" class="danger">Apagar minha conta</a>
+</div>

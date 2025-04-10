@@ -92,7 +92,7 @@ const validateUpdateProfileForm = [
 
     if (!errors.isEmpty()) {
       return res.status(400).render("layout", {
-        template: "pages/profile-page",
+        template: "pages/user-profile-page",
         title: "Meu Perfil",
         errors: errors.array(),
         values: { ...req.body },

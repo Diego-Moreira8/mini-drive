@@ -16,6 +16,7 @@ h4,
 h5,
 h6 {
   font-weight: bold;
+  margin: 1rem 0;
 }
 
 h1 {
@@ -23,12 +24,21 @@ h1 {
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 1.75rem;
+}
+
+p {
+  margin: 1rem 0;
+  line-height: 1.15;
 }
 
 a {
   font-weight: bold;
   color: colors.$link;
+
+  &.danger {
+    color: colors.$danger;
+  }
 }
 
 b {

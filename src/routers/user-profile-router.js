@@ -10,7 +10,7 @@ const userProfileRouter = Router();
 userProfileRouter.get("/", userProfileController.getProfilePage);
 
 userProfileRouter.post(
-  "/editar-perfil",
+  "/",
   validateUpdateProfileForm,
   userProfileController.postProfileUpdate
 );

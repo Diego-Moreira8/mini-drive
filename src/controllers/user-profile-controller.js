@@ -1,10 +1,15 @@
 const userService = require("../services/user-service");
 
-const getProfileViewData = (errorsArray, { name, username }) => {
+const getProfileViewData = (
+  errorsArray,
+  { name, username },
+  formSuccessMessage
+) => {
   return {
-    template: "pages/profile-page",
+    template: "pages/user-profile-page",
     title: "Meu Perfil",
     errors: errorsArray.length > 0 ? errorsArray : [],
+    formSuccessMessage: formSuccessMessage || null,
     values: { name, username },
   };
 };
@@ -62,11 +67,10 @@ const postProfileUpdate = async (req, res, next) => {
       newName: name,
     });
 
-    res.render("layout", {
-      template: "pages/message",
-      title: "Modificações Salvas",
-      message: "Modificações realizadas com sucesso!",
-    });
+    return res.render(
+      "layout",
+      getProfileViewData([], req.body, "Dados salvos!")
+    );
   } catch (error) {
     next(error);
   }

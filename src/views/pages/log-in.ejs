@@ -19,12 +19,19 @@
             id="username"
             required
             value="<%= locals.values.username %>"
+            autocomplete="username"
           />
         </div>
 
         <div class="formRow">
           <label for="password">Senha:</label>
-          <input type="password" name="password" id="password" required />
+          <input 
+            type="password"
+            name="password"
+            id="password"
+            required
+            autocomplete="current-password"
+          />
         </div>
 
         <div class="formControls">

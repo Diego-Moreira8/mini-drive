@@ -51,6 +51,23 @@ a.button {
     }
   }
 
+  &.danger {
+    background-color: colors.$dangerLight;
+    border: 2px solid colors.$danger;
+    color: colors.$text;
+
+    &:hover,
+    &:focus-visible {
+      background-color: colors.$dangerHover;
+      outline: 1px solid colors.$danger;
+    }
+
+    &:active {
+      background-color: colors.$danger;
+      color: colors.$bg;
+    }
+  }
+
   &.small {
     padding: 0.25rem 0.5rem;
     font-size: 0.75rem;

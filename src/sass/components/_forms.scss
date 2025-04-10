@@ -3,17 +3,25 @@
 form {
   margin: 1rem 0;
 
-  ul.formErrors {
+  ul.formErrors,
+  p.formSuccess {
     margin: 1rem 0;
     border-radius: 0.5rem;
     padding: 1rem;
-    background-color: colors.$dangerLight;
     color: colors.$text;
+  }
+
+  ul.formErrors {
+    background-color: colors.$dangerLight;
     list-style-type: disc;
 
     li {
       margin: 0.5rem 0 0.5rem 2rem;
     }
+  }
+
+  p.formSuccess {
+    background-color: colors.$okLight;
   }
 
   .formRow {

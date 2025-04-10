@@ -14,6 +14,7 @@ h4,
 h5,
 h6 {
   font-weight: bold;
+  margin: 1rem 0;
 }
 
 h1 {
@@ -21,12 +22,20 @@ h1 {
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 1.75rem;
+}
+
+p {
+  margin: 1rem 0;
+  line-height: 1.15;
 }
 
 a {
   font-weight: bold;
   color: #0042bf;
+}
+a.danger {
+  color: #f00;
 }
 
 b {
@@ -82,6 +91,23 @@ a.button[type=submit]:focus-visible {
 button[type=submit]:active,
 a.button[type=submit]:active {
   background-color: #008600;
+  color: #fff;
+}
+button.danger,
+a.button.danger {
+  background-color: #ffd7d7;
+  border: 2px solid #f00;
+  color: #000;
+}
+button.danger:hover, button.danger:focus-visible,
+a.button.danger:hover,
+a.button.danger:focus-visible {
+  background-color: #ffbfbf;
+  outline: 1px solid #f00;
+}
+button.danger:active,
+a.button.danger:active {
+  background-color: #f00;
   color: #fff;
 }
 button.small,
@@ -150,16 +176,22 @@ a.button.small {
 form {
   margin: 1rem 0;
 }
-form ul.formErrors {
+form ul.formErrors,
+form p.formSuccess {
   margin: 1rem 0;
   border-radius: 0.5rem;
   padding: 1rem;
-  background-color: #ffbfbf;
   color: #000;
+}
+form ul.formErrors {
+  background-color: #ffd7d7;
   list-style-type: disc;
 }
 form ul.formErrors li {
   margin: 0.5rem 0 0.5rem 2rem;
+}
+form p.formSuccess {
+  background-color: #e9ffe9;
 }
 form .formRow {
   display: flex;
@@ -604,6 +636,19 @@ nav .options {
   padding: 1rem;
   border-radius: 0.5rem;
   text-align: center;
+}
+
+.userProfilePage,
+.deleteAccount {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+.userProfilePage a,
+.deleteAccount a {
+  width: fit-content;
+  display: block;
+  margin: 0 auto;
 }
 
 /*# sourceMappingURL=style.css.map */
