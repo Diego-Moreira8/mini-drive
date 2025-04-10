@@ -1,17 +1,43 @@
 const folderService = require("../services/folder-service");
 const fileService = require("../services/file-service");
+const userService = require("../services/user-service");
 
 /**
- * Middleware to attach user information to the response locals object for use
+ * Attach user information to the response locals object for use
  * in views, without needing to retrieve it in each one separately.
  * @type {import("express").RequestHandler} */
-const addUserToLocals = (req, res, next) => {
+const addUserToLocals = async (req, res, next) => {
   if (!req.user) {
     return next();
   }
 
   const { name, username } = req.user;
-  res.locals.user = { name, username };
+
+  const driveUsage = await userService.getDriveUsage(req.user.id);
+
+  const driveUsageMB = driveUsage === 0 ? 0 : parseInt(driveUsage / 1e6);
+
+  const driveUsagePercentage =
+    driveUsage === 0
+      ? 0
+      : parseInt((driveUsage / parseInt(process.env.UPLOAD_LIMIT)) * 100);
+
+  res.locals = {
+    ...res.locals,
+    user: { name, username },
+    driveUsageMB,
+    driveUsagePercentage,
+  };
+
+  next();
+};
+
+/**
+ * Attach the current path to the response locals object for use
+ * in the nav view.
+ * @type {import("express").RequestHandler} */
+const addCurrentPathToLocals = (req, res, next) => {
+  res.locals.path = req.originalUrl;
   next();
 };
 
@@ -87,6 +113,7 @@ const getFileIfOwnedByUser = async (req, res, next) => {
 
 module.exports = {
   addUserToLocals,
+  addCurrentPathToLocals,
   isUserConnected,
   isUserDisconnected,
   getFolderIfOwnedByUser,

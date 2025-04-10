@@ -1,6 +1,5 @@
 require("dotenv").config();
 const folderService = require("../services/folder-service");
-const { getDriveUsage } = require("../services/user-service");
 const hierarchizeFolders = require("../utils/hierarchize-folders");
 
 const getCreateFolderFormView = (errorsArray, value) => {
@@ -45,23 +44,12 @@ const getFolderPage = async (req, res, next) => {
 
   const hierarchicalFolders = hierarchizeFolders(allFolders);
 
-  const driveUsage = await getDriveUsage(req.user.id);
-
-  const driveUsageMB = driveUsage === 0 ? 0 : parseInt(driveUsage / 1e6);
-
-  const driveUsagePercentage =
-    driveUsage === 0
-      ? 0
-      : parseInt((driveUsage / parseInt(process.env.UPLOAD_LIMIT)) * 100);
-
   res.render("layout", {
     template: "pages/folder-page",
     title,
     currentFolder,
     allFolders,
     hierarchicalFolders,
-    driveUsageMB,
-    driveUsagePercentage,
   });
 };
 

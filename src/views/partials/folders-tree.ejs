@@ -6,7 +6,7 @@
       <% (function renderHierarchy(hierarchicalFolders) { %>
         <% hierarchicalFolders.forEach(folder => { %>
           <li>
-            <% if (folder.id === locals.currentFolder.id) { %>
+            <% if (folder.id === locals.folder.id) { %>
               <b>
                 <%= folder.rootOfUserId ? "Meus Arquivos (raiz)" : folder.name %>
               </b>

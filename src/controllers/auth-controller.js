@@ -4,6 +4,7 @@ const passport = require("../config/passport");
 const signUpViewData = {
   template: "pages/sign-up",
   title: "Criar Conta",
+  includeNav: false,
   errors: [],
   values: { name: "", username: "", password: "", confirmPassword: "" },
 };
@@ -11,6 +12,7 @@ const signUpViewData = {
 const logInViewData = {
   template: "pages/log-in",
   title: "Entrar",
+  includeNav: false,
   errors: [],
   values: { username: "" },
 };

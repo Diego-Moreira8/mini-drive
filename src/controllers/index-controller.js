@@ -9,7 +9,8 @@ const getIndex = (req, res, next) => {
 /** @type {import("express").RequestHandler} */
 const getHome = async (req, res, next) => {
   res.render("layout", {
-    template: "pages/home",
+    template: "pages/home-page",
+    includeNav: false,
   });
 };
 

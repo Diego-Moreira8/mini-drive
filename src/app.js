@@ -19,6 +19,7 @@ const errorController = require("./controllers/error-controller");
 const {
   addUserToLocals,
   isUserConnected,
+  addCurrentPathToLocals,
 } = require("./middlewares/custom-middlewares");
 
 const app = express();
@@ -31,7 +32,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(expressSession(expressSessionOptions));
 app.use(passport.session());
-app.use(addUserToLocals);
+app.use(addUserToLocals, addCurrentPathToLocals);
 
 app.use("/", indexRouter);
 app.use("/", authRouter);

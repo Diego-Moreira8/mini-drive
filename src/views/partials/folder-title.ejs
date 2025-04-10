@@ -1,9 +1,9 @@
 <div class="folderTitle">
   <h1>
-    <%= locals.folder.rootOfUserId ? "Meus Arquivos"  : currentFolder.name %>
+    <%= locals.folder.rootOfUserId ? "Meus Arquivos"  : locals.folder.name %>
   </h1>
 
-  <% if (!locals.currentFolder.rootOfUserId) { %>
+  <% if (!locals.folder.rootOfUserId) { %>
     <div class="options">
       <button type="button">Renomear</button>
       <button type="button">Apagar</button>

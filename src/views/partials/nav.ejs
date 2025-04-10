@@ -1,28 +1,40 @@
-<nav>
-  <%- include("./logo") %>
+<%# 
+  A navigation bar is included by default.
+  To disable it, pass { includeNav: false } in the layout view options.
+%>
 
-  <div class="driveUsage" title="Utilização">
-    <div class="numbers">
-      <div class="used">
-        <%= locals.driveUsageMB %>
+<% if (locals.includeNav !== false) { %>
+  <nav>
+    <%- include("./logo") %>
+
+    <div class="driveUsage" title="Utilização">
+      <div class="numbers">
+        <div class="used">
+          <%= locals.driveUsageMB %>
+        </div>
+        <div class="size">
+          /50MB
+        </div>
       </div>
-      <div class="size">
-        /50MB
+      
+      <div class="progressBar">
+        <div class="size">
+          <div
+            class="used <%= locals.driveUsagePercentage > 90 ? "danger" : "" %>"
+            style="width: <%= locals.driveUsagePercentage %>%;"
+          ></div>
+        </div>
       </div>
     </div>
-    
-    <div class="progressBar">
-      <div class="size">
-        <div
-          class="used <%= locals.driveUsagePercentage > 90 ? "danger" : "" %>"
-          style="width: <%= locals.driveUsagePercentage %>%;"
-        ></div>
-      </div>
-    </div>
-  </div>
 
-  <div class="options">
-    <a href="/minha-conta">Minha conta</a>
-    <a href="/sair">Sair</a>
-  </div>
-</nav>
+    <div class="options">
+      <% if (locals.path === "/minha-conta") { %>
+        <a href="/">Meus arquivos</a>
+      <% } else { %>
+        <a href="/minha-conta">Minha conta</a>
+      <% } %>
+
+      <a href="/sair">Sair</a>
+    </div>
+  </nav>
+<% } %>
