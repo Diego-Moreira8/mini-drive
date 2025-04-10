@@ -1,77 +1,80 @@
 @use "../base/colors";
 
 .contentTable {
-  table {
+  .tableContainer {
     width: 100%;
-    margin: 1rem 0;
-    white-space: nowrap;
     overflow-x: auto;
 
-    thead {
-      font-weight: bold;
-      font-size: 0.75rem;
-      text-align: center;
+    table {
+      width: 100%;
+      white-space: nowrap;
 
-      tr {
-        th {
-          padding: 1rem;
+      thead {
+        font-weight: bold;
+        font-size: 0.75rem;
+        text-align: center;
+
+        tr {
+          th {
+            padding: 1rem;
+          }
         }
       }
-    }
 
-    tbody {
-      tr {
-        border-top: 1px solid #d3d3d3;
-        border-bottom: 1px solid #d3d3d3;
+      tbody {
+        tr {
+          border-top: 1px solid #d3d3d3;
+          border-bottom: 1px solid #d3d3d3;
 
-        &:hover {
-          background-color: colors.$bgHover;
-        }
+          &:hover {
+            background-color: colors.$bgHover;
+          }
 
-        td {
-          height: 3rem;
-          vertical-align: middle;
-          padding: 1rem;
+          td {
+            vertical-align: middle;
+            height: max-content;
+            padding: 1rem;
 
-          &.icon {
-            width: 1rem;
-
-            img {
+            &.icon {
               width: 1rem;
-              height: 1rem;
+
+              img {
+                width: 1rem;
+                height: 1rem;
+              }
             }
-          }
 
-          &.name {
-          }
+            &.name {
+              a {
+                display: block;
+                text-decoration: none;
+                color: colors.$text;
 
-          &.size {
-            width: 6rem;
-            text-align: right;
-          }
+                &:hover {
+                  text-decoration: underline;
+                }
+              }
+            }
 
-          &.date {
-            width: max-content;
-            text-align: center;
-          }
+            &.size,
+            &.date {
+              text-align: center;
+            }
 
-          &.fileOptions {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 0.25rem;
-          }
-
-          a {
-            text-decoration: none;
-            color: colors.$text;
-
-            &:hover {
-              text-decoration: underline;
+            &.fileOptions {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              gap: 0.25rem;
+              padding: 0.75rem;
             }
           }
         }
       }
     }
+  }
+
+  p {
+    color: colors.$textLight;
   }
 }

@@ -8,69 +8,73 @@
   %>
 
   <% if (notEmpty) { %>
-    <table>
-      <thead>
-        <tr>
-          <th scope="col"></th>
-          <th scope="col">Nome</th>
-          <th scope="col">Tamanho</th>
-          <th scope="col">Data</th>
-          <th scope="col">Opções</th>
-        </tr>
-      </thead>
+    <div class="tableContainer">
+      <div class="rightGradient"></div>
 
-      <tbody>
-        <%# Folders %>
-        <% if (hasSubfolders) { %>
-          <% locals.folder.subFolders.forEach(dir => { %>
-            <tr>
-              <td class="icon">
-                <img src="/todo">
-              </td>
-              <td class="name">
-                <a href="<%= `/pasta/${dir.id}` %>"><%= dir.name %></a>
-              </td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          <% }) %>
-        <% } %>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Nome</th>
+            <th scope="col">Tamanho</th>
+            <th scope="col">Data</th>
+            <th scope="col">Opções</th>
+          </tr>
+        </thead>
 
-        <%# Files %>
-        <% if (hasFiles) { %>
-          <% locals.folder.files.forEach(file => { %>
-            <tr>
-              <td class="icon">
-                <img src="/todo">
-              </td>
+        <tbody>
+          <%# Folders %>
+          <% if (hasSubfolders) { %>
+            <% locals.folder.subFolders.forEach(dir => { %>
+              <tr>
+                <td class="icon">
+                  <img src="/todo">
+                </td>
+                <td class="name">
+                  <a href="<%= `/pasta/${dir.id}` %>"><%= dir.name %></a>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            <% }) %>
+          <% } %>
 
-              <td class="name">
-                <a href="<%= `/arquivo/${file.id}` %>"><%= file.fileName %></a>
-              </td>
+          <%# Files %>
+          <% if (hasFiles) { %>
+            <% locals.folder.files.forEach(file => { %>
+              <tr>
+                <td class="icon">
+                  <img src="/todo">
+                </td>
 
-              <td class="size">
-                <%= parseFloat((file.size / 1e6).toFixed(2)) %> MB
-              </td>
+                <td class="name">
+                  <a href="<%= `/arquivo/${file.id}` %>"><%= file.fileName %></a>
+                </td>
 
-              <td class="date">
-                <%= file.uploadTime %>
-              </td>
+                <td class="size">
+                  <%= parseFloat((file.size / 1e6).toFixed(2)) %> MB
+                </td>
 
-              <td class="fileOptions">
-                <a href="<%= `/arquivo/${file.id}/baixar` %>" class="button small">
-                  Baixar
-                </a>
-                <button type="button" class="small">
-                  Apagar
-                </button>
-              </td>
-            </tr>
-          <% }) %>
-        <% } %>
-      </tbody>
-    </table>
+                <td class="date">
+                  <%= file.uploadTime %>
+                </td>
+
+                <td class="fileOptions">
+                  <a href="<%= `/arquivo/${file.id}/baixar` %>" class="button small">
+                    Baixar
+                  </a>
+                  <button type="button" class="small">
+                    Apagar
+                  </button>
+                </td>
+              </tr>
+            <% }) %>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
   <% } else { %>
-    <p><i>Ainda não há arquivos por aqui...</i></p>
+    <p><i>Ainda não há arquivos nem pastas por aqui...</i></p>
   <% } %>
 </div>

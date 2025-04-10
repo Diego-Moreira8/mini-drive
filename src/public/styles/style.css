@@ -50,6 +50,7 @@ a.button {
   font-weight: bold;
   text-decoration: none;
   text-align: center;
+  line-height: 1;
   border: 2px solid #000;
   border-radius: 0.75rem;
   padding: 0.5rem 1rem;
@@ -89,59 +90,61 @@ a.button.small {
   font-size: 0.75rem;
 }
 
-.contentTable table {
+.contentTable .tableContainer {
   width: 100%;
-  margin: 1rem 0;
-  white-space: nowrap;
   overflow-x: auto;
 }
-.contentTable table thead {
+.contentTable .tableContainer table {
+  width: 100%;
+  white-space: nowrap;
+}
+.contentTable .tableContainer table thead {
   font-weight: bold;
   font-size: 0.75rem;
   text-align: center;
 }
-.contentTable table thead tr th {
+.contentTable .tableContainer table thead tr th {
   padding: 1rem;
 }
-.contentTable table tbody tr {
+.contentTable .tableContainer table tbody tr {
   border-top: 1px solid #d3d3d3;
   border-bottom: 1px solid #d3d3d3;
 }
-.contentTable table tbody tr:hover {
+.contentTable .tableContainer table tbody tr:hover {
   background-color: #eaeaea;
 }
-.contentTable table tbody tr td {
-  height: 3rem;
+.contentTable .tableContainer table tbody tr td {
   vertical-align: middle;
+  height: max-content;
   padding: 1rem;
 }
-.contentTable table tbody tr td.icon {
+.contentTable .tableContainer table tbody tr td.icon {
   width: 1rem;
 }
-.contentTable table tbody tr td.icon img {
+.contentTable .tableContainer table tbody tr td.icon img {
   width: 1rem;
   height: 1rem;
 }
-.contentTable table tbody tr td.size {
-  width: 6rem;
-  text-align: right;
+.contentTable .tableContainer table tbody tr td.name a {
+  display: block;
+  text-decoration: none;
+  color: #000;
 }
-.contentTable table tbody tr td.date {
-  width: max-content;
+.contentTable .tableContainer table tbody tr td.name a:hover {
+  text-decoration: underline;
+}
+.contentTable .tableContainer table tbody tr td.size, .contentTable .tableContainer table tbody tr td.date {
   text-align: center;
 }
-.contentTable table tbody tr td.fileOptions {
+.contentTable .tableContainer table tbody tr td.fileOptions {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.25rem;
+  padding: 0.75rem;
 }
-.contentTable table tbody tr td a {
-  text-decoration: none;
-  color: #000;
-}
-.contentTable table tbody tr td a:hover {
-  text-decoration: underline;
+.contentTable p {
+  color: #585858;
 }
 
 form {
@@ -194,9 +197,11 @@ form .formControls {
 }
 .folderPath button.toggleHierarchy {
   border: 1px solid #fff;
-  padding: 0;
-  width: 2rem;
-  height: 2rem;
+  padding: 0.5rem;
+}
+.folderPath button.toggleHierarchy img {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 .folderPath button.toggleHierarchy:hover {
   outline: none;
@@ -243,6 +248,7 @@ form .formControls {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  margin: 1rem 0;
 }
 .folderTitle h1 {
   margin-right: 0.5rem;

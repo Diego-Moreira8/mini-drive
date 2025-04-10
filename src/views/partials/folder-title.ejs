@@ -1,10 +1,6 @@
 <div class="folderTitle">
   <h1>
-    <%=
-      locals.folder.rootOfUserId
-        ? "Meus Arquivos" 
-        : `Pasta: ${currentFolder.name}` 
-    %>
+    <%= locals.folder.rootOfUserId ? "Meus Arquivos"  : currentFolder.name %>
   </h1>
 
   <% if (!locals.currentFolder.rootOfUserId) { %>

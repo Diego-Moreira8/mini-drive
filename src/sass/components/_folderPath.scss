@@ -7,9 +7,12 @@
 
   button.toggleHierarchy {
     border: 1px solid colors.$bg;
-    padding: 0;
-    width: 2rem;
-    height: 2rem;
+    padding: 0.5rem;
+
+    img {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
 
     &:hover {
       outline: none;
