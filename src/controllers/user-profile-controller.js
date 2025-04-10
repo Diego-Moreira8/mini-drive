@@ -1,15 +1,11 @@
 const userService = require("../services/user-service");
 
-const getProfileViewData = (
-  errorsArray,
-  { name, username },
-  formSuccessMessage
-) => {
+const getProfileViewData = (errorsArray, { name, username }, updateSuccess) => {
   return {
     template: "pages/user-profile-page",
     title: "Meu Perfil",
     errors: errorsArray.length > 0 ? errorsArray : [],
-    formSuccessMessage: formSuccessMessage || null,
+    formSuccessMessage: updateSuccess ? "Dados atualizados com sucesso!" : null,
     values: { name, username },
   };
 };
@@ -25,7 +21,11 @@ const getDeleteAccountViewData = (errorsArray) => {
 /** @type {import("express").RequestHandler} */
 const getProfilePage = (req, res, next) => {
   const { name, username } = req.user;
-  res.render("layout", getProfileViewData([], { name, username }));
+  const updateSuccess = req.query?.update === "success";
+  res.render(
+    "layout",
+    getProfileViewData([], { name, username }, updateSuccess)
+  );
 };
 
 /** @type {import("express").RequestHandler} */
@@ -64,13 +64,10 @@ const postProfileUpdate = async (req, res, next) => {
     await userService.update(req.user.id, {
       newUsername: usernameChange ? username : null,
       newPassword: passwordChange ? newPassword : null,
-      newName: name,
+      newName: name || null,
     });
 
-    return res.render(
-      "layout",
-      getProfileViewData([], req.body, "Dados salvos!")
-    );
+    res.redirect("/minha-conta?update=success");
   } catch (error) {
     next(error);
   }

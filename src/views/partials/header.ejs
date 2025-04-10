@@ -4,7 +4,7 @@
 %>
 
 <% if (locals.includeNav !== false) { %>
-  <nav>
+  <header>
     <%- include("./logo") %>
 
     <div class="driveUsage" title="Utilização">
@@ -27,14 +27,20 @@
       </div>
     </div>
 
-    <div class="options">
-      <% if (locals.path === "/minha-conta") { %>
+    <div class="navOverlay"></div>
+    
+    <button type="button" class="navToggle">
+      <span class="user">
+        Olá, <%= locals.user.name || locals.user.username %>!
+      </span>
+      <span class="arrow">▼</span>
+      
+      <nav>
         <a href="/">Meus arquivos</a>
-      <% } else { %>
         <a href="/minha-conta">Minha conta</a>
-      <% } %>
+        <a href="/sair">Sair</a>
+      </nav>
+    </button>
 
-      <a href="/sair">Sair</a>
-    </div>
-  </nav>
+  </header>
 <% } %>

@@ -17,7 +17,9 @@
     <title>miniDrive<%= locals.title ? ` | ${locals.title}` : "" %></title>
   </head>
   <body>
-    <%- include("partials/nav") %>
+    <%- include("partials/header") %>
     <%- include(locals.template) %>
+
+    <script src="/scripts/toggle-nav.js"></script>
   </body>
 </html>

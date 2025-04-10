@@ -88,9 +88,8 @@ const update = async (id, { newUsername, newPassword, newName }) => {
       const hashedPassword = await hashPassword(newPassword);
       newData.password = hashedPassword;
     }
-    if (newName) {
-      newData.name = newName;
-    }
+
+    newData.name = newName;
 
     const result = await prisma.user.update({
       where: { id },

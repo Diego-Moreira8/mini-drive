@@ -334,18 +334,7 @@ footer {
   margin: 2rem 0;
 }
 
-a.logo {
-  display: block;
-  width: fit-content;
-  padding: 0.25rem;
-}
-a.logo img {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-nav {
+header {
   position: sticky;
   display: flex;
   justify-content: space-between;
@@ -355,61 +344,136 @@ nav {
   background-color: rgba(255, 255, 255, 0.8392156863);
   backdrop-filter: blur(3px);
 }
-nav a.logo {
+header a.logo {
   height: 1.75rem;
 }
 @media (min-width: 600px) {
-  nav a.logo {
+  header a.logo {
     height: 2rem;
   }
 }
-nav .driveUsage {
+header .driveUsage {
   display: flex;
   flex-flow: column;
 }
-nav .driveUsage .numbers {
+header .driveUsage .numbers {
   display: flex;
   align-items: flex-end;
 }
-nav .driveUsage .numbers .used {
+header .driveUsage .numbers .used {
   font-weight: bold;
   font-size: 1rem;
 }
 @media (min-width: 600px) {
-  nav .driveUsage .numbers .used {
+  header .driveUsage .numbers .used {
     font-size: 1.5rem;
   }
 }
-nav .driveUsage .numbers .size {
+header .driveUsage .numbers .size {
   font-size: 0.75rem;
 }
 @media (min-width: 600px) {
-  nav .driveUsage .numbers .size {
+  header .driveUsage .numbers .size {
     font-size: 1rem;
   }
 }
-nav .driveUsage .progressBar .size {
+header .driveUsage .progressBar .size {
   width: 100%;
   height: 5px;
   border-radius: 5px;
   background-color: #d3d3d3;
 }
 @media (min-width: 600px) {
-  nav .driveUsage .progressBar .size {
+  header .driveUsage .progressBar .size {
     height: 10px;
   }
 }
-nav .driveUsage .progressBar .size .used {
+header .driveUsage .progressBar .size .used {
   height: 100%;
   border-radius: inherit;
   background-color: #008600;
 }
-nav .driveUsage .progressBar .size .used.danger {
+header .driveUsage .progressBar .size .used.danger {
   background-color: #f00;
 }
-nav .options {
+header .navOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+header .navOverlay.visible {
+  display: block;
+}
+header button.navToggle {
+  position: relative;
+  white-space: nowrap;
+  border: 1px solid #000;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+}
+@media (min-width: 600px) {
+  header button.navToggle {
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+  }
+}
+header button.navToggle .user,
+header button.navToggle .arrow {
+  font-size: 0.75rem;
+  max-width: 125px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+@media (min-width: 600px) {
+  header button.navToggle .user,
+  header button.navToggle .arrow {
+    font-size: 1rem;
+    max-width: 250px;
+  }
+}
+header button.navToggle .user {
+  margin-right: 0.25rem;
+}
+header button.navToggle nav {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  transform: translateY(calc(100% + 0.5rem));
+  display: none;
+  border-radius: 1rem;
+  padding: 1rem 0;
+  background-color: #fff;
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.2588235294);
+}
+header button.navToggle nav.visible {
   display: flex;
-  gap: 1rem;
+  flex-flow: column;
+}
+header button.navToggle nav a {
+  display: block;
+  padding: 1rem;
+  text-decoration: none;
+  text-align: right;
+  color: #000;
+}
+header button.navToggle nav a:hover {
+  background-color: #eaeaea;
+  text-decoration: underline;
+}
+
+a.logo {
+  display: block;
+  width: fit-content;
+  padding: 0.25rem;
+}
+a.logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .signUpPage,
