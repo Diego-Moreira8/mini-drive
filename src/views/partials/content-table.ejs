@@ -1,0 +1,76 @@
+<div class="contentTable">
+  <%- include("folder-title") %>
+
+  <%
+    const hasSubfolders = locals.folder.subFolders?.length > 0;
+    const hasFiles = locals.folder.files?.length > 0;
+    const notEmpty = hasSubfolders || hasFiles;
+  %>
+
+  <% if (notEmpty) { %>
+    <table>
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Nome</th>
+          <th scope="col">Tamanho</th>
+          <th scope="col">Data</th>
+          <th scope="col">Opções</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <%# Folders %>
+        <% if (hasSubfolders) { %>
+          <% locals.folder.subFolders.forEach(dir => { %>
+            <tr>
+              <td class="icon">
+                <img src="/todo">
+              </td>
+              <td class="name">
+                <a href="<%= `/pasta/${dir.id}` %>"><%= dir.name %></a>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          <% }) %>
+        <% } %>
+
+        <%# Files %>
+        <% if (hasFiles) { %>
+          <% locals.folder.files.forEach(file => { %>
+            <tr>
+              <td class="icon">
+                <img src="/todo">
+              </td>
+
+              <td class="name">
+                <a href="<%= `/arquivo/${file.id}` %>"><%= file.fileName %></a>
+              </td>
+
+              <td class="size">
+                <%= parseFloat((file.size / 1e6).toFixed(2)) %> MB
+              </td>
+
+              <td class="date">
+                <%= file.uploadTime %>
+              </td>
+
+              <td class="fileOptions">
+                <a href="<%= `/arquivo/${file.id}/baixar` %>" class="button small">
+                  Baixar
+                </a>
+                <button type="button" class="small">
+                  Apagar
+                </button>
+              </td>
+            </tr>
+          <% }) %>
+        <% } %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p><i>Ainda não há arquivos por aqui...</i></p>
+  <% } %>
+</div>

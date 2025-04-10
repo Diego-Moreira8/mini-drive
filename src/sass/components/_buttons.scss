@@ -6,6 +6,7 @@ a.button {
   align-items: center;
   justify-content: center;
   width: max-content;
+  height: fit-content;
 
   background-color: colors.$bg;
   color: colors.$text;
@@ -47,5 +48,10 @@ a.button {
       background-color: colors.$ok;
       color: colors.$bg;
     }
+  }
+
+  &.small {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
   }
 }

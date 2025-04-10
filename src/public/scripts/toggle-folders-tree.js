@@ -26,7 +26,5 @@ const handleToggle = () => {
   }
 };
 
-window.onload = () => {
-  openContentTable();
-  btn.addEventListener("click", handleToggle);
-};
+openContentTable();
+btn.addEventListener("click", handleToggle);

@@ -1,0 +1,77 @@
+@use "../base/colors";
+
+.contentTable {
+  table {
+    width: 100%;
+    margin: 1rem 0;
+    white-space: nowrap;
+    overflow-x: auto;
+
+    thead {
+      font-weight: bold;
+      font-size: 0.75rem;
+      text-align: center;
+
+      tr {
+        th {
+          padding: 1rem;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        border-top: 1px solid #d3d3d3;
+        border-bottom: 1px solid #d3d3d3;
+
+        &:hover {
+          background-color: colors.$bgHover;
+        }
+
+        td {
+          height: 3rem;
+          vertical-align: middle;
+          padding: 1rem;
+
+          &.icon {
+            width: 1rem;
+
+            img {
+              width: 1rem;
+              height: 1rem;
+            }
+          }
+
+          &.name {
+          }
+
+          &.size {
+            width: 6rem;
+            text-align: right;
+          }
+
+          &.date {
+            width: max-content;
+            text-align: center;
+          }
+
+          &.fileOptions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.25rem;
+          }
+
+          a {
+            text-decoration: none;
+            color: colors.$text;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+}

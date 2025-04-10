@@ -1,0 +1,14 @@
+.folderTitle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  h1 {
+    margin-right: 0.5rem;
+  }
+
+  .options {
+    display: flex;
+    gap: 0.5rem;
+  }
+}

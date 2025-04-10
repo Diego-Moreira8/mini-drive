@@ -1,7 +1,16 @@
-<h1>
-  <%=
-    locals.folder.rootOfUserId
-      ? "Meus Arquivos" 
-      : `Pasta: ${currentFolder.name}` 
-  %>
-</h1>
+<div class="folderTitle">
+  <h1>
+    <%=
+      locals.folder.rootOfUserId
+        ? "Meus Arquivos" 
+        : `Pasta: ${currentFolder.name}` 
+    %>
+  </h1>
+
+  <% if (!locals.currentFolder.rootOfUserId) { %>
+    <div class="options">
+      <button type="button">Renomear</button>
+      <button type="button">Apagar</button>
+    </div>
+  <% } %>
+</div>

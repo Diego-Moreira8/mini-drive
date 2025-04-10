@@ -43,6 +43,7 @@ a.button {
   align-items: center;
   justify-content: center;
   width: max-content;
+  height: fit-content;
   background-color: #fff;
   color: #000;
   font-size: 1rem;
@@ -81,6 +82,66 @@ button[type=submit]:active,
 a.button[type=submit]:active {
   background-color: #008600;
   color: #fff;
+}
+button.small,
+a.button.small {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+}
+
+.contentTable table {
+  width: 100%;
+  margin: 1rem 0;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+.contentTable table thead {
+  font-weight: bold;
+  font-size: 0.75rem;
+  text-align: center;
+}
+.contentTable table thead tr th {
+  padding: 1rem;
+}
+.contentTable table tbody tr {
+  border-top: 1px solid #d3d3d3;
+  border-bottom: 1px solid #d3d3d3;
+}
+.contentTable table tbody tr:hover {
+  background-color: #eaeaea;
+}
+.contentTable table tbody tr td {
+  height: 3rem;
+  vertical-align: middle;
+  padding: 1rem;
+}
+.contentTable table tbody tr td.icon {
+  width: 1rem;
+}
+.contentTable table tbody tr td.icon img {
+  width: 1rem;
+  height: 1rem;
+}
+.contentTable table tbody tr td.size {
+  width: 6rem;
+  text-align: right;
+}
+.contentTable table tbody tr td.date {
+  width: max-content;
+  text-align: center;
+}
+.contentTable table tbody tr td.fileOptions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+}
+.contentTable table tbody tr td a {
+  text-decoration: none;
+  color: #000;
+}
+.contentTable table tbody tr td a:hover {
+  text-decoration: underline;
 }
 
 form {
@@ -176,6 +237,19 @@ form .formControls {
   background-color: #eaeaea;
   color: #0042bf;
   text-decoration: underline;
+}
+
+.folderTitle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.folderTitle h1 {
+  margin-right: 0.5rem;
+}
+.folderTitle .options {
+  display: flex;
+  gap: 0.5rem;
 }
 
 .foldersTree {
