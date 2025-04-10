@@ -1,42 +1,47 @@
+@use "../base/breakpoints";
 @use "../base/colors";
 
 .foldersTree {
-  display: flex;
-  flex-flow: column;
-  gap: 2rem;
+  h2 {
+    margin-bottom: 2rem;
+  }
 
-  ul {
-    margin-left: 1rem;
+  .treeContainer {
+    overflow-x: auto;
 
-    li {
-      a,
-      b {
-        display: block;
-        padding: 0.5rem;
-        text-decoration: none;
-        color: colors.$text;
+    ul {
+      margin-left: 1rem;
 
-        &:hover {
-          background-color: colors.$bgHover;
+      li {
+        a,
+        b {
+          display: block;
+          padding: 0.5rem;
+          text-decoration: none;
+          color: colors.$text;
+
+          &:hover {
+            background-color: colors.$bgHover;
+          }
         }
-      }
 
-      a {
-        font-weight: normal;
+        a {
+          font-weight: normal;
 
-        &:hover {
-          color: colors.$link;
-          text-decoration: underline;
+          &:hover {
+            color: colors.$link;
+            text-decoration: underline;
+          }
         }
       }
     }
-  }
 
-  > ul {
-    margin-left: 0;
-  }
+    > ul {
+      margin-left: 0;
+    }
 
-  .prefix {
-    font-family: monospace;
+    .prefix {
+      font-family: monospace;
+    }
   }
 }

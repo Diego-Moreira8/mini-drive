@@ -1,9 +1,10 @@
+@use "../base/breakpoints";
 @use "../base/colors";
 
 .folderPath {
   display: flex;
   align-items: center;
-  margin: 1rem 0;
+  grid-column: 1/-1;
 
   button.toggleHierarchy {
     border: 1px solid colors.$bg;
@@ -25,6 +26,10 @@
 
     &:active {
       background-color: colors.$bgHover;
+    }
+
+    @media (min-width: breakpoints.$large) {
+      display: none;
     }
   }
 

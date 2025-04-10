@@ -193,7 +193,7 @@ form .formControls {
 .folderPath {
   display: flex;
   align-items: center;
-  margin: 1rem 0;
+  grid-column: 1/-1;
 }
 .folderPath button.toggleHierarchy {
   border: 1px solid #fff;
@@ -212,6 +212,11 @@ form .formControls {
 }
 .folderPath button.toggleHierarchy:active {
   background-color: #eaeaea;
+}
+@media (min-width: 1200px) {
+  .folderPath button.toggleHierarchy {
+    display: none;
+  }
 }
 .folderPath ul {
   display: flex;
@@ -248,7 +253,7 @@ form .formControls {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin: 1rem 0;
+  margin-bottom: 2rem;
 }
 .folderTitle h1 {
   margin-right: 0.5rem;
@@ -258,36 +263,37 @@ form .formControls {
   gap: 0.5rem;
 }
 
-.foldersTree {
-  display: flex;
-  flex-flow: column;
-  gap: 2rem;
+.foldersTree h2 {
+  margin-bottom: 2rem;
 }
-.foldersTree ul {
+.foldersTree .treeContainer {
+  overflow-x: auto;
+}
+.foldersTree .treeContainer ul {
   margin-left: 1rem;
 }
-.foldersTree ul li a,
-.foldersTree ul li b {
+.foldersTree .treeContainer ul li a,
+.foldersTree .treeContainer ul li b {
   display: block;
   padding: 0.5rem;
   text-decoration: none;
   color: #000;
 }
-.foldersTree ul li a:hover,
-.foldersTree ul li b:hover {
+.foldersTree .treeContainer ul li a:hover,
+.foldersTree .treeContainer ul li b:hover {
   background-color: #eaeaea;
 }
-.foldersTree ul li a {
+.foldersTree .treeContainer ul li a {
   font-weight: normal;
 }
-.foldersTree ul li a:hover {
+.foldersTree .treeContainer ul li a:hover {
   color: #0042bf;
   text-decoration: underline;
 }
-.foldersTree > ul {
+.foldersTree .treeContainer > ul {
   margin-left: 0;
 }
-.foldersTree .prefix {
+.foldersTree .treeContainer .prefix {
   font-family: monospace;
 }
 
@@ -308,10 +314,14 @@ a.logo img {
 }
 
 nav {
+  position: sticky;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 1rem;
+  padding: 1rem;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.8392156863);
+  backdrop-filter: blur(3px);
 }
 nav a.logo {
   height: 1.75rem;
@@ -445,19 +455,34 @@ nav .options {
   flex-flow: column;
 }
 .folderPage main {
+  display: grid;
+  gap: 2rem;
   margin: 1rem;
+  grid-template-columns: 100%;
 }
-.folderPage main .foldersTree {
-  display: none;
+@media (min-width: 600px) {
+  .folderPage main {
+    margin: 2rem;
+  }
 }
-.folderPage main .foldersTree.visible {
-  display: block;
+@media (min-width: 1200px) {
+  .folderPage main {
+    grid-template-columns: 300px 1fr;
+  }
 }
+.folderPage main .foldersTree,
 .folderPage main .contentTable {
   display: none;
 }
+.folderPage main .foldersTree.visible,
 .folderPage main .contentTable.visible {
   display: block;
+}
+@media (min-width: 1200px) {
+  .folderPage main .foldersTree,
+  .folderPage main .contentTable {
+    display: block;
+  }
 }
 
 .homePage {

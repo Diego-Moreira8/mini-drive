@@ -1,27 +1,33 @@
+@use "../base/breakpoints";
+
 .folderPage {
   display: flex;
   flex-flow: column;
 
   main {
+    display: grid;
+    gap: 2rem;
     margin: 1rem;
+    grid-template-columns: 100%;
 
-    .foldersTree {
-      display: none;
-      //visibility: hidden;
-
-      &.visible {
-        display: block;
-        //visibility: visible;
-      }
+    @media (min-width: breakpoints.$small) {
+      margin: 2rem;
     }
 
+    @media (min-width: breakpoints.$large) {
+      grid-template-columns: 300px 1fr;
+    }
+
+    .foldersTree,
     .contentTable {
       display: none;
-      //visibility: hidden;
 
       &.visible {
         display: block;
-        //visibility: visible;
+      }
+
+      @media (min-width: breakpoints.$large) {
+        display: block;
       }
     }
   }

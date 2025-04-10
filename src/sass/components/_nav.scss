@@ -2,10 +2,14 @@
 @use "../base/breakpoints";
 
 nav {
+  position: sticky;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 1rem;
+  padding: 1rem;
+  top: 0;
+  background-color: #ffffffd6;
+  backdrop-filter: blur(3px);
 
   a.logo {
     height: 1.75rem;

@@ -1,27 +1,29 @@
 <div class="foldersTree">
   <h2>Hierarquia de Pastas</h2>
 
-  <ul>
-    <% (function renderHierarchy(hierarchicalFolders) { %>
-      <% hierarchicalFolders.forEach(folder => { %>
-        <li>
-          <% if (folder.id === locals.currentFolder.id) { %>
-            <b>
-              <%= folder.rootOfUserId ? "Meus Arquivos (raiz)" : folder.name %>
-            </b>
-          <% } else { %>
-            <a href="<%= `/pasta/${folder.id}` %>">
-              <%= folder.rootOfUserId ? "Meus Arquivos (raiz)" : folder.name %>
-            </a>
-          <% } %>
+  <div class="treeContainer">
+    <ul>
+      <% (function renderHierarchy(hierarchicalFolders) { %>
+        <% hierarchicalFolders.forEach(folder => { %>
+          <li>
+            <% if (folder.id === locals.currentFolder.id) { %>
+              <b>
+                <%= folder.rootOfUserId ? "Meus Arquivos (raiz)" : folder.name %>
+              </b>
+            <% } else { %>
+              <a href="<%= `/pasta/${folder.id}` %>">
+                <%= folder.rootOfUserId ? "Meus Arquivos (raiz)" : folder.name %>
+              </a>
+            <% } %>
 
-          <% if (folder.children?.length > 0) { %>
-            <ul>
-              <% renderHierarchy(folder.children) %>
-            </ul>
-          <% } %>
-        </li>
-      <% }) %>
-    <% })([locals.hierarchicalFolders]) %>
-  </ul>
+            <% if (folder.children?.length > 0) { %>
+              <ul>
+                <% renderHierarchy(folder.children) %>
+              </ul>
+            <% } %>
+          </li>
+        <% }) %>
+      <% })([locals.hierarchicalFolders]) %>
+    </ul>
+  </div>
 </div>

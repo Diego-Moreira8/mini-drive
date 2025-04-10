@@ -55,7 +55,7 @@ const getFolderPage = async (req, res, next) => {
       : parseInt((driveUsage / parseInt(process.env.UPLOAD_LIMIT)) * 100);
 
   res.render("layout", {
-    template: "pages/file-explorer",
+    template: "pages/folder-page",
     title,
     currentFolder,
     allFolders,
