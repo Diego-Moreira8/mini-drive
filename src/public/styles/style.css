@@ -628,6 +628,7 @@ a.logo img {
   flex-flow: column;
   align-items: center;
   justify-content: center;
+  margin: 0;
   padding: 1rem;
   border-radius: 0.5rem;
   color: #fff;
