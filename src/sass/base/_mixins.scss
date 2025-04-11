@@ -1,0 +1,11 @@
+@use "breakpoints";
+
+@mixin centered-container($max-width) {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 1rem;
+
+  @media (min-width: breakpoints.$small) {
+    margin: 2rem auto;
+  }
+}

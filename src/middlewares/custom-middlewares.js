@@ -65,14 +65,14 @@ const getFolderIfOwnedByUser = async (req, res, next) => {
     if (!folder) {
       throw {
         statusCode: 404,
-        msgForUser: "O diretório requisitado não existe.",
+        msgForUser: "A pasta requisitada não existe.",
       };
     }
 
     if (req.user.id !== folder.ownerId) {
       throw {
         statusCode: 403,
-        msgForUser: "Você não tem permissão para acessar este diretório.",
+        msgForUser: "Você não tem permissão para acessar esta pasta.",
       };
     }
 

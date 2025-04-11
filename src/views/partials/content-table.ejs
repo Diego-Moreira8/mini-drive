@@ -23,13 +23,13 @@
         <tbody>
           <%# Folders %>
           <% if (hasSubfolders) { %>
-            <% locals.folder.subFolders.forEach(dir => { %>
+            <% locals.folder.subFolders.forEach(folder => { %>
               <tr>
                 <td class="icon">
                   <img src="/todo">
                 </td>
                 <td class="name">
-                  <a href="<%= `/pasta/${dir.id}` %>"><%= dir.name %></a>
+                  <a href="<%= `/pasta/${folder.id}` %>"><%= folder.name %></a>
                 </td>
                 <td></td>
                 <td></td>

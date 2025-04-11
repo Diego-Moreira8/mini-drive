@@ -1,6 +1,5 @@
 @use "../base/mixins";
 
-.userProfilePage,
-.deleteAccount {
+.folderFormPage {
   @include mixins.centered-container(500px);
 }

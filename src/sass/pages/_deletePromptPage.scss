@@ -1,10 +1,5 @@
-@use "../base/breakpoints";
+@use "../base/mixins";
 
 .promptPage {
-  max-width: 500px;
-  margin: 1rem;
-
-  @media (min-width: breakpoints.$small) {
-    margin: 2rem auto;
-  }
+  @include mixins.centered-container(500px);
 }

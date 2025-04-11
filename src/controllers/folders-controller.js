@@ -4,7 +4,7 @@ const hierarchizeFolders = require("../utils/hierarchize-folders");
 
 const getCreateFolderFormView = (errorsArray, value) => {
   return {
-    template: "pages/folder-form",
+    template: "pages/folder-form-page",
     isEdit: false,
     title: "Criar pasta",
     errors: errorsArray || [],
@@ -14,9 +14,9 @@ const getCreateFolderFormView = (errorsArray, value) => {
 
 const getRenameFolderFormView = (folderName, errorsArray, value) => {
   return {
-    template: "pages/folder-form",
+    template: "pages/folder-form-page",
     isEdit: true,
-    title: `Renomear pasta ${folderName}`,
+    title: `Renomear pasta "${folderName}"`,
     errors: errorsArray || [],
     value: value || "",
   };
@@ -91,8 +91,15 @@ const postCreateFolder = async (req, res, next) => {
 
 /** @type {import("express").RequestHandler} */
 const getRenameFolder = (req, res, next) => {
-  const currDirName = res.locals.folder.name;
-  res.render("layout", getRenameFolderFormView(currDirName, [], currDirName));
+  if (res.locals.folder.rootOfUserId) {
+    return res.status(403).redirect("/");
+  }
+
+  const currFolderName = res.locals.folder.name;
+  res.render(
+    "layout",
+    getRenameFolderFormView(currFolderName, [], currFolderName)
+  );
 };
 
 /** @type {import("express").RequestHandler} */
@@ -139,9 +146,9 @@ const promptDeleteFolder = (req, res, next) => {
 
   res.render("layout", {
     template: "pages/delete-prompt-page",
-    title: "Apagar Diretório",
-    promptTitle: "Apagar Diretório",
-    promptText: `Tem certeza que deseja apagar o diretório "${res.locals.folder.name}" e todos os seus arquivos?`,
+    title: "Apagar Pasta",
+    promptTitle: "Apagar Pasta",
+    promptText: `Tem certeza que deseja apagar a pasta "${res.locals.folder.name}" e todos os seus arquivos?`,
     action: `/pasta/${res.locals.folder.id}/apagar`,
   });
 };

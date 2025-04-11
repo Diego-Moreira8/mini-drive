@@ -5,8 +5,13 @@
 
   <% if (!locals.folder.rootOfUserId) { %>
     <div class="options">
-      <button type="button">Renomear</button>
-      <button type="button">Apagar</button>
+      <a href="<%= `/pasta/${locals.folder.id}/renomear` %>" class="button">
+        Renomear
+      </a>
+      
+      <a href="<%= `/pasta/${locals.folder.id}/apagar` %>" class="button">
+        Apagar
+      </a>
     </div>
   <% } %>
 </div>
