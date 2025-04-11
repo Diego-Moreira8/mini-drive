@@ -12,7 +12,7 @@ const getProfileViewData = (errorsArray, { name, username }, updateSuccess) => {
 
 const getDeleteAccountViewData = (errorsArray) => {
   return {
-    template: "pages/delete-account",
+    template: "pages/delete-account-page",
     title: "Apagar Minha Conta",
     errors: errorsArray.length > 0 ? errorsArray : [],
   };

@@ -3,7 +3,7 @@ const fileService = require("../services/file-service");
 /** @type {import("express").RequestHandler} */
 const getFileDetails = (req, res, next) => {
   res.render("layout", {
-    template: "pages/file-details",
+    template: "pages/file-details-page",
     title: "Detalhes do Arquivo",
     file: res.locals.file,
   });

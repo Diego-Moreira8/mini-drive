@@ -39,7 +39,7 @@ const validateSignUpForm = [
 
     if (!errors.isEmpty()) {
       return res.status(400).render("layout", {
-        template: "pages/sign-up",
+        template: "pages/sign-up-page",
         title: "Criar Conta",
         errors: errors.array(),
         values: { ...req.body },

@@ -2,7 +2,7 @@ const userService = require("../services/user-service");
 const passport = require("../config/passport");
 
 const signUpViewData = {
-  template: "pages/sign-up",
+  template: "pages/sign-up-page",
   title: "Criar Conta",
   includeNav: false,
   errors: [],
@@ -10,7 +10,7 @@ const signUpViewData = {
 };
 
 const logInViewData = {
-  template: "pages/log-in",
+  template: "pages/log-in-page",
   title: "Entrar",
   includeNav: false,
   errors: [],
