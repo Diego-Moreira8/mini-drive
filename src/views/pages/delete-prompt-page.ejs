@@ -1,0 +1,15 @@
+<div class="promptPage">
+  <h1><%= locals.promptTitle %></h1>
+  
+  <p><%= locals.promptText %></p>
+
+  <form action="<%= locals.action %>" method="post">
+    <button type="submit" name="response" value="true" class="danger">
+      Sim
+    </button>
+    
+    <button type="submit" name="response" value="false" class="default">
+      Não
+    </button>
+  </form>
+</div>

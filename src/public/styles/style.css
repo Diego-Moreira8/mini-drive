@@ -37,6 +37,16 @@ a {
 a.danger {
   color: #f00;
 }
+a.blockCentered, a.blockLeft {
+  display: block;
+  width: fit-content;
+}
+a.blockCentered {
+  margin: 1rem auto;
+}
+a.blockLeft {
+  margin: 1rem 0;
+}
 
 b {
   font-weight: bold;
@@ -48,19 +58,19 @@ i {
 
 button,
 a.button {
-  display: flex;
+  background-color: #fff;
+  color: #000;
+  border: 2px solid #000;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   width: max-content;
   height: fit-content;
-  background-color: #fff;
-  color: #000;
   font-size: 1rem;
   font-weight: bold;
   text-decoration: none;
   text-align: center;
   line-height: 1;
-  border: 2px solid #000;
   border-radius: 0.75rem;
   padding: 0.5rem 1rem;
   cursor: pointer;
@@ -76,19 +86,23 @@ a.button:active {
   background-color: #000;
   color: #fff;
 }
-button[type=submit],
+button.ok, button[type=submit],
+a.button.ok,
 a.button[type=submit] {
   background-color: #e9ffe9;
   border: 2px solid #008600;
   color: #000;
 }
-button[type=submit]:hover, button[type=submit]:focus-visible,
+button.ok:hover, button.ok:focus-visible, button[type=submit]:hover, button[type=submit]:focus-visible,
+a.button.ok:hover,
+a.button.ok:focus-visible,
 a.button[type=submit]:hover,
 a.button[type=submit]:focus-visible {
   background-color: #cfffcf;
   outline: 1px solid #008600;
 }
-button[type=submit]:active,
+button.ok:active, button[type=submit]:active,
+a.button.ok:active,
 a.button[type=submit]:active {
   background-color: #008600;
   color: #fff;
@@ -114,6 +128,23 @@ button.small,
 a.button.small {
   padding: 0.25rem 0.5rem;
   font-size: 0.75rem;
+}
+button.default,
+a.button.default {
+  background-color: #fff;
+  color: #000;
+  border: 2px solid #000;
+}
+button.default:hover, button.default:focus-visible,
+a.button.default:hover,
+a.button.default:focus-visible {
+  background-color: #eaeaea;
+  outline: 1px solid #000;
+}
+button.default:active,
+a.button.default:active {
+  background-color: #000;
+  color: #fff;
 }
 
 .contentTable .tableContainer {
@@ -546,6 +577,30 @@ a.logo img {
   text-align: center;
 }
 
+.promptPage {
+  max-width: 500px;
+  margin: 1rem;
+}
+@media (min-width: 600px) {
+  .promptPage {
+    margin: 2rem auto;
+  }
+}
+
+.fileDetailsPage {
+  max-width: 500px;
+  margin: 1rem;
+}
+@media (min-width: 600px) {
+  .fileDetailsPage {
+    margin: 2rem auto;
+  }
+}
+.fileDetailsPage .goToFolder {
+  display: block;
+  margin: 1rem 0;
+}
+
 .folderPage {
   display: flex;
   flex-flow: column;
@@ -708,12 +763,6 @@ a.logo img {
   max-width: 600px;
   margin: 0 auto;
   padding: 1rem;
-}
-.userProfilePage a,
-.deleteAccount a {
-  width: fit-content;
-  display: block;
-  margin: 0 auto;
 }
 
 /*# sourceMappingURL=style.css.map */

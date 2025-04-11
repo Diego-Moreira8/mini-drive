@@ -51,7 +51,7 @@ const downloadFile = async (req, res, next) => {
 /** @type {import("express").RequestHandler} */
 const promptDeleteFile = (req, res, next) => {
   res.render("layout", {
-    template: "pages/prompt",
+    template: "pages/delete-prompt-page",
     title: "Apagar Arquivo",
     promptTitle: "Apagar Arquivo",
     promptText: `Tem certeza que deseja apagar o arquivo "${res.locals.file.fileName}"?`,
@@ -66,7 +66,7 @@ const postDeleteFile = async (req, res, next) => {
     const deleteConfirmed = req.body.response === "true";
 
     if (!deleteConfirmed) {
-      return res.redirect(`/pasta/${folderId}`);
+      return res.redirect(`/arquivo/${id}`);
     }
 
     await fileService.deleteFile(id);

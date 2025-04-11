@@ -1,8 +1,34 @@
-<h1><%= locals.title %></h1>
+<div class="fileDetailsPage">
+  <h2><%= locals.file.fileName %></h2>
+  
+  <p><b>Tamanho: </b><%= locals.file.size %> bytes</p>
+  <p>
+    <b>Proprietário: </b>
+    <%= 
+      locals.file.owner.name
+        ? `${locals.file.owner.name} (${locals.file.owner.username})`
+        : locals.file.owner.username
+    %>
+  </p>
+  
+  <div class="options">
+    <a 
+      href="<%= `/arquivo/${locals.file.id}/baixar` %>"
+      class="button ok"
+    >
+      Baixar
+    </a>
 
-<p><b>Nome: </b><%= locals.file.fileName %></p>
-<p><b>Tamanho: </b><%= locals.file.size %> bytes</p>
-<p><b>Proprietário: </b><%= locals.file.owner.username %></p>
+    <a 
+      href="<%= `/arquivo/${locals.file.id}/apagar` %>"
+      class="button"
+    >
+      Apagar
+    </a>
 
-<a href="<%= `/arquivo/${locals.file.id}/baixar` %>">Baixar</a>
-<a href="<%= `/arquivo/${locals.file.id}/apagar` %>">Apagar</a>
+  </div>
+  
+  <a href="<%= `/pasta/${locals.file.folderId}` %>" class="blockLeft">
+    Ir para a pasta do arquivo
+  </a>
+</div>

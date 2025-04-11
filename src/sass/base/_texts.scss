@@ -39,6 +39,20 @@ a {
   &.danger {
     color: colors.$danger;
   }
+
+  &.blockCentered,
+  &.blockLeft {
+    display: block;
+    width: fit-content;
+  }
+
+  &.blockCentered {
+    margin: 1rem auto;
+  }
+
+  &.blockLeft {
+    margin: 1rem 0;
+  }
 }
 
 b {

@@ -1,27 +1,10 @@
 @use "../base/colors";
 
-button,
-a.button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: max-content;
-  height: fit-content;
-
+@mixin defaultColors {
   background-color: colors.$bg;
   color: colors.$text;
 
-  font-size: 1rem;
-  font-weight: bold;
-  text-decoration: none;
-  text-align: center;
-  line-height: 1;
-
   border: 2px solid colors.$text;
-  border-radius: 0.75rem;
-  padding: 0.5rem 1rem;
-
-  cursor: pointer;
 
   &:hover,
   &:focus-visible {
@@ -33,7 +16,30 @@ a.button {
     background-color: colors.$text;
     color: colors.$bg;
   }
+}
 
+button,
+a.button {
+  @include defaultColors;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+  height: fit-content;
+
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  line-height: 1;
+
+  border-radius: 0.75rem;
+  padding: 0.5rem 1rem;
+
+  cursor: pointer;
+
+  &.ok,
   &[type="submit"] {
     background-color: colors.$okLight;
     border: 2px solid colors.$ok;
@@ -71,5 +77,9 @@ a.button {
   &.small {
     padding: 0.25rem 0.5rem;
     font-size: 0.75rem;
+  }
+
+  &.default {
+    @include defaultColors;
   }
 }

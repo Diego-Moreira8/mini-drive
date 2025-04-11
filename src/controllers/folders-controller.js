@@ -133,8 +133,12 @@ const postRenameFolder = async (req, res, next) => {
 
 /** @type {import("express").RequestHandler} */
 const promptDeleteFolder = (req, res, next) => {
+  if (res.locals.folder.rootOfUserId) {
+    return res.status(403).redirect("/");
+  }
+
   res.render("layout", {
-    template: "pages/prompt",
+    template: "pages/delete-prompt-page",
     title: "Apagar Diretório",
     promptTitle: "Apagar Diretório",
     promptText: `Tem certeza que deseja apagar o diretório "${res.locals.folder.name}" e todos os seus arquivos?`,
