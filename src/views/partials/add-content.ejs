@@ -3,12 +3,19 @@
     Nova pasta
   </a>
 
-  <form id="uploadForm" action="/arquivo/enviar" method="post" enctype="multipart/form-data">
+  <form 
+    id="uploadForm" 
+    action="/arquivo/enviar" 
+    method="post" 
+    enctype="multipart/form-data"
+  >
     <input type="hidden" name="folderId" value="<%= locals.folder.id %>" />
     
     <input type="file" name="file" id="file" required />
 
-    <button type="button" id="openFileDialog" class="button">Escolher Arquivo</button>
+    <button type="button" id="openFileDialog" class="button">
+      Escolher Arquivo
+    </button>
 
     <button type="submit">Enviar</button>
   </form>
@@ -16,12 +23,12 @@
 
 <script>
   document.querySelector('#openFileDialog').addEventListener('click', () => {
-    document.querySelector('#file').click();
+    document.querySelector('#file').click();  
   });
 
-  document.querySelector('#file').addEventListener('change', () => {
-    if (this.files.length > 0) {
-      document.querySelector('#uploadForm').submit();
+  document.querySelector('#file').addEventListener('change', (e) => {
+    if (e.target.files.length > 0) {
+      document.querySelector('#uploadForm').submit();  
     }
   });
 </script>

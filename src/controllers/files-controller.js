@@ -1,4 +1,15 @@
 const fileService = require("../services/file-service");
+const splitFileName = require("../utils/split-file-name");
+
+const getRenameFileFormView = (fileName, errorsArray, value) => {
+  return {
+    template: "pages/content-form-page",
+    isRename: true,
+    title: `Renomear arquivo "${fileName}"`,
+    errors: errorsArray || [],
+    value: value || "",
+  };
+};
 
 /** @type {import("express").RequestHandler} */
 const getFileDetails = (req, res, next) => {
@@ -76,10 +87,58 @@ const postDeleteFile = async (req, res, next) => {
   }
 };
 
+/** @type {import("express").RequestHandler} */
+const getRenameFile = (req, res, next) => {
+  const { fileName } = res.locals.file;
+  const { baseName } = splitFileName(fileName);
+  res.render("layout", getRenameFileFormView(fileName, [], baseName));
+};
+
+/** @type {import("express").RequestHandler} */
+const postRenameFile = async (req, res, next) => {
+  try {
+    const { fileName, folderId } = res.locals.file;
+    const { baseName, extension } = splitFileName(fileName);
+    const newName = req.body.name;
+    const newNameWithExtension = newName + "." + extension;
+    const nameChanged = newName !== baseName;
+
+    if (!nameChanged) {
+      return res.redirect(`/arquivo/${res.locals.file.id}`);
+    }
+
+    const nameTaken = await fileService.checkDuplication(
+      folderId,
+      newNameWithExtension
+    );
+
+    if (nameTaken) {
+      res.locals.formErrors.push({ msg: "Já existe um arquivo com este nome" });
+    }
+
+    if (res.locals.formErrors.length > 0) {
+      return res
+        .status(400)
+        .render(
+          "layout",
+          getRenameFileFormView(fileName, res.locals.formErrors, newName)
+        );
+    }
+
+    await fileService.rename(res.locals.file.id, newNameWithExtension);
+
+    res.redirect(`/arquivo/${res.locals.file.id}`);
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   getFileDetails,
   uploadFile,
   downloadFile,
   promptDeleteFile,
   postDeleteFile,
+  getRenameFile,
+  postRenameFile,
 };

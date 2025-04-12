@@ -1,0 +1,49 @@
+<div class="folderFormPage">
+  <h1><%= locals.title %></h1>
+
+  <%
+    let action;
+    let returnLink;
+
+    if (locals.folder) {
+      if (isRename) {
+        action = `/pasta/${locals.folder.id}/renomear`;
+        returnLink = `/pasta/${locals.folder.id}`
+      } else {
+        action = `/pasta/${locals.folder.id}/criar`;
+        returnLink = `/pasta/${locals.folder.parentId}`
+      }
+    } else if (locals.file) {
+      action = `/arquivo/${locals.file.id}/renomear`;
+      returnLink = `/arquivo/${locals.file.id}`
+    }
+  %>
+  
+  <form action="<%= action %>" method="post">
+    <%- include("../partials/form-errors") %>
+    
+    <div class="formRow">
+      <label for="name"><%= isRename ? "Novo nome:" : "Nome:" %></label>
+  
+      <input
+        type="text"
+        name="name"
+        id="name"
+        maxlength="250"
+        required
+        value="<%= value %>"
+        autocomplete="off"
+      />
+    </div>
+    
+    <div class="formControls">
+      <button type="submit"><%= isRename ? "Salvar" : "Criar pasta" %></button>
+      <a
+        href="<%= returnLink %>"
+        class="button"
+      >
+        Cancelar
+      </a>
+    </div>
+  </form>
+</div>

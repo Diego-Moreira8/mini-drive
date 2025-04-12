@@ -4,8 +4,8 @@ const hierarchizeFolders = require("../utils/hierarchize-folders");
 
 const getCreateFolderFormView = (errorsArray, value) => {
   return {
-    template: "pages/folder-form-page",
-    isEdit: false,
+    template: "pages/content-form-page",
+    isRename: false,
     title: "Criar pasta",
     errors: errorsArray || [],
     value: value || "",
@@ -14,8 +14,8 @@ const getCreateFolderFormView = (errorsArray, value) => {
 
 const getRenameFolderFormView = (folderName, errorsArray, value) => {
   return {
-    template: "pages/folder-form-page",
-    isEdit: true,
+    template: "pages/content-form-page",
+    isRename: true,
     title: `Renomear pasta "${folderName}"`,
     errors: errorsArray || [],
     value: value || "",

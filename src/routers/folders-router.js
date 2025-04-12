@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const { getFolderIfOwnedByUser } = require("../middlewares/custom-middlewares");
 const foldersController = require("../controllers/folders-controller");
-const { validateFolderForm } = require("../middlewares/express-validator");
+const { validateContentForm } = require("../middlewares/express-validator");
 
 const foldersRouter = Router();
 
@@ -16,7 +16,7 @@ foldersRouter.get(
 foldersRouter.post(
   "/:id/criar",
   getFolderIfOwnedByUser,
-  validateFolderForm,
+  validateContentForm,
   foldersController.postCreateFolder
 );
 
@@ -29,7 +29,7 @@ foldersRouter.get(
 foldersRouter.post(
   "/:id/renomear",
   getFolderIfOwnedByUser,
-  validateFolderForm,
+  validateContentForm,
   foldersController.postRenameFolder
 );
 

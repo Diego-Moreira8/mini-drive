@@ -71,6 +71,17 @@ const getById = async (fileId) => {
   }
 };
 
+const checkDuplication = async (folderId, fileName) => {
+  try {
+    const filesInFolder = await prisma.file.findMany({ where: { folderId } });
+    const foundFiles = filesInFolder.find((f) => fileName === f.fileName);
+    return foundFiles;
+  } catch (error) {
+    console.error("Error at checking duplication");
+    throw error;
+  }
+};
+
 const rename = async (fileId, newName) => {
   try {
     const file = await prisma.file.update({
@@ -146,6 +157,7 @@ const getSignedUrl = async (userId, nameOnStorage, originalName) => {
 module.exports = {
   create,
   getById,
+  checkDuplication,
   rename,
   renameSafe,
   deleteFile,

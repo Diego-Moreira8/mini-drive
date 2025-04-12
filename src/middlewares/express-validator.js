@@ -103,11 +103,11 @@ const validateUpdateProfileForm = [
   },
 ];
 
-const validateFolderForm = [
+const validateContentForm = [
   body("name")
     .trim()
     .notEmpty()
-    .withMessage("A pasta precisa ter um nome")
+    .withMessage("O nome não pode ficar vazio")
     .isLength({ max: 250 })
     .withMessage("O nome pode ter no máximo 250 caracteres"),
 
@@ -122,5 +122,5 @@ const validateFolderForm = [
 module.exports = {
   validateSignUpForm,
   validateUpdateProfileForm,
-  validateFolderForm,
+  validateContentForm,
 };

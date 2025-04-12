@@ -601,6 +601,17 @@ a.logo img {
   text-align: center;
 }
 
+.folderFormPage {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+@media (min-width: 600px) {
+  .folderFormPage {
+    margin: 2rem auto;
+  }
+}
+
 .promptPage {
   max-width: 500px;
   margin: 0 auto;
@@ -630,17 +641,6 @@ a.logo img {
 .fileDetailsPage .goToFolder {
   display: block;
   margin: 1rem 0;
-}
-
-.folderFormPage {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 1rem;
-}
-@media (min-width: 600px) {
-  .folderFormPage {
-    margin: 2rem auto;
-  }
 }
 
 .folderPage {
