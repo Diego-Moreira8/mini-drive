@@ -612,6 +612,11 @@ a.logo img {
   }
 }
 
+.errorPage {
+  margin: 2rem;
+  text-align: center;
+}
+
 .fileDetailsPage {
   max-width: 500px;
   margin: 0 auto;

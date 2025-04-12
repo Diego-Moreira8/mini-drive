@@ -1,3 +1,6 @@
-<h1><%= locals.statusCode %></h1>
-<p><%= locals.msgForUser %></p>
-<a href="/">Voltar para o início</a>
+<div class="errorPage">
+  <h1>Ops... Houve um erro!</h1>
+  <p><%= locals.msgForUser %></p>
+  <p><b>Código do erro: </b><%= locals.statusCode %></p>
+  <a href="/">Voltar para o início</a>
+</div>
