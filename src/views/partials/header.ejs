@@ -4,9 +4,10 @@
 %>
 
 <% if (locals.includeNav !== false) { %>
-  <header>
+  <header class="appHeader">
     <%- include("./logo") %>
 
+    <% if (locals.user) { %>
     <div class="driveUsage" title="Utilização">
       <div class="numbers">
         <div class="used">
@@ -41,6 +42,12 @@
         <a href="/sair">Sair</a>
       </nav>
     </button>
+    <% } else { %>
+      <div>
+        <a class="button" href="/entrar">Entrar</a>
+        <a class="button" href="/criar-conta">Criar conta</a>
+      </div>
+    <% } %>
 
   </header>
 <% } %>

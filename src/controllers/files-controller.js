@@ -129,7 +129,23 @@ const postRenameFile = async (req, res, next) => {
 
     res.redirect(`/arquivo/${res.locals.file.id}`);
   } catch (error) {
-    throw error;
+    return next(error);
+  }
+};
+
+/** @type {import("express").RequestHandler} */
+const toggleShareFile = async (req, res, next) => {
+  try {
+    const { id, shareCode } = res.locals.file;
+    if (shareCode) {
+      await fileService.stopShare(id);
+    } else {
+      await fileService.share(id);
+    }
+
+    res.redirect(`/arquivo/${id}`);
+  } catch (error) {
+    return next(error);
   }
 };
 
@@ -141,4 +157,5 @@ module.exports = {
   postDeleteFile,
   getRenameFile,
   postRenameFile,
+  toggleShareFile,
 };

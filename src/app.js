@@ -21,6 +21,7 @@ const {
   isUserConnected,
   addCurrentPathToLocals,
 } = require("./middlewares/custom-middlewares");
+const sharedFilesRouter = require("./routers/shared-files-router");
 
 const app = express();
 
@@ -39,6 +40,7 @@ app.use("/", authRouter);
 app.use("/minha-conta", isUserConnected, userProfileRouter);
 app.use("/pasta", isUserConnected, foldersRouter);
 app.use("/arquivo", isUserConnected, filesRouter);
+app.use("/s", sharedFilesRouter);
 
 app.use(errorController.routeNotFound);
 app.use(errorController.errorHandler);

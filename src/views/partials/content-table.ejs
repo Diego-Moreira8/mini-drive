@@ -47,7 +47,12 @@
                 </td>
 
                 <td class="name">
-                  <a href="<%= `/arquivo/${file.id}` %>"><%= file.fileName %></a>
+                  <a href="<%= `/arquivo/${file.id}` %>">
+                    <span class="fileName"><%= file.fileName %></span>
+                    <% if (file.shareCode) { %>
+                      <span class="shareWarning">🌐</span>
+                    <% } %>
+                  </a>
                 </td>
 
                 <td class="size">

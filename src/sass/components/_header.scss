@@ -1,7 +1,7 @@
 @use "../base/colors";
 @use "../base/breakpoints";
 
-header {
+.appHeader {
   position: sticky;
   display: flex;
   justify-content: space-between;

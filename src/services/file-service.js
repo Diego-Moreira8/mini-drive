@@ -159,6 +159,40 @@ const getSignedUrl = async (userId, nameOnStorage, originalName) => {
   }
 };
 
+const share = async (fileId) => {
+  try {
+    await prisma.file.update({
+      where: { id: fileId },
+      data: { shareCode: uuid() },
+    });
+  } catch (error) {
+    console.error("Error at adding file share code.");
+  }
+};
+
+const stopShare = async (fileId) => {
+  try {
+    await prisma.file.update({
+      where: { id: fileId },
+      data: { shareCode: null },
+    });
+  } catch (error) {
+    console.error("Error at stopping file share.");
+  }
+};
+
+const getByShareCode = async (shareCode) => {
+  try {
+    const file = await prisma.file.findUnique({
+      where: { shareCode },
+      include: { owner: true },
+    });
+    return file;
+  } catch (error) {
+    console.error("Error at stopping file share.");
+  }
+};
+
 module.exports = {
   create,
   getById,
@@ -167,4 +201,7 @@ module.exports = {
   renameSafe,
   deleteFile,
   getSignedUrl,
+  share,
+  stopShare,
+  getByShareCode,
 };

@@ -39,6 +39,12 @@ filesRouter.post(
   filesController.postRenameFile
 );
 
+filesRouter.get(
+  "/:id/compartilhar",
+  getFileIfOwnedByUser,
+  filesController.toggleShareFile
+);
+
 filesRouter.get("/:id", getFileIfOwnedByUser, filesController.getFileDetails);
 
 module.exports = filesRouter;
