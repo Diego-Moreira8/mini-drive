@@ -13,18 +13,20 @@ const addUserToLocals = async (req, res, next) => {
 
   const { name, username } = req.user;
 
-  const driveUsage = await userService.getDriveUsage(req.user.id);
+  const driveUsageBytes = await userService.getDriveUsage(req.user.id);
 
-  const driveUsageMB = driveUsage === 0 ? 0 : parseInt(driveUsage / 1e6);
+  const driveUsageMB =
+    driveUsageBytes === 0 ? 0 : parseInt(driveUsageBytes / 1e6);
 
   const driveUsagePercentage =
-    driveUsage === 0
+    driveUsageBytes === 0
       ? 0
-      : parseInt((driveUsage / parseInt(process.env.UPLOAD_LIMIT)) * 100);
+      : parseInt((driveUsageBytes / parseInt(process.env.UPLOAD_LIMIT)) * 100);
 
   res.locals = {
     ...res.locals,
     user: { name, username },
+    driveUsageBytes,
     driveUsageMB,
     driveUsagePercentage,
   };
