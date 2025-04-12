@@ -13,6 +13,8 @@ const create = async (
   mimeType,
   fileBuffer
 ) => {
+  let newFile;
+
   try {
     if (!(await folderService.isFolderOfUser(folderId, userId))) {
       throw new Error(
@@ -23,7 +25,7 @@ const create = async (
     const nameOnStorage = uuid();
 
     // Store file details on database
-    const newFile = await prisma.file.create({
+    newFile = await prisma.file.create({
       data: {
         nameOnStorage,
         fileName: fileName,
@@ -40,12 +42,13 @@ const create = async (
       .upload(`${userId}/${nameOnStorage}`, fileBuffer);
 
     if (error) {
-      await prisma.file.delete({ where: { id: newFile.id } });
       throw error;
     }
 
     return newFile;
   } catch (error) {
+    console.log("erooo", error);
+    await prisma.file.delete({ where: { id: newFile.id } });
     console.error("Error at creating file");
     throw error;
   }

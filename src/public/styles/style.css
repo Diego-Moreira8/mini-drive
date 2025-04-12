@@ -56,6 +56,29 @@ i {
   font-style: italic;
 }
 
+.addContent {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  gap: 0.5rem;
+}
+@media (min-width: 600px) {
+  .addContent {
+    bottom: 2rem;
+    right: 2rem;
+  }
+}
+.addContent form {
+  margin: 0;
+}
+.addContent form input[type=file],
+.addContent form button[type=submit] {
+  display: none;
+}
+
 button,
 a.button {
   background-color: #fff;

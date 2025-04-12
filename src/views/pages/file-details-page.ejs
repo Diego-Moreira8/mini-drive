@@ -1,7 +1,11 @@
 <div class="fileDetailsPage">
   <h2><%= locals.file.fileName %></h2>
   
-  <p><b>Tamanho: </b><%= locals.file.size %> bytes</p>
+  <p>
+    <b>Tamanho: </b>
+    <%= parseFloat((locals.file.size / 1e6).toFixed(2)) %> MB
+  </p>
+  
   <p>
     <b>Proprietário: </b>
     <%= 

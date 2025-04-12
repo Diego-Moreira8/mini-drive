@@ -1,0 +1,25 @@
+@use "../base/breakpoints";
+
+.addContent {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  gap: 0.5rem;
+
+  @media (min-width: breakpoints.$small) {
+    bottom: 2rem;
+    right: 2rem;
+  }
+
+  form {
+    margin: 0;
+
+    input[type="file"],
+    button[type="submit"] {
+      display: none;
+    }
+  }
+}
