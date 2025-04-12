@@ -2,7 +2,13 @@ const VISIBLE = "visible";
 
 const formatTableDates = (dateElements) => {
   dateElements.forEach((el) => {
-    const userLocalDate = new Date(el.textContent.trim()).toLocaleString();
+    const userLocalDate = new Date(el.textContent.trim()).toLocaleString(
+      "pt-BR",
+      {
+        dateStyle: "short",
+        timeStyle: "short",
+      }
+    );
     el.textContent = userLocalDate;
   });
 };
