@@ -109,7 +109,18 @@ const validateContentForm = [
     .notEmpty()
     .withMessage("O nome não pode ficar vazio")
     .isLength({ max: 250 })
-    .withMessage("O nome pode ter no máximo 250 caracteres"),
+    .withMessage("O nome pode ter no máximo 250 caracteres")
+    .custom((input) => {
+      const invalidChars = /[<>:"/\\|?*]/;
+      if (invalidChars.test(input)) {
+        throw new Error(`
+          Alguns caracteres não são permitidos em nomes de arquivos, pois podem
+          causar erros ao fazer download. Os caracteres proibidos são:
+          < > : " / \\ | ? *
+        `);
+      }
+      return true;
+    }),
 
   /** @type {import("express").RequestHandler}} */
   function storeErrors(req, res, next) {

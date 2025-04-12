@@ -1,8 +1,4 @@
 <div class="addContent">
-  <a href="/pasta/<%= locals.folder.id %>/criar" class="button">
-    Nova pasta
-  </a>
-
   <form 
     id="uploadForm" 
     action="/arquivo/enviar" 
@@ -19,6 +15,10 @@
 
     <button type="submit">Enviar</button>
   </form>
+
+  <a href="/pasta/<%= locals.folder.id %>/criar" class="button">
+    Nova pasta
+  </a>
 </div>
 
 <script>
