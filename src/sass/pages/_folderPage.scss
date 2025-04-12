@@ -3,6 +3,7 @@
 .folderPage {
   display: flex;
   flex-flow: column;
+  padding-bottom: 5rem; // To stay above the add content buttons
 
   main {
     display: grid;

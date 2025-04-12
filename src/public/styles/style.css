@@ -71,6 +71,10 @@ i {
     right: 2rem;
   }
 }
+.addContent a.button,
+.addContent button {
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.2588235294);
+}
 .addContent form {
   margin: 0;
 }
@@ -646,6 +650,7 @@ a.logo img {
 .folderPage {
   display: flex;
   flex-flow: column;
+  padding-bottom: 5rem;
 }
 .folderPage main {
   display: grid;

@@ -1,6 +1,7 @@
 const uuid = require("uuid").v4;
 const prisma = require("../config/prisma-client");
 const supabase = require("../config/supabase-client");
+const splitFileName = require("../utils/split-file-name");
 const folderService = require("./folder-service");
 
 const USERS_FILES_BUCKET = "users-files";
@@ -22,13 +23,17 @@ const create = async (
       );
     }
 
+    const nameTaken = await checkDuplication(folderId, fileName);
+    const { baseName, extension } = splitFileName(fileName);
+    const adaptedFileName = baseName + " (cópia)." + extension;
+
     const nameOnStorage = uuid();
 
     // Store file details on database
     newFile = await prisma.file.create({
       data: {
         nameOnStorage,
-        fileName: fileName,
+        fileName: nameTaken ? adaptedFileName : fileName,
         size: size,
         mimeType: mimeType,
         ownerId: userId,
