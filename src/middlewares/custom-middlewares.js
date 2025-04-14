@@ -76,6 +76,24 @@ const getFolderIfOwnedByUser = async (req, res, next) => {
       };
     }
 
+    folder.subFolders.sort((a, b) => {
+      const folderA = a.name.toLowerCase();
+      const folderB = b.name.toLowerCase();
+
+      if (folderA < folderB) return -1;
+      if (folderA > folderB) return 1;
+      return 0;
+    });
+
+    folder.files.sort((a, b) => {
+      const fileA = a.fileName.toLowerCase();
+      const fileB = b.fileName.toLowerCase();
+
+      if (fileA < fileB) return -1;
+      if (fileA > fileB) return 1;
+      return 0;
+    });
+
     res.locals = { ...res.locals, folder };
 
     next();

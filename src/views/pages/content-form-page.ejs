@@ -6,12 +6,14 @@
     let returnLink;
 
     if (locals.folder) {
+      const {id, parentId, rootOfUserId} = locals.folder
+      
       if (isRename) {
-        action = `/pasta/${locals.folder.id}/renomear`;
-        returnLink = `/pasta/${locals.folder.id}`
+        action = `/pasta/${id}/renomear`;
+        returnLink = `/pasta/${id}`
       } else {
-        action = `/pasta/${locals.folder.id}/criar`;
-        returnLink = `/pasta/${locals.folder.parentId}`
+        action = `/pasta/${id}/criar`;
+        returnLink = `/pasta/${rootOfUserId ? id : parentId}`
       }
     } else if (locals.file) {
       action = `/arquivo/${locals.file.id}/renomear`;
@@ -23,7 +25,9 @@
     <%- include("../partials/form-errors") %>
     
     <div class="formRow">
-      <label for="name"><%= isRename ? "Novo nome:" : "Nome:" %></label>
+      <label for="name">
+        <%= isRename ? "Novo nome:" : "Nome:" %>
+      </label>
   
       <input
         type="text"
@@ -37,7 +41,10 @@
     </div>
     
     <div class="formControls">
-      <button type="submit"><%= isRename ? "Salvar" : "Criar pasta" %></button>
+      <button type="submit">
+        <%= isRename ? "Salvar" : "Criar pasta" %>
+      </button>
+
       <a
         href="<%= returnLink %>"
         class="button"
