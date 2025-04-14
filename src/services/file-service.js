@@ -52,7 +52,6 @@ const create = async (
 
     return newFile;
   } catch (error) {
-    console.log("erooo", error);
     await prisma.file.delete({ where: { id: newFile.id } });
     console.error("Error at creating file");
     throw error;

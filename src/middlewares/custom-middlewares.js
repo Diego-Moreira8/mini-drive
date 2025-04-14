@@ -11,8 +11,6 @@ const addUserToLocals = async (req, res, next) => {
     return next();
   }
 
-  const { name, username } = req.user;
-
   const driveUsageBytes = await userService.getDriveUsage(req.user.id);
 
   const driveUsageMB =
@@ -25,7 +23,7 @@ const addUserToLocals = async (req, res, next) => {
 
   res.locals = {
     ...res.locals,
-    user: { name, username },
+    user: { ...req.user },
     driveUsageBytes,
     driveUsageMB,
     driveUsagePercentage,
