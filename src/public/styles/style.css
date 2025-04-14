@@ -200,17 +200,18 @@ a.button.default:active {
 .contentTable .tableContainer table tbody tr td {
   vertical-align: middle;
   height: max-content;
-  padding: 1rem;
+  padding: 0.25rem;
 }
 .contentTable .tableContainer table tbody tr td.icon {
-  width: 1rem;
+  width: 2rem;
 }
 .contentTable .tableContainer table tbody tr td.icon img {
-  width: 1rem;
-  height: 1rem;
+  width: 2rem;
+  height: 2rem;
 }
 .contentTable .tableContainer table tbody tr td.name a {
   display: block;
+  padding: 1rem 0;
   text-decoration: none;
   color: #000;
 }
@@ -225,7 +226,8 @@ a.button.default:active {
   justify-content: center;
   align-items: center;
   gap: 0.25rem;
-  padding: 0.75rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 .contentTable p {
   color: #585858;

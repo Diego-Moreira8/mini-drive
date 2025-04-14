@@ -1,0 +1,89 @@
+<%
+  const mimeToIconMap = {
+    // Text
+    'text/plain': 'text-icon',
+    'text/html': 'text-icon',
+    'application/msword': 'text-icon',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'text-icon',
+    'application/vnd.oasis.opendocument.text': 'text-icon',
+    'application/rtf': 'text-icon',
+
+    // Spreadsheet
+    'application/vnd.ms-excel': 'spreadsheet-icon',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'spreadsheet-icon',
+    'application/vnd.oasis.opendocument.spreadsheet': 'spreadsheet-icon',
+    'text/csv': 'spreadsheet-icon',
+
+    // Presentation
+    'application/vnd.ms-powerpoint': 'presentation-icon',
+    'application/vnd.openxmlformats-officedocument.presentationml.presentation': 'presentation-icon',
+    'application/vnd.oasis.opendocument.presentation': 'presentation-icon',
+
+    // PDFs
+    'application/pdf': 'pdf-icon',
+
+    // Images
+    'image/jpeg': 'image-icon',
+    'image/png': 'image-icon',
+    'image/gif': 'image-icon',
+    'image/webp': 'image-icon',
+    'image/svg+xml': 'image-icon',
+    'image/bmp': 'image-icon',
+    'image/tiff': 'image-icon',
+    'image/avif': 'image-icon',
+
+    // Videos
+    'video/mp4': 'video-icon',
+    'video/mpeg': 'video-icon',
+    'video/ogg': 'video-icon',
+    'video/webm': 'video-icon',
+    'video/quicktime': 'video-icon',
+    'video/x-msvideo': 'video-icon',
+    'video/x-matroska': 'video-icon',
+
+    // Audio
+    'audio/mpeg': 'audio-icon',
+    'audio/ogg': 'audio-icon',
+    'audio/wav': 'audio-icon',
+    'audio/webm': 'audio-icon',
+    'audio/aac': 'audio-icon',
+    'audio/flac': 'audio-icon',
+
+    // Archive
+    'application/zip': 'archive-icon',
+    'application/x-7z-compressed': 'archive-icon',
+    'application/x-rar-compressed': 'archive-icon',
+    'application/x-tar': 'archive-icon',
+    'application/gzip': 'archive-icon',
+    'application/x-bzip2': 'archive-icon',
+    'application/x-xz': 'archive-icon',
+
+    // Other common types
+    'application/json': 'code-icon',
+    'application/javascript': 'code-icon',
+    'text/css': 'code-icon',
+    'text/xml': 'code-icon',
+    'application/xml': 'code-icon',
+  };
+
+  function getIconByMimeType(mimeType = '') {
+    if (mimeToIconMap[mimeType]) {
+      return mimeToIconMap[mimeType];
+    }
+
+    if (mimeType.startsWith('image/')) return 'image-icon';
+    if (mimeType.startsWith('video/')) return 'video-icon';
+    if (mimeType.startsWith('audio/')) return 'audio-icon';
+    if (mimeType.startsWith('text/')) return 'text-icon';
+    if (mimeType.startsWith('application/')) {
+      if (mimeType.includes('spreadsheet')) return 'spreadsheet-icon';
+      if (mimeType.includes('presentation')) return 'presentation-icon';
+      if (mimeType.includes('wordprocessingml')) return 'text-icon';
+      if (mimeType.includes('zip') || mimeType.includes('compressed')) return 'archive-icon';
+    }
+
+    return 'default-icon';
+  }
+%>
+
+<img src="/images/<%= getIconByMimeType(mimeType) %>.svg">

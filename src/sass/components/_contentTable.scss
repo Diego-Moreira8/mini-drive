@@ -33,20 +33,22 @@
           td {
             vertical-align: middle;
             height: max-content;
-            padding: 1rem;
+            padding: 0.25rem;
 
             &.icon {
-              width: 1rem;
+              $size: 2rem;
+              width: $size;
 
               img {
-                width: 1rem;
-                height: 1rem;
+                width: $size;
+                height: $size;
               }
             }
 
             &.name {
               a {
                 display: block;
+                padding: 1rem 0;
                 text-decoration: none;
                 color: colors.$text;
 
@@ -66,7 +68,10 @@
               justify-content: center;
               align-items: center;
               gap: 0.25rem;
-              padding: 0.75rem;
+
+              // For vertical alignment
+              padding-top: 1rem;
+              padding-bottom: 1rem;
             }
           }
         }
