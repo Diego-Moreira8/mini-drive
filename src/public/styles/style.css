@@ -646,6 +646,17 @@ a.logo img {
     margin: 2rem auto;
   }
 }
+.fileDetailsPage .properties,
+.sharedFilePage .properties {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.fileDetailsPage .properties img,
+.sharedFilePage .properties img {
+  height: 4rem;
+}
 .fileDetailsPage .goToFolder,
 .sharedFilePage .goToFolder {
   display: block;

@@ -4,6 +4,17 @@
 .sharedFilePage {
   @include mixins.centered-container(500px);
 
+  .properties {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+
+    img {
+      height: 4rem;
+    }
+  }
+
   .goToFolder {
     display: block;
     margin: 1rem 0;

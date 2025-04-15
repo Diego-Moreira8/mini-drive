@@ -1,0 +1,21 @@
+<div class="properties">
+  <%- include("../partials/content-icon", {mimeType: locals.file.mimeType}) %>
+
+  <div class="group">
+    <p>
+      <b>Tamanho: </b>
+      <%- include("../partials/file-size", {size: locals.file.size}) %>
+    </p>
+    
+    <p>
+      <b>Proprietário: </b>
+      <%=
+      locals.file.ownerId === locals.user?.id
+         ? "Você mesmo"
+         : locals.file.owner.name
+            ? `${locals.file.owner.name} (${locals.file.owner.username})`
+            : locals.file.owner.username
+      %>
+    </p>
+  </div>
+</div>

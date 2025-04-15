@@ -1,26 +1,12 @@
 <div class="fileDetailsPage">
   <h2><%= locals.file.fileName %></h2>
   
-  <p>
-    <b>Tamanho: </b>
-    <%= parseFloat((locals.file.size / 1e6).toFixed(2)) %> MB
-  </p>
-  
-  <p>
-    <b>Proprietário: </b>
-    <%=
-      locals.file.ownerId === locals.user.id
-       ? "Você mesmo"
-       : locals.file.owner.name
-          ? `${locals.file.owner.name} (${locals.file.owner.username})`
-          : locals.file.owner.username
-    %>
-  </p>
+  <%- include("../partials/file-properties") %>
   
   <div class="options">
     <a 
       href="<%= `/arquivo/${locals.file.id}/baixar` %>"
-      class="button ok"
+      class="button"
     >
       Baixar
     </a>
