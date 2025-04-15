@@ -4,6 +4,11 @@
 .sharedFilePage {
   @include mixins.centered-container(500px);
 
+  h2 {
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
   .properties {
     display: flex;
     align-items: center;

@@ -20,8 +20,6 @@
 
 button,
 a.button {
-  @include defaultColors;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -38,6 +36,8 @@ a.button {
   padding: 0.5rem 1rem;
 
   cursor: pointer;
+
+  @include defaultColors;
 
   &.ok,
   &[type="submit"] {
