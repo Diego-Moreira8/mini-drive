@@ -1,7 +1,7 @@
 {
-  "name": "odin-file-uploader",
+  "name": "mini-drive",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/app.js",
   "scripts": {
     "dev": "nodemon src/app.js",
     "sass": "sass --watch src/sass/main.scss src/public/styles/style.css",
@@ -11,7 +11,7 @@
     "start": "node src/app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Diego Moreira de Oliveira",
   "license": "ISC",
   "description": "",
   "devDependencies": {
