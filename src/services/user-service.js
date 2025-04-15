@@ -66,7 +66,15 @@ const getByUsername = async (username) => {
 
 const getDriveUsage = async (userId) => {
   try {
-    const filesSizes = await prisma.file.findMany({ select: { size: true } });
+    const filesSizes = await prisma.file.findMany({
+      where: {
+        ownerId: userId,
+      },
+      select: {
+        size: true,
+      },
+    });
+
     const totalBytes = filesSizes.reduce((a, c) => a + c.size, 0);
     return totalBytes;
   } catch (error) {
