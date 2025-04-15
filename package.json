@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "start": "node src/app.js",
     "dev": "nodemon src/app.js",
-    "sass": "sass --watch src/sass/main.scss src/public/styles/style.css"
+    "sass": "sass --watch src/sass/main.scss src/public/styles/style.css",
+    "build:sass": "sass src/sass/main.scss src/public/styles/style.css --no-source-map --style=compressed"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +28,7 @@
     "express": "^4.21.2",
     "express-session": "^1.18.1",
     "express-validator": "^7.2.1",
+    "helmet": "^8.1.0",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
     "passport": "^0.7.0",

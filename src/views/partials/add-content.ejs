@@ -21,14 +21,3 @@
   </a>
 </div>
 
-<script>
-  document.querySelector('#openFileDialog').addEventListener('click', () => {
-    document.querySelector('#file').click();  
-  });
-
-  document.querySelector('#file').addEventListener('change', (e) => {
-    if (e.target.files.length > 0) {
-      document.querySelector('#uploadForm').submit();  
-    }
-  });
-</script>

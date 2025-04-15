@@ -70,23 +70,54 @@ const configToggleNav = (btn) => {
   navOverlay.addEventListener("click", closeNav);
 };
 
+const configUploadFileBtn = (btn) => {
+  btn.addEventListener("click", () => {
+    document.querySelector("#file").click();
+  });
+
+  document.querySelector("#file").addEventListener("change", (e) => {
+    if (e.target.files.length > 0) {
+      document.querySelector("#uploadForm").submit();
+    }
+  });
+};
+
+const configCopyUrlBtn = (btn) => {
+  btn.addEventListener("click", (e) => {
+    navigator.permissions.query({ name: "clipboard-write" }).then((result) => {
+      if (result.state === "granted" || result.state === "prompt") {
+        navigator.clipboard.writeText(
+          window.location.origin +
+            "/s/" +
+            e.target.getAttribute("data-share-code")
+        );
+      } else if (result.state === "denied") {
+        alert(`
+              Não foi possível copiar o código. Verifique se foi concedida 
+              permissão de acesso a área de transferência no seu navegador.
+            `);
+      }
+    });
+  });
+};
+
 window.addEventListener("load", () => {
   console.log(
     "Olá! Confira este e outros projetos no meu GitHub: https://github.com/Diego-Moreira8"
   );
 
   const dateElements = document.querySelectorAll(".date");
-  if (dateElements.length > 0) {
-    formatTableDates(dateElements);
-  }
+  if (dateElements.length > 0) formatTableDates(dateElements);
 
   const toggleHierarchyBtn = document.querySelector(".toggleHierarchy");
-  if (toggleHierarchyBtn) {
-    configToggleHierarchy(toggleHierarchyBtn);
-  }
+  if (toggleHierarchyBtn) configToggleHierarchy(toggleHierarchyBtn);
 
   const toggleNavBtn = document.querySelector("button.navToggle");
-  if (toggleNavBtn) {
-    configToggleNav(toggleNavBtn);
-  }
+  if (toggleNavBtn) configToggleNav(toggleNavBtn);
+
+  const uploadFileBtn = document.querySelector("#openFileDialog");
+  if (uploadFileBtn) configUploadFileBtn(uploadFileBtn);
+
+  const copyUrlBtn = document.querySelector("#copyUrl");
+  if (copyUrlBtn) configCopyUrlBtn(copyUrlBtn);
 });

@@ -3,6 +3,7 @@ require("dotenv").config();
 const path = require("path");
 const express = require("express");
 const expressSession = require("express-session");
+const { default: helmet } = require("helmet");
 const logger = require("morgan");
 // Configs
 const passport = require("./config/passport");
@@ -28,6 +29,7 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+app.use(helmet({ contentSecurityPolicy: false }));
 app.use(logger("dev"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
