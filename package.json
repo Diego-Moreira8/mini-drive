@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node src/app.js",
     "dev": "nodemon src/app.js",
     "sass": "sass --watch src/sass/main.scss src/public/styles/style.css",
-    "build:sass": "sass src/sass/main.scss src/public/styles/style.css --no-source-map --style=compressed"
+    "build:sass": "sass src/sass/main.scss src/public/styles/style.css --no-source-map --style=compressed",
+    "migrate": "prisma migrate deploy",
+    "build": "npm run build:sass && npm run migrate",
+    "start": "node src/app.js"
   },
   "keywords": [],
   "author": "",
